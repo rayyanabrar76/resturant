@@ -1,0 +1,776 @@
+{
+  "Navigation": {
+    "LogoName": "Chef Aboud Küche",
+    "Home": "Startseite",
+    "Menu": "Speisekarte",
+    "Catering": "Catering",
+    "About": "Über uns",
+    "Order": "Jetzt bestellen"
+  },
+  "hero": {
+    "liveKitchen": "LIVE KÜCHE",
+    "signature": "Signatur",
+    "craftingMemories": "Wir erschaffen",
+    "memories": "Erinnerungen",
+    "onePlate": "Einen Teller nach dem anderen.",
+    "fresh": "Frisch",
+    "ingredientBase": "Zutaten Basis",
+    "handmade": "Handgemacht",
+    "everySingleMorning": "Jeden Morgen",
+    "exploreMenu": "Menü entdecken",
+    "chefsSelection": "Köchs Auswahl",
+    "viewDetails": "DETAILS ANSEHEN",
+    "slides": [
+      { "ar": "نكهات أصيلة", "en": "Authentische Aromen" },
+      { "ar": "تحضير فاخر", "en": "Meisterhafte Zubereitung" },
+      { "ar": "تقديم عصري", "en": "Modernes Dining" }
+    ],
+    "recipes": [
+      { "en": "Hummus", "ar": "حمص", "slug": "hummus" },
+      { "en": "Taboulé", "ar": "تبولة", "slug": "tabbouleh" },
+      { "en": "Fattoush", "ar": "فتوش", "slug": "fattoush" },
+      { "en": "Kibbeh", "ar": "كبة", "slug": "kibbeh" },
+      { "en": "Schawarma", "ar": "شاورما", "slug": "shawarma" }
+    ]
+  },
+  "HomePage": {
+    "exclusiveEvents": "Exklusive Events",
+"cateringTitle1": "Catering",
+"cateringTitle2": "Neu definiert",
+    "title": "Essenz des Safrans",
+    "description": "Erleben Sie eine kulinarische Reise, in der persische Tradition auf modernen Luxus trifft. Jedes Gericht erzählt eine Geschichte von Herkunft und Gewürzen.",
+    "orderNow": "Tisch reservieren",
+    "viewGallery": "Galerie ansehen",
+    "discover": "Entdecken",
+    "kitchen": "Die Küche",
+      "kitchenItalic": "des Chefs",
+    "kitchenDesc": "Jede Zutat wird sorgfältig ausgewählt, um ein gehobenes kulinarisches Erlebnis zu garantieren, das unser Erbe ehrt.",
+    "eventTitle": "Veranstalten Sie ein unvergessliches Event",
+    "eventDesc": "Unser maßgeschneidertes Catering bringt die Eleganz des Safrans an Ihren Wunschort.",
+    "planBuffet": "Buffet planen"
+  },
+  "menuDropdown": {
+  "categoriesLabel": "Kategorien",
+  "popularChoices": "Beliebte Gerichte",
+  "premiumQuality": "Premium Qualität",
+  "tasteOfLevant": "Geschmack des Levants",
+  "freshIngredients": "Täglich frisch zubereitet nach traditionellen Rezepten von Chef Aboud.",
+  "fullExperience": "Zum Menü",
+  "categories": [
+    {
+      "id": "sandwiches",
+      "label": "Sandwiches",
+      "arabic": "ساندوتشات",
+      "subfolders": [
+        { "name": "Veggie & Halloumi", "items": ["Falafel Sandwich", "Falafel & Halloumi", "Makali (Gebratenes Gemüse)", "Babaghanoush Sandwich"] },
+        { "name": "Traditionelles Fleisch", "items": ["Shawarma Kalb", "Shawarma Hähnchen", "Shawarma Mix", "Kafta Sandwich", "Sucuk Sandwich"] },
+        { "name": "Chef-Spezialitäten", "items": ["Philadelphia Sandwich", "Fahita Sandwich", "Crispy Chicken Sandwich"] }
+      ]
+    },
+    {
+      "id": "plates",
+      "label": "Hauptspeisen",
+      "arabic": "الأطباق الرئيسية",
+      "subfolders": [
+        { "name": "Grill Mix", "items": ["Grill Teller Mix (19.00 €)", "Kafta Teller", "Shish Taouk Teller"] },
+        { "name": "Arabische Klassiker", "items": ["Shawarma Teller Hähnchen", "Shawarma Teller Kalb", "Aboud Teller Mix (Chef-Spezial)"] },
+        { "name": "Vegane Köstlichkeiten", "items": ["Falafel Teller", "Makali Teller", "Halloumi Teller"] }
+      ]
+    },
+    {
+      "id": "starters",
+      "label": "Vorspeisen & Getränke",
+      "arabic": "مقبلات ومشروبات",
+      "subfolders": [
+        { "name": "Mezza & Suppe", "items": ["Hummus Teller", "Babaghanoush Teller", "Mutabbal Teller", "Linsensuppe"] },
+        { "name": "Frische Salate", "items": ["Tabbouleh Salat", "Fattoush Salat"] },
+        { "name": "Süßes & Getränke", "items": ["Katayef Kishta", "Arabisches Eis", "Sahlab", "Frischer Orangensaft", "Minzlimonade", "Ayran"] }
+      ]
+    }
+  ]
+},
+  "Reservation": {
+    "experienceBadge": "Ein besonderes kulinarisches Erlebnis",
+    "pageTitle": "Tischreservierung",
+    "introText": "Begleiten Sie uns zu einem unvergesslichen Abend, an dem jeder Geschmack eine Geschichte erzählt. Wir empfehlen, mindestens 24 Stunden im Voraus zu reservieren.",
+    "fullName": "Vollständiger Name",
+    "phone": "Telefonnummer",
+    "date": "Datum",
+    "time": "Uhrzeit",
+    "guests": "Anzahl der Gäste",
+    "specialRequests": "Besondere Wünsche",
+    "confirmBooking": "Reservierung anfragen",
+    "successTitle": "Reservierungsanfrage erhalten",
+    "successMessage": "Wir haben Ihre Anfrage erhalten. Unser Team wird Sie innerhalb der nächsten zwei Stunden telefonisch oder per E-Mail kontaktieren, um Ihre Reservierung zu bestätigen.",
+    "backToBooking": "Neue Reservierung"
+  },
+  "Gallery": {
+    "title": "Eine visuelle Geschichte",
+    "subtitle": "Ein Einblick in Zafran",
+    "filter": {
+      "all": "Alle",
+      "food": "Speisen",
+      "interior": "Ambiente",
+      "catering": "Veranstaltungen"
+    }
+  },
+  "experienceBridge": {
+  "menuTitle": "À la carte",
+  "menuTitleHighlight": "Speisekarte",
+  "menuDesc": "Perfekt für intime Abende und tägliche Gelüste. Entdecken Sie unsere vollständige Auswahl.",
+  "menuCta": "Menü ansehen",
+  "eventsTitle": "Maßgeschneiderte",
+  "eventsTitleHighlight": "Events",
+  "eventsDesc": "Unser Buffet-Rechner hilft Ihnen, das perfekte Fest für Ihre Gäste zu planen.",
+  "eventsCta": "Buffet planen"
+},
+"chefsTable": {
+  "label": "Der Prozess",
+  "title": "Hinter der",
+  "titleHighlight": "Signatur",
+  "stampText": "Authentisch • Handgemacht • Signatur • ",
+  "steps": [
+    { "no": "01", "title": "Die Seele der Zutaten", "desc": "Handverlesene Gewürze aus dem Bekaa-Tal, wöchentlich geliefert, um die Frische der Aromen zu bewahren." },
+    { "no": "02", "title": "Das langsame Feuer", "desc": "Unser Fleisch mariniert 48 Stunden in einer einzigartigen Mischung aus 12 Gewürzen, bevor es auf das Eichenholzfeuer trifft." },
+    { "no": "03", "title": "Handwerkliches Anrichten", "desc": "Jeder Teller ist eine Leinwand. Wir balancieren Textur, Temperatur und Farbe für ein multisensorisches Erlebnis." }
+  ]
+},
+ "Footer": {
+  "tagline": "Authentische Levantinische Küche · Berlin",
+  "contactTitle": "Kontakt",
+  "address": "Thielallee 34, 14195 Berlin",
+  "phone": "+49 176 066 6501",
+  "exploreTitle": "Entdecken",
+  "exploreLinks": ["Speisekarte", "Über uns", "Events", "Galerie", "Kontakt"],
+  "newsletterTitle": "Newsletter",
+  "newsletterPlaceholder": "E-Mail-Adresse",
+  "newsletterCta": "Abonnieren",
+  "copyright": "© 2026 Chef Aboud Küche",
+  "backToTop": "Nach oben"
+},
+  "Menu": {
+   "title": "Unsere",
+   "viewDetails": "Details ansehen →",  
+   "back": "Zurück",
+   "headerArabic": "قائمة طعامنا", 
+   "titleItalic": "Speisekarte",
+   "breadcrumb": "Speisekarte", 
+    "total": "Gesamt",
+    "filterAll": "Alle Gerichte",
+    "qty": "Menge",
+    "item": "Artikel",
+    "items": "Artikel",
+    "filterStarters": "Vorspeisen",
+    "filterMains": "Hauptgerichte",
+    "filterDesserts": "Desserts",
+    "currencySymbol": "€",
+    "currencyPos": "suffix",
+    "addToCart": "Zum Warenkorb hinzufügen",
+    "viewCart": "Warenkorb ansehen",
+    "cartTitle": "Ihre Auswahl",
+    "itemUnit": "Artikel",
+    "emptyCart": "Der Warenkorb ist leer",
+    "checkout": "Zur Kasse",
+    "continueShopping": "Weiter einkaufen"
+  },
+  "DishDetail": {
+    "heritageLabel": "Heritage Rezept",
+    "tab_zutaten": "Zutaten",
+    "tab_chef": "Chef's Note",
+    "tab_info": "Allergene",
+    "chefName": "Chef Aboud",
+    "allergensLabel": "Enthält Allergene",
+    "allergensDisclaimer": "Alle Angaben ohne Gewähr · Bei Unverträglichkeiten bitte nachfragen",
+    "priceLabel": "Preis pro Portion",
+    "vatNote": "inkl. MwSt.",
+    "addToCart": "In den Warenkorb",
+    "addedConfirm": "In den Warenkorb gelegt",
+    "freshNote": "Täglich frisch · Allergene auf Anfrage",
+    "relatedArabic": "من نفس الفئة",
+    "relatedTitle": "Weitere",
+    "relatedTitleItalic": "Gerichte",
+    "allDishes": "Alle Gerichte",
+    "viewDish": "Zum Gericht →",
+    "mobilePriceLabel": "Preis",
+    "mobileAddToCart": "In den Warenkorb",
+    "mobileAdded": "Hinzugefügt",
+    "timeUnit": "{minutes} Min",
+    "statKcal": "kcal",
+    "statProtein": "Protein",
+    "statDuration": "Dauer",
+    "statPerson": "Person",
+    "statPersons": "Pers.",
+
+    "dish1Arabic": "الطبق الأول",
+    "dish1Desc": "Ein klassisches Hauptgericht aus der Levante — zubereitet mit handverlesenen Gewürzen, langsam geschmortem Fleisch und frisch gebackenem Fladenbrot direkt aus unserem Holzofen.",
+    "dish1Tags": ["Hauptgericht", "Levantinisch", "Hausgemacht"],
+    "dish1Ingredients": ["Lamm", "Sumach", "Granatapfel", "Petersilie", "Knoblauch", "Olivenöl"],
+    "dish1ChefNote": "Dieses Rezept stammt direkt aus meiner Kindheit in Damaskus. Die Gewürzmischung haben wir von meiner Großmutter geerbt.",
+    "dish1Allergens": "Gluten, Sesam",
+
+    "dish2Arabic": "الطبق الثاني",
+    "dish2Desc": "Zart gegrilltes Fleisch vom Holzkohlegrill, mariniert über Nacht in einem Geheimrezept aus acht levantinischen Kräutern und Gewürzen. Serviert mit Reis und gegrilltem Gemüse.",
+    "dish2Tags": ["Hauptgericht", "Gegrilltes", "Traditionell"],
+    "dish2Ingredients": ["Rinderhack", "Zwiebel", "Thymian", "Zimt", "Pfeffer", "Petersilie"],
+    "dish2ChefNote": "Die Marinade braucht mindestens 12 Stunden. Geduld ist hier das wichtigste Gewürz.",
+    "dish2Allergens": "Gluten",
+
+    "dish3Arabic": "الطبق الثالث",
+    "dish3Desc": "Ein vollständig vegetarisches Hauptgericht voller Aromen des levantinischen Frühlings. Frische Kräuter, geröstete Körner und hausgemachte Soßen vereinen sich zu einem unvergesslichen Erlebnis.",
+    "dish3Tags": ["Hauptgericht", "Vegetarisch", "Frisch"],
+    "dish3Ingredients": ["Kichererbsen", "Zitrone", "Tahini", "Koriander", "Paprika", "Kurkuma"],
+    "dish3ChefNote": "Frische Zutaten sind nicht verhandelbar. Wir beziehen täglich vom Markt.",
+    "dish3Allergens": "Sesam",
+
+    "dish4Arabic": "المقبلات",
+    "dish4Desc": "Eine handverlesene Auswahl levantinischer Vorspeisen — frisch zubereitete Mezze aus dem Herzen der syrischen Küche, perfekt zum Teilen und Entdecken.",
+    "dish4Tags": ["Vorspeise", "Mezze", "Geteilt"],
+    "dish4Ingredients": ["Aubergine", "Tahini", "Petersilie", "Zitrone", "Olivenöl", "Knoblauch"],
+    "dish4ChefNote": "Mezze ist mehr als Essen — es ist eine Einladung zum Verweilen und Genießen.",
+    "dish4Allergens": "Sesam, Gluten",
+
+    "dish5Arabic": "الحلويات",
+    "dish5Desc": "Zarte Süßspeisen aus der levantinischen Konditoreikunst — verfeinert mit Rosenwasser, Pistazie und goldener Honigglasur nach einem Rezept aus dem alten Damaskus.",
+    "dish5Tags": ["Dessert", "Süßes", "Hausgemacht"],
+    "dish5Ingredients": ["Grieß", "Rosenwasser", "Pistazie", "Honig", "Butter", "Orangenblüte"],
+    "dish5ChefNote": "Das Gleichgewicht zwischen Süße und Blütenaroma ist die eigentliche Kunst.",
+    "dish5Allergens": "Gluten, Nüsse, Milch",
+
+    "dish6Arabic": "الحلويات الشامية",
+    "dish6Desc": "Klassische syrische Süßwaren — knuspriger Teig, gefüllt mit Walnüssen und Datteln, parfümiert mit Mastix und getränkt in leichtem Zuckersirup.",
+    "dish6Tags": ["Dessert", "Orientalisch", "Saisonal"],
+    "dish6Ingredients": ["Weizenmehl", "Datteln", "Walnüsse", "Mastix", "Zuckersirup", "Sesam"],
+    "dish6ChefNote": "Saisonal und limitiert — wir backen diese Köstlichkeiten nur wenn die Zutaten auf dem Höhepunkt sind.",
+    "dish6Allergens": "Gluten, Nüsse, Sesam",
+
+    "hummus_beirutiArabic": "حمص بيروتي",
+    "hummus_beirutiDesc": "Der cremigste Hummus diesseits von Beirut — aus frisch gekochten Kichererbsen, reichlich Tahini und einem Hauch Zitrone. Serviert mit warmem Fladenbrot und einem Spritzer bestem Olivenöl.",
+    "hummus_beirutiTags": ["Vorspeise", "Mezze", "Vegetarisch"],
+    "hummus_beirutiIngredients": ["Kichererbsen", "Tahini", "Zitrone", "Knoblauch", "Olivenöl", "Kreuzkümmel"],
+    "hummus_beirutiChefNote": "Der Trick liegt im Schälen der Kichererbsen. Es dauert länger, macht aber den Hummus seidig glatt.",
+    "hummus_beirutiAllergens": "Sesam, Gluten",
+
+    "fattoush_gardenArabic": "فتوش الحديقة",
+    "fattoush_gardenDesc": "Knackig, bunt und erfrischend — unser Fattoush vereint das Beste des levantinischen Gartens mit geröstetem Fladenbrot, Sumach-Dressing und einem Hauch Granatapfelmelasse.",
+    "fattoush_gardenTags": ["Salat", "Frisch", "Levantinisch"],
+    "fattoush_gardenIngredients": ["Tomate", "Gurke", "Radieschen", "Sumach", "Granatapfelmelasse", "Fladenbrot"],
+    "fattoush_gardenChefNote": "Das Fladenbrot wird kurz vor dem Servieren geröstet — für das perfekte Knack-Erlebnis.",
+    "fattoush_gardenAllergens": "Gluten",
+
+    "mashawi_platterArabic": "مشاوي مشكّلة",
+    "mashawi_platterDesc": "Das ultimative Grill-Erlebnis für zwei — eine großzügige Auswahl von Kebabs, Köfte und marinierten Fleischspießen, frisch vom Holzkohlegrill, serviert mit Reis, Fladenbrot und Grillgemüse.",
+    "mashawi_platterTags": ["Hauptgericht", "Gegrilltes", "Für Zwei"],
+    "mashawi_platterIngredients": ["Lammkeule", "Hühnerbrust", "Rinderhack", "Zwiebel", "Thymian", "Zitrone"],
+    "mashawi_platterChefNote": "Für zwei Personen konzipiert, aber eine Person hat dieses Gericht auch schon alleine geschafft.",
+    "mashawi_platterAllergens": "Gluten, Sesam"
+  },
+  "Checkout": {
+    "back": "Zurück zur Speisekarte",
+    "cateringBadge": "Catering-Service",
+    "deliveryBadge": "Premium-Lieferung",
+    "eventDetails": "Veranstaltungsdetails",
+    "checkoutTitle": "Kasse",
+    "fullName": "Vollständiger Name",
+    "phone": "Telefonnummer",
+    "date": "Bevorzugtes Datum",
+    "time": "Ankunftszeit",
+    "address": "Lieferadresse",
+    "location": "Veranstaltungsort / Adresse",
+    "paymentMethod": "Zahlungsmethode",
+    "onlinePayment": "Online-Zahlung",
+    "cashOnDelivery": "Barzahlung bei Lieferung",
+    "orderSummary": "Bestellübersicht",
+    "eventSummary": "Veranstaltungsübersicht",
+    "subtotal": "Zwischensumme",
+    "delivery": "Lieferung",
+    "serviceFee": "Servicegebühr",
+    "total": "Gesamtbetrag",
+    "completeOrder": "Bestellung abschließen",
+    "requestBooking": "Reservierung anfragen",
+    "secure": "Sichere und verschlüsselte Zahlung",
+    "selectedDishes": "Im Buffet enthalten"
+  },
+  "Catering": {
+    "badge": "Besondere Anlässe",
+    "title": "Individuell gestaltetes",
+    "titleItalic": "Buffet",
+    "description": "Gestalten Sie Ihr exklusives kulinarisches Erlebnis. Wählen Sie Ihre Lieblingsgerichte, legen Sie die Gästezahl fest und erhalten Sie sofort eine Kostenschätzung.",
+    "summaryTitle": "Veranstaltungsübersicht",
+    "guestsLabel": "Anzahl der Gäste",
+    "guestUnit": "Person",
+    "perPerson": "pro Person",
+    "perItem": "pro Stück",
+    "selectedDishes": "Ausgewählte Gerichte",
+    "selectedDish": "Ausgewähltes Gericht",
+    "noDishesSelected": "Noch keine Gerichte ausgewählt",
+    "bookButton": "Catering buchen",
+    "disclaimer": "Der endgültige Preis kann je nach Standort und Servicepersonal variieren.",
+    "orBuildCustom": "Oder stellen Sie Ihr eigenes Buffet zusammen",
+    "perPersonShort": "pro Person",
+    "estimatedCost": "Geschätzte Kosten pro Person",
+    "totalLabel": "Gesamtkosten der Veranstaltung",
+    "heroLabel": "Besondere Anlässe",
+  "closeLabel": "Schließen",
+  "openSummaryLabel": "Bestellübersicht öffnen",
+  "filterAriaLabel": "Nach Kategorie filtern",
+  "addDishLabel": "{dish} hinzufügen",
+  "removeDishLabel": "{dish} entfernen",
+  "increaseGuests": "Gästeanzahl erhöhen",
+  "decreaseGuests": "Gästeanzahl verringern",
+  "guestRangeMin": "10",
+  "guestRangeMid": "250",
+  "stationLabel": "Station",
+"stationProgressLabel": "Konfigurierte Stationen",
+"selectedOne": "ausgewählt",
+"selectedMany": "ausgewählt",
+"noneSelected": "Keine Auswahl",
+"summaryEmptyHint": "Noch keine Stationen konfiguriert",
+"stationUnit": "Station",
+"stationsUnit": "Stationen",
+"configured": "konfiguriert",
+  "guestRangeMax": "500",
+  "fabSummaryDetail": "{count} Artikel · {guests} Gäste",
+    "heroTitle": "Buffet-Konfigurator",
+    "heroSubtitle": "Gestalten Sie Ihr luxuriöses kulinarisches Erlebnis. Wählen Sie Ihre Lieblingsgerichte, legen Sie die Gästezahl fest und erhalten Sie sofort eine Kostenschätzung.",
+    "perPersonLabel": "pro Person",
+    "tierBudget": "Budget",
+    "tierValue": "Bestes Preis-Leistungs-Verhältnis",
+    "tierPremium": "Luxuserlebnis",
+    "viewDetails": "Details anzeigen",
+    "offer1Title": "Königliches Safran-Buffet",
+    "offer1Desc": "Eine Auswahl unserer besten Kebabs und Schmorgerichte für ein authentisches Erlebnis.",
+    "offer2Title": "Kaiserliches Festmahl",
+    "offer2Desc": "Eine umfangreiche Auswahl mit Vorspeisen, Hauptgerichten und traditionellen Desserts.",
+    "offer3Title": "Große Persische Gala",
+    "offer3Desc": "Ein luxuriöses kulinarisches Erlebnis, ideal für gehobene Veranstaltungen und Hochzeiten.",
+    "backToCatering": "Zurück zur Übersicht",
+    "whatsIncluded": "Was ist enthalten?",
+    "startingFrom": "Ab",
+    "inquireNow": "Jetzt anfragen",
+    "serviceStyle": "Servierstil",
+    "badgeMostPopular": "Am beliebtesten",
+    "badgePremium": "Premium",
+    "selectedDishesLabel": "Ausgewählte Gerichte",
+    "perEvent": "pro Veranstaltung",
+    "premiumQuality": "Premium-Qualität",
+    "qualityDesc": "Wir verwenden 100 % biologischen Safran und Fleisch von höchster Qualität.",
+    "notice": "Vorbestellung erforderlich",
+    "offersLabel": "Unsere Catering-Angebote",
+    "offersTitle": "Fertige Erlebnisse",
+    "offersSubtitle": "Komplettpakete für jeden Anlass — alles organisiert, nichts dem Zufall überlassen.",
+    "customTitle": "Stellen Sie Ihr Buffet zusammen",
+    "customLabel": "Individuelle Auswahl",
+    "customSubtitle": "Wählen Sie genau, was Sie möchten. Der Preis pro Person aktualisiert sich automatisch.",
+    "filterAll": "Alle",
+    "offer1LongDesc": "Das klassische persische Festmahl wurde für intime Familientreffen konzipiert. Erleben Sie die Wärme der Tradition mit unseren beliebtesten Gerichten.",
+    "feature1_1": "Standard-Buffetaufbau",
+    "feature1_2": "3 Hauptgerichte",
+    "feature1_3": "2 Vorspeisen und Salate",
+    "feature1_4": "Erfrischungsgetränke inklusive",
+    "offer1Style": "Legeres Familienbuffet",
+    "offer2LongDesc": "Werten Sie Ihre Firmenveranstaltungen mit unserem professionellen Catering-Service auf. Wir bieten eine gehobene Auswahl persischer Gerichte, ideal für Geschäftsessen und formelle Anlässe.",
+    "offer2Style": "Formeller Service oder Executive-Buffet",
+    "feature2_1": "Kompletter Tischservice verfügbar",
+    "feature2_2": "5 Hauptgerichtsoptionen",
+    "feature2_3": "Exklusive Dessertauswahl",
+    "feature2_4": "Kaffee- und Teestation",
+    "offer3LongDesc": "Machen Sie Ihren besonderen Tag unvergesslich mit unserem großen Hochzeitspaket. Ein vollständig luxuriöses Erlebnis mit unseren exklusivsten Rezepten, beeindruckender Präsentation und einem engagierten Serviceteam vor Ort.",
+    "offer3Style": "Luxuriöser Gala-Service",
+    "feature3_1": "Privatkoch und Serviceteam vor Ort",
+    "feature3_2": "Unbegrenztes Luxus-Buffet",
+    "feature3_3": "Individuelle persische Hochzeitstorte",
+    "feature3_4": "Blumendekoration für die Tische",
+    "guestPlaceholder": "Anzahl der Gäste eingeben",
+    "tagPopular": "Am beliebtesten",
+    "tagNew": "Neu",
+    "tagChefsPick": "Empfehlung des Küchenchefs",
+    "guests": "Personen"
+  },
+  "MenuExplorer": {
+    "restaurantName": "Chef Aboud Küche",
+    "restaurantNameArabic": "مطبخ الشيف عبود",
+
+    "liveMenuBadge": "Aktuelle Speisekarte",
+    "updatedToday": "Heute aktualisiert",
+    "heroDescription": "Eine Hommage an die levantinische Tradition — jedes Gericht handgefertigt mit saisonalen Zutaten, alten Gewürzrouten und der Wärme von Chef Abouds Küche.",
+    "location": "Frankfurt, Deutschland",
+    "sommelierHints": "Sommelier-Empfehlungen",
+    "signatureStyle": "Signature Style",
+    "featuredDishAlt": "Empfohlenes Gericht",
+
+    "curatedSelection": "Kuratierte Auswahl",
+    "chefsSelection": "Empfehlung des Küchenchefs",
+    "hotItem": "Bestseller",
+
+    "tagVegan": "Vegan",
+    "tagGlutenFree": "Glutenfrei",
+    "tagNuts": "Enthält Nüsse",
+    "tagDairyFree": "Laktosefrei",
+
+    "closeModal": "Schließen",
+    "inStock": "Jetzt verfügbar",
+    "calories": "Kalorien",
+    "protein": "Eiweiß",
+    "carbs": "Kohlenhydrate",
+    "sommeliersInsight": "Empfehlung des Sommeliers",
+    "pairingHintProtein": "Ein vollmundiger Rotwein wie ein Syrah oder gereifter Malbec harmoniert wunderbar mit der Reichhaltigkeit dieses Gerichts.",
+    "pairingHintLight": "Ein knackiger Sauvignon Blanc oder Sprudelwasser mit einem Spritzer Zitrone rundet diese leichte Wahl perfekt ab.",
+    "addToSelection": "Zur Auswahl hinzufügen",
+    "backToMenu": "Zurück zur Speisekarte",
+
+    "monFri": "Mo – Fr",
+    "saturday": "Samstag",
+    "sunday": "Sonntag",
+    "hoursMonFri": "11:00 – 22:00",
+    "hoursSaturday": "10:00 – 23:00",
+    "hoursSunday": "12:00 – 21:00",
+
+    "hoursLabel": "Öffnungszeiten",
+    "reservations": "Reservierungen",
+    "cateringContact": "Catering",
+    "locationLabel": "Standort",
+    "contactLabel": "Kontakt",
+    "emailReservations": "info@chefaboud.de",
+    "emailCatering": "catering@chefaboud.de",
+
+    "footerTagline": "Authentische libanesische Küche – zubereitet mit traditionellen Zutaten und dem Geist großzügiger Gastfreundschaft.",
+    "copyright": "Alle Rechte vorbehalten.",
+
+    "sectionStarters": "Vorspeisen",
+    "sectionStartersArabic": "المقبلات",
+    "sectionPlates": "Hauptgerichte",
+    "sectionPlatesArabic": "الأطباق الرئيسية",
+    "sectionSandwiches": "Sandwiches",
+    "sectionSandwichesArabic": "السندويشات",
+
+    "itemS1Name": "Hummus Beiruti",
+    "itemS1ArabicName": "حمص بيروتي",
+    "itemS1Desc": "Auf dem Stein gemahlene Kichererbsen mit gereifter Tahini, frischer Zitrone und kaltgepresstem Olivenöl. Verfeinert mit geräuchertem Paprika und handverlesenem Petersilie.",
+
+    "itemS2Name": "Tabbouleh",
+    "itemS2ArabicName": "تبولة",
+    "itemS2Desc": "Frisch gehackte glattblättrige Petersilie, Heirloom-Tomaten und Bulgurweizen, angemacht mit Zitrone und nativem Olivenöl extra. Jeden Morgen frisch zubereitet.",
+
+    "itemS3Name": "Fattoush-Salat",
+    "itemS3ArabicName": "فتوش",
+    "itemS3Desc": "Gartengemüse, knusprige Fladenbrotchips mit Sumach, Granatapfelkerne und frische Minze in einem würzigen Granatapfelmelasse-Dressing.",
+
+    "itemP1Name": "Kibbeh bil Sanieh",
+    "itemP1ArabicName": "كبة بالصينية",
+    "itemP1Desc": "Schichten von handgeknetemem Bulgur und Lammhackfleisch, im Blech gebacken mit Pinienkernen, karamellisierten Zwiebeln und einer wärmenden Sieben-Baharat-Gewürzmischung.",
+
+    "itemP2Name": "Gegrilltes Halloumi-Teller",
+    "itemP2ArabicName": "حلوم مشوي",
+    "itemP2Desc": "Dickgeschnittener zypriotischer Halloumi auf Holzkohle gegrillt, serviert mit warmem Fladenbrot, geröstetem Gemüse und kräuterinfusiertem Olivenöl.",
+
+    "itemP3Name": "Schawarma-Teller",
+    "itemP3ArabicName": "شاورما",
+    "itemP3Desc": "Langsam marinierte Hähnchenschenkel mit Sumach, Kardamom und Knoblauch, frisch vom Drehspieß geschnitten. Serviert mit Tahini, Pickles und Toum.",
+
+    "itemW1Name": "Falafel-Wrap",
+    "itemW1ArabicName": "فلافل",
+    "itemW1Desc": "Handgeformter grüner Kräuter-Falafel, goldbraun gebraten, eingewickelt in frisches Saj-Brot mit eingelegten Rüben, Tahini-Sauce und gehobeltem Weißkohl.",
+
+    "itemW2Name": "Hähnchen-Schawarma-Wrap",
+    "itemW2ArabicName": "شاورما دجاج",
+    "itemW2Desc": "Hähnchen vom Drehspieß, Knoblauch-Toum, Tomate, Pickles und Granatapfelsauce fest eingerollt in frisch gebackenes levantinisches Fladenbrot.",
+
+    "itemW3Name": "Arayes",
+    "itemW3ArabicName": "عرايس",
+    "itemW3Desc": "Gewürztes Lammhackfleisch im Fladenbrot gepresst und kross gegrillt. Serviert mit einem erfrischenden Gurken-Joghurt-Dip."
+  },
+  "Dishes": {
+    "backToMenu": "Zurück zur Speisekarte",
+"authenticIngredients": "Authentische Zutaten",
+"premiumPackaging": "Premium Verpackung",
+      "hummus": {
+      "name": "Hummus Beiruti",
+      "tag": "Vorspeise · Mezze",
+      "desc": "Samtiger Hummus aus püriertem Kichererbsen, Tahini, frischem Zitronensaft und einer Prise Knoblauch — warm serviert mit Olivenöl und Paprika. Ein Grundpfeiler der levantinischen Küche."
+    },
+    
+    "shawarma": {
+      "name": "Schawarma Schami",
+      "tag": "Hauptgericht · Grill",
+      "desc": "Gegrillte Lammfleisch mit frischen Zutaten und einer würzigen Marinade — ein klassisches levantinisches Gericht."
+    },
+    "kibbeh": {
+      "name": "Kibbeh Bil Saniyeh",
+      "tag": "Hauptgericht · Gebacken",
+      "desc": "Kibbeh aus gemischtem Hackfleisch und Bulgur, gebacken oder frittiert — ein traditionelles levantinisches Gericht."
+    },
+    "shawarma_teller": {
+  "name": "Schawarma-Teller Hähnchen",
+  "desc": "Zartes Hähnchenfleisch in unserem 12-Gewürz-Mix mariniert, langsam am Eichenholz gegart und mit frischem Gemüse, Knoblauchsauce und warmem Fladenbrot serviert."
+},
+"grill_mix": {
+  "name": "Grill-Teller Mix",
+  "desc": "Ein großzügiger gemischter Grillteller mit Kafta, Shish Taouk und gewürztem Hähnchen – alles über offener Flamme gegrillt, mit Reis, Grillgemüse und Haussaucen."
+},
+"aboud_special": {
+  "name": "Aboud-Teller Mix",
+  "desc": "Chef Abouds persönlicher Signaturteller – eine sorgfältig zusammengestellte Auswahl der feinsten Gerichte der Küche mit Schawarma, Falafel und Grillspezialitäten."
+},
+"falafel_teller": {
+  "name": "Falafel-Teller",
+  "desc": "Außen knusprig, innen zart – unser Falafel wird täglich frisch aus eingeweichten Kichererbsen und Kräutern zubereitet, mit Hummus, Taboulé und warmem Brot."
+},
+"hummus_teller": {
+  "name": "Hummus-Teller",
+  "desc": "Seidig-cremiger Hummus mit nativem Olivenöl und Paprika, serviert mit frisch gebackenem Fladenbrot. Ein Klassiker der levantinischen Küche."
+},
+"tabbouleh": {
+  "name": "Taboulé-Salat",
+  "desc": "Ein frischer, kräuterreicher Salat aus fein gehackter Petersilie, reifen Tomaten, Bulgur und frischer Minze, angemacht mit Zitronensaft und hochwertigem Olivenöl."
+},
+"fattoush": {
+  "name": "Fattoush-Salat",
+  "desc": "Ein lebhafter levantinischer Salat mit knusprigen Fladenbrotchips, frischem Gemüse und einem spritzigen Granatapfelmelasse-Dressing – leicht und voller Textur."
+},
+"halloumi_teller": {
+  "name": "Halloumi-Teller",
+  "desc": "Goldgegrillter Halloumi-Käse mit knuspriger Kruste und weichem Inneren, serviert mit geröstetem Gemüse und einem frischen Kräutersalat."
+},
+    "mansaf": {
+      "name": "Mansaf",
+      "tag": "Hauptgericht · Spezial",
+      "desc": "Ein traditionelles persisches Gericht mit Reis, Lammfleisch und einer würzigen Soße — ein Symbol der levantinischen Küche."
+    },
+    "knafeh": {
+      "name": "Knafeh",
+      "tag": "Dessert · Süß",
+      "desc": "Ein traditionelles syrisches Dessert mit zartem Pfeffer und einer würzigen Soße — ein Symbol der levantinischen Küche."
+    },
+    "baklava": {
+      "name": "Baklava",
+      "tag": "Dessert · Süß",
+      "desc": "Ein traditionelles türkisches Dessert mit Schichten von Blätterteig, Nüssen und Sirup — ein Symbol der levantinischen Küche."
+    },
+    "warak_enab": {
+      "name": "Warak Enab (Gefüllte Weinblätter)",
+      "tag": "Kalte Mezze",
+      "desc": "Gefüllte Weinblätter mit einem Mischung aus Hackfleisch, Reis und Gewürzen — ein traditionelles levantinisches Gericht."
+    },
+    "baba_ganoush": {
+      "name": "Moutabal (Baba Ganoush)",
+      "tag": "Kalte Mezze",
+      "desc": "Ein kaltes Mezze aus geräuchertem Aubergine, Tahini, Zitronensaft und Knoblauch — ein Symbol der levantinischen Küche."
+    },
+    "catStarters": {
+      "name": "Vorspeisen"
+    },
+    "catMains": {
+      "name": "Hauptgerichte"
+    },
+    "catDesserts": {
+      "name": "Desserts"
+    },
+    "shawarma_teller_hahnchen": { "name": "Hähnchen-Schawarma-Teller" },
+"grill_teller_mix": { "name": "Grill-Mix-Teller" },
+"tag": "Hauptgericht · Signatur",
+"desc": "Eine großzügige Auswahl unserer Signature-Gerichte, perfekt zum Teilen und Entdecken der levantinischen Küche. Ideal für zwei Personen.",
+"aboud_teller_mix": { "name": "Aboud-Mix-Teller" },
+"tabbouleh_salad": { "name": "Taboulé-Salat" },
+"fattoush_salad": { "name": "Fattoush-Salat" },
+"exploreFullMenu": "Entdecken Sie unser vollständiges Menü",
+    "signatureLabel": "Unsere Empfehlung",
+    "addToCart": "In den Warenkorb",
+    "currency": "$",
+    "dish1": "Safranreis mit Berberitzen",
+    "dish2": "Gegrillte Lammspieße",
+    "dish3": "Granatapfel-Walnuss-Eintopf",
+    "dish4": "Traditionelle Mezze-Platte",
+    "dish5": "Pistazien-Baklava mit Rosenwasser",
+    "dish6": "Safran-Kardamom-Custard",
+    "cateringPackageName": "Name des Catering-Pakets",
+    "customBuffet": "Individuelles Buffet",
+    "catMain": "Hauptgericht",
+    "catSide": "Beilage",
+    "catApp": "Vorspeise",
+    "catDessert": "Dessert"
+  },
+    "Product": {
+    "priceLabel": "Preis",
+    "prepLabel": "Zubereitung",
+    "calLabel": "Kcal",
+    "spiceLabel": "Schärfe",
+    "spiceMild": "Mild",
+    "spiceMedium": "Mittel",
+    "spiceHot": "Scharf",
+    "aboutLabel": "Über dieses Gericht",
+    "ingredientsLabel": "Zutaten",
+    "allergensLabel": "Allergene",
+    "relatedLabel": "Weitere aus dieser Kategorie",
+    "allergenGluten": "Gluten",
+    "allergenDairy": "Milchprodukte",
+    "allergenNuts": "Schalenfrüchte",
+    "allergenSesame": "Sesam",
+    "allergenEggs": "Eier",
+    "hummusDesc": "Samtiger Hummus aus püriertem Kichererbsen, Tahini, frischem Zitronensaft und einer Prise Knoblauch — warm serviert mit Olivenöl und Paprika. Ein Grundpfeiler der levantinischen Küche.",
+    "hummusIng1": "Kichererbsen",
+    "hummusIng2": "Tahini",
+    "hummusIng3": "Zitronensaft",
+    "hummusIng4": "Knoblauch",
+    "hummusIng5": "Olivenöl",
+    "tabboulehDesc": "Ein frischer Salat aus fein gehackter Petersilie, reifen Tomaten und Frühlingszwiebeln mit Bulgur, Zitrone und Olivenöl. Leicht, aromatisch und unvergesslich levantinisch.",
+    "tabboulehIng1": "Glattblättrige Petersilie",
+    "tabboulehIng2": "Bulgur",
+    "tabboulehIng3": "Tomaten",
+    "tabboulehIng4": "Frühlingszwiebeln",
+    "tabboulehIng5": "Zitrone & Olivenöl",
+    "fattoushDesc": "Ein lebhafter Salat mit knusprigem geröstetem Fladenbrot, frischem Gemüse und einem würzigen Granatapfel-Sumach-Dressing. Knusprig, frisch und einzigartig.",
+    "fattoushIng1": "Geröstetes Fladenbrot",
+    "fattoushIng2": "Romana-Salat",
+    "fattoushIng3": "Radieschen & Gurke",
+    "fattoushIng4": "Sumach & Granatapfelmelasse",
+    "fattoushIng5": "Frische Minze",
+    "shawarmaDesc": "Zart mariniertes Hähnchen in einer Mischung aus Schawarma-Gewürzen — Zimt, Piment und Kardamom — langsam geröstet und von Hand aufgeschnitten. Serviert mit Knoblauchsauce und Fladenbrot.",
+    "shawarmaIng1": "Hähnchenschenkel",
+    "shawarmaIng2": "Schawarma-Gewürzmischung",
+    "shawarmaIng3": "Knoblauchsauce (Toum)",
+    "shawarmaIng4": "Fladenbrot",
+    "shawarmaIng5": "Eingelegtes Gemüse",
+    "kibbehDesc": "Ein geliebter levantinischer Klassiker — eine knusprige Hülle aus feinem Bulgur und Lammfleisch, gefüllt mit Hackfleisch, gerösteten Pinienkernen und karamellisierten Zwiebeln. Im Ofen golden gebacken.",
+    "kibbehIng1": "Lamm- & Rinderhackfleisch",
+    "kibbehIng2": "Feiner Bulgur",
+    "kibbehIng3": "Pinienkerne",
+    "kibbehIng4": "Karamellisierte Zwiebeln",
+    "kibbehIng5": "Sieben-Gewürze-Mischung",
+    "mansafDesc": "Das Festtagsgericht der Levante — langsam geschmortes Lamm auf Safranreis, reichlich bedeckt mit Jameed, einer fermentierten getrockneten Joghurtsauce. Ein Gericht für besondere Anlässe.",
+    "mansafIng1": "Langsam geschmortes Lamm",
+    "mansafIng2": "Safranreis",
+    "mansafIng3": "Jameed (fermentierter Joghurt)",
+    "mansafIng4": "Geröstete Mandeln & Pinienkerne",
+    "mansafIng5": "Fladenbrot",
+    "knafehDesc": "Zupfteig in Rosensirup getränkt, über warmem Nabulsi-Käse, gekrönt mit gehackten Pistazien. Knusprig oben, cremig innen — die Königin der levantinischen Desserts.",
+    "knafehIng1": "Kataifi-Teig",
+    "knafehIng2": "Nabulsi-Käse",
+    "knafehIng3": "Rosensirup",
+    "knafehIng4": "Gehackte Pistazien",
+    "knafehIng5": "Orangenblütenwasser",
+    "baklavaDesc": "Hauchdünne Schichten Filoteig, gefüllt mit einer duftenden Mischung aus Pistazien und Walnüssen, in leichtem Honig-Rosensirup getränkt. Jedes Stück ist ein Meisterwerk.",
+    "baklavaIng1": "Filoteig",
+    "baklavaIng2": "Pistazien & Walnüsse",
+    "baklavaIng3": "Honigsirup",
+    "baklavaIng4": "Rosenwasser",
+    "baklavaIng5": "Geklärte Butter"
+  },
+  "About": {
+    "badge": "Unsere Geschichte",
+    "title": "Mit",
+    "titleItalic": "Leidenschaft",
+    "storyPara1": "Zafran entstand aus einer einzigen Vision: die Tiefe des persischen kulinarischen Erbes in einen Dialog mit den feinsten europäischen Techniken zu bringen. 2008 in einem Raum mit zwölf Plätzen in Kreuzberg gegründet, sind wir gewachsen — ohne jemals die Wärme unseres ersten Tisches zu verlieren.",
+    "storyPara2": "Jedes Gericht, das unsere Küche verlässt, trägt die Erinnerung an einen Gewürzmarkt in Teheran, an das Rezept der Großmutter und an die Ernte unserer eigenen Farm in Brandenburg. Wir kochen mit Feuer, mit Geduld und mit kompromissloser Liebe zu den Zutaten.",
+    "storyTitle": "Wo Tradition auf Haute Cuisine trifft",
+    "stats": {
+      "years": "Jahre Exzellenz",
+      "chefs": "Erfahrene Köche",
+      "awards": "Auszeichnungen"
+    },
+    "galleryTitle": "Ein Blick nach innen",
+    "gallerySubtitle": "Visuelle Geschichten",
+    "floatingCard": {
+      "michelinLabel": "Michelin-Sterne",
+      "michelinValue": "Zwei Sterne · 2019",
+      "yearsNumber": "15",
+      "yearsLabel": "Jahre"
+    },
+    "scrollHint": "→ Scrollen",
+    "hero": {
+      "reserveButton": "Tisch reservieren",
+      "viewMenuLink": "Speisekarte ansehen"
+    },
+    "quote": {
+      "sectionLabel": "Unsere Philosophie",
+      "line1": "\"Wir kochen kein Essen.",
+      "line2": "Wir kochen Erinnerung.\"",
+      "attribution": "— Karim Zafrani, Gründer"
+    },
+    "story": {
+      "sectionLabel": "Unsere Geschichte",
+      "kitchenCode": "\"Jedes Gericht ist ein Liebesbrief an die Zutaten.\" — Zafran Küchenkodex"
+    },
+    "timeline": {
+      "sectionLabel": "Unsere Reise",
+      "sectionTitle": "Fünfzehn Jahre Perfektion",
+      "items": [
+        {
+          "year": "2008",
+          "title": "Der Anfang",
+          "body": "Chef Karim Zafrani eröffnet einen Degustationsraum mit zwölf Plätzen in Kreuzberg mit einem einzigen Menü — sieben Gänge persisch-europäischer Fusion."
+        },
+        {
+          "year": "2012",
+          "title": "Der erste Stern",
+          "body": "Wir erhalten unseren ersten Michelin-Stern. Die Anerkennung führte zu einem neuen Speisesaal, doch unsere Philosophie blieb intim."
+        },
+        {
+          "year": "2016",
+          "title": "Der Garten",
+          "body": "Wir erwerben eine kleine Farm außerhalb Berlins. Seitdem wird jedes Kraut und jede essbare Blüte auf unseren Tellern von uns selbst angebaut."
+        },
+        {
+          "year": "2019",
+          "title": "Der zweite Stern",
+          "body": "Ein zweiter Michelin-Stern. Das Team wächst, die Speisekarte wird kleiner — weniger Gerichte, mehr Tiefe, reichere Geschichten."
+        },
+        {
+          "year": "2024",
+          "title": "Zafran heute",
+          "body": "Vierzig Plätze, eine Warteliste von sechs Monaten und eine unerschütterliche Leidenschaft für Geschmack."
+        }
+      ]
+    },
+    "pillars": {
+      "sectionLabel": "Woran wir glauben",
+      "sectionTitle": "Die vier Säulen",
+      "items": [
+        {
+          "title": "Vom Feld auf den Tisch",
+          "body": "Jede Zutat ist bis zu einer vertrauenswürdigen Quelle rückverfolgbar. Unsere Farm in Brandenburg versorgt uns das ganze Jahr über mit Kräutern, essbaren Blüten und Microgreens."
+        },
+        {
+          "title": "Offenes Feuer",
+          "body": "Kochen über offenem Feuer ist das Herz unserer Identität. Holzrauch, Holzkohle und die Maillard-Reaktion — Aromen, die kein Ofen reproduzieren kann."
+        },
+        {
+          "title": "Gastfreundschaft",
+          "body": "Wir glauben, dass ein großartiges Essen genauso sehr von den Menschen am Tisch abhängt wie von dem, was darauf serviert wird. Jeder Gast wird willkommen geheißen, nicht nur bedient."
+        },
+        {
+          "title": "Exzellenz",
+          "body": "Zwei Michelin-Sterne, verdient über fünfzehn Jahre täglicher Verfeinerung. Wir setzen unsere eigenen Maßstäbe höher als jeder Führer."
+        }
+      ]
+    },
+    "team": {
+      "sectionLabel": "Die Menschen",
+      "sectionTitle": "Lernen Sie das Team kennen",
+      "chefs": [
+        {
+          "name": "Karim Zafrani",
+          "role": "Küchenchef & Gründer",
+          "bio": "Ausgebildet in Paris und Teheran, verkörpert Karim die Brücke zwischen persischem Erbe und moderner europäischer Technik. Sein Safran-Risotto steht seit 2008 unverändert auf der Karte."
+        },
+        {
+          "name": "Sofia Marchetti",
+          "role": "Leiterin Pâtisserie",
+          "bio": "Absolventin von Le Cordon Bleu, verleiht Sofia Desserts architektonische Präzision. Ihre Kreationen sind visuelle Kunstwerke, die zum Genießen einladen."
+        },
+        {
+          "name": "Lars Eriksson",
+          "role": "Sommelier",
+          "bio": "Lars verbrachte zwanzig Jahre in den Kellern von Burgund und Shiraz. Seine Pairings sind nie offensichtlich, aber immer erhellend."
+        }
+      ]
+    },
+    "cta": {
+      "sectionLabel": "Begrenzte Verfügbarkeit",
+      "title": "Begleiten Sie uns zu einem",
+      "titleItalic": "unvergesslichen Abend",
+      "body": "Nur vierzig Plätze pro Abend. Reservieren Sie jetzt Ihren Tisch und werden Sie Teil unserer Geschichte.",
+      "reserveButton": "Jetzt reservieren",
+      "menuButton": "Speisekarte ansehen"
+    }
+  }
+}

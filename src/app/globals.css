@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  /* The Base Colors from your design */
+  --color-gold-dark: #b89130;   /* Deep Antique Gold */
+  --color-gold-light: #f3d078;  /* Bright Metallic Highlight */
+  --color-gold: #b89130; 
+  
+  --color-brand-dark: #1c1917;
+  --color-brand-light: #fafaf9;
+
+  /* Custom Metallic Gradient */
+  --background-image-gold-metallic: linear-gradient(
+    135deg, 
+    #b89130 0%, 
+    #f3d078 50%, 
+    #b89130 100%
+  );
+}
+
+/* ─── CUSTOM LUXURY SCROLLBAR ─── */
+/* Applied to the menu dropdown via the .custom-scrollbar class */
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(250, 250, 249, 0.02); /* Using your brand-light with low opacity */
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /* Uses your gold-dark for the scroll handle */
+    background: linear-gradient(
+      to bottom, 
+      transparent, 
+      var(--color-gold-dark), 
+      transparent
+    );
+    border-radius: 10px;
+    transition: background 0.3s ease;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gold-light);
+  }
+
+  /* Firefox Support */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold-dark) rgba(250, 250, 249, 0.02);
+}
+
+/* ─── LUXURY MASKING ─── */
+/* Makes content fade out at the edges for a premium feel */
+@utility mask-fade-bottom {
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+
+/* ─── BASE STYLES ─── */
+:root {
+  --background: var(--color-brand-dark);
+  --foreground: var(--color-brand-light);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth selection color matching your gold */
+::selection {
+  background-color: var(--color-gold-dark);
+  color: var(--color-brand-dark);
+}

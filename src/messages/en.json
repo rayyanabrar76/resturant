@@ -1,0 +1,583 @@
+{
+  "Navigation": {
+ "LogoName": "Chef Aboud Küche",
+    "Home": "Home",
+    "Menu": "Menu",
+    "Catering": "Catering",
+    "About": "About Us",
+    "Order": "Order Now"
+  },
+  "hero": {
+    "liveKitchen": "LIVE KITCHEN",
+    "signature": "Signature",
+    "craftingMemories": "Crafting",
+    "memories": "Memories",
+    "onePlate": "One Plate at a Time.",
+    "fresh": "Fresh",
+    "ingredientBase": "Ingredient Base",
+    "handmade": "Handmade",
+    "everySingleMorning": "Every Single Morning",
+    "exploreMenu": "Explore the Menu",
+    "chefsSelection": "Chef's Selection",
+    "viewDetails": "VIEW DETAILS",
+    "slides": [
+      { "ar": "نكهات أصيلة", "en": "Authentic Flavors" },
+      { "ar": "تحضير فاخر", "en": "Masterful Prep" },
+      { "ar": "تقديم عصري", "en": "Modern Dining" }
+    ],
+    "recipes": [
+      { "en": "Hummus", "ar": "حمص", "slug": "hummus" },
+      { "en": "Tabbouleh", "ar": "تبولة", "slug": "tabbouleh" },
+      { "en": "Fattoush", "ar": "فتوش", "slug": "fattoush" },
+      { "en": "Kibbeh", "ar": "كبة", "slug": "kibbeh" },
+      { "en": "Shawarma", "ar": "شاورما", "slug": "shawarma" }
+    ]
+  },
+  "HomePage": {
+    "exclusiveEvents": "Exclusive Events",
+"cateringTitle1": "Catering",
+"cateringTitle2": "Redefined",
+    "title": "The Essence of Saffron",
+    "description": "Experience a culinary journey where centuries-old Persian tradition meets modern luxury. Every dish tells a story of heritage and spice.",
+    "orderNow": "Reserve a Table",
+    "viewGallery": "View Gallery",
+    "discover": "Discover",
+    "kitchen": "Kitchen",
+      "kitchenItalic": "Experience",
+    "kitchenDesc": "Every ingredient is hand-selected to ensure a premium dining experience that honors our heritage.",
+    "eventTitle": "Host an Unforgettable Event",
+    "eventDesc": "Our bespoke catering services bring the luxury of Zafran to your private venue.",
+    "planBuffet": "Plan Your Buffet"
+  },
+  
+  "Reservation": {
+    "experienceBadge": "Culinary Journey",
+    "pageTitle": "Reserve a Table",
+    "introText": "Join us for an unforgettable evening where every flavor tells a story. We recommend booking at least 24 hours in advance.",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "date": "Date",
+    "time": "Time",
+    "guests": "Number of Guests",
+    "specialRequests": "Special Requests",
+    "confirmBooking": "Request Table",
+    "successTitle": "Reservation Requested",
+    "successMessage": "We have received your request. Our team will contact you via phone or email within the next 2 hours to confirm your table.",
+    "backToBooking": "New Reservation"
+  },
+  "menuDropdown": {
+  "categoriesLabel": "Categories",
+  "popularChoices": "Popular Choices",
+  "premiumQuality": "Premium Quality",
+  "tasteOfLevant": "Taste of Levant",
+  "freshIngredients": "Fresh ingredients prepared daily following traditional recipes from Chef Aboud.",
+  "fullExperience": "Full Experience",
+  "categories": [
+    {
+      "id": "sandwiches",
+      "label": "Sandwiches",
+      "arabic": "ساندوتشات",
+      "subfolders": [
+        { "name": "Veggie & Halloumi", "items": ["Falafel Sandwich", "Falafel & Halloumi", "Makali (Fried Veggies)", "Babaghanoush Sandwich"] },
+        { "name": "Traditional Meat", "items": ["Shawarma Kalb (Veal)", "Shawarma Hähnchen", "Shawarma Mix", "Kafta Sandwich", "Sucuk Sandwich"] },
+        { "name": "Chef Specialties", "items": ["Philadelphia Sandwich", "Fahita Sandwich", "Crispy Chicken Sandwich"] }
+      ]
+    },
+    {
+      "id": "plates",
+      "label": "Hauptspeisen",
+      "arabic": "الأطباق الرئيسية",
+      "subfolders": [
+        { "name": "Grill Mix", "items": ["Grill Teller Mix (19.00 €)", "Kafta Teller", "Shish Taouk Teller"] },
+        { "name": "Arabic Classics", "items": ["Shawarma Teller Hähnchen", "Shawarma Teller Kalb", "Aboud Teller Mix (Chef's Special)"] },
+        { "name": "Vegan Delights", "items": ["Falafel Teller", "Makali Teller", "Halloumi Teller"] }
+      ]
+    },
+    {
+      "id": "starters",
+      "label": "Starters & Drinks",
+      "arabic": "مقبلات ومشروبات",
+      "subfolders": [
+        { "name": "Mezza & Soup", "items": ["Hummus Teller", "Babaghanoush Teller", "Mutabbal Teller", "Linsensuppe (Lentil Soup)"] },
+        { "name": "Fresh Salads", "items": ["Tabbouleh Salad", "Fattoush Salad"] },
+        { "name": "Sweets & Refreshments", "items": ["Katayef Kishta", "Arabisch Eis", "Sahlab", "Fresh Orange Juice", "Mint Lemonade", "Ayran"] }
+      ]
+    }
+  ]
+},
+  "Gallery": {
+    "title": "Visual Story",
+    "subtitle": "A Glimpse of Zafran",
+    "filter": {
+      "all": "All",
+      "food": "Cuisine",
+      "interior": "Atmosphere",
+      "catering": "Events"
+    }
+  },
+  "experienceBridge": {
+  "menuTitle": "The Al La Carte",
+  "menuTitleHighlight": "Menu",
+  "menuDesc": "Perfect for intimate evenings and daily cravings. Explore our full selection.",
+  "menuCta": "View Menu",
+  "eventsTitle": "Tailored",
+  "eventsTitleHighlight": "Events",
+  "eventsDesc": "Our custom buffet calculator helps you plan the perfect feast for your guests.",
+  "eventsCta": "Plan Buffet"
+},
+"chefsTable": {
+  "label": "The Process",
+  "title": "Behind the",
+  "titleHighlight": "Signature",
+  "stampText": "Authentic • Handmade • Signature • ",
+  "steps": [
+    { "no": "01", "title": "Sourcing the Soul", "desc": "Hand-picked spices from the Bekaa Valley, arriving weekly to ensure the terpene profiles remain vibrant." },
+    { "no": "02", "title": "The Slow Burn", "desc": "Our meats are marinated for 48 hours in a signature blend of 12 spices before meeting the oak-wood fire." },
+    { "no": "03", "title": "Artisanal Plating", "desc": "Every plate is a canvas. We balance texture, temperature, and color to create a multisensory finish." }
+  ]
+},
+  "Footer": {
+  "tagline": "Authentische Levantinische Küche · Berlin",
+  "contactTitle": "Contact",
+  "address": "Thielallee 34, 14195 Berlin",
+  "phone": "+49 176 066 6501",
+  "exploreTitle": "Explore",
+  "exploreLinks": ["Menu", "About", "Events", "Gallery", "Contact"],
+  "newsletterTitle": "Newsletter",
+  "newsletterPlaceholder": "Email Address",
+  "newsletterCta": "Join",
+  "copyright": "© 2026 Chef Aboud Küche",
+  "backToTop": "Back to top"
+},
+  "Menu": {
+    "title": "Our",
+    "titleItalic": "Menu",
+    "breadcrumb": "Menu",
+    "filterAll": "All Dishes",
+    "headerArabic": "قائمة طعامنا",
+    "viewDetails": "View details →",
+    "back": "Back",
+    "total": "Total",
+    "qty": "Qty",
+    "item": "Item",
+    "items": "Items",
+    "filterStarters": "Starters",
+    "filterMains": "Main Courses",
+    "filterDesserts": "Desserts",
+    "currencySymbol": "$",
+    "currencyPos": "prefix",
+    "addToCart": "Add to Order",
+    "viewCart": "View My Order",
+    "cartTitle": "Your Selection",
+    "itemUnit": "item",
+    "emptyCart": "Your tray is empty",
+    "checkout": "Proceed to Checkout",
+    "continueShopping": "Continue Shopping"
+  },
+  "MenuExplorer": {
+    "restaurantName": "Chef Aboud Küche",
+    "restaurantNameArabic": "مطبخ الشيف عبود",
+
+    "liveMenuBadge": "Live Menu",
+    "updatedToday": "Updated Today",
+    "heroDescription": "A celebration of Levantine tradition — every dish handcrafted with seasonal ingredients, ancient spice routes, and the warmth of Chef Aboud's kitchen.",
+    "location": "Frankfurt, Germany",
+    "sommelierHints": "Sommelier Hints",
+    "signatureStyle": "Signature Style",
+    "featuredDishAlt": "Featured dish",
+
+    "curatedSelection": "Curated Selection",
+    "chefsSelection": "Chef's Selection",
+    "hotItem": "Hot Item",
+
+    "tagVegan": "Vegan",
+    "tagGlutenFree": "Gluten-Free",
+    "tagNuts": "Contains Nuts",
+    "tagDairyFree": "Dairy-Free",
+
+    "closeModal": "Close",
+    "inStock": "Available Now",
+    "calories": "Calories",
+    "protein": "Protein",
+    "carbs": "Carbs",
+    "sommeliersInsight": "Sommelier's Insight",
+    "pairingHintProtein": "A full-bodied red such as a Syrah or aged Malbec will stand up beautifully to the richness of this dish.",
+    "pairingHintLight": "A crisp Sauvignon Blanc or sparkling water with a wedge of lemon complements this light selection perfectly.",
+    "addToSelection": "Add to Selection",
+    "backToMenu": "Back to Menu",
+
+    "monFri": "Mon – Fri",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "hoursMonFri": "11:00 – 22:00",
+    "hoursSaturday": "10:00 – 23:00",
+    "hoursSunday": "12:00 – 21:00",
+
+    "hoursLabel": "Opening Hours",
+    "reservations": "Reservations",
+    "cateringContact": "Catering",
+    "locationLabel": "Location",
+    "contactLabel": "Contact",
+    "emailReservations": "info@chefaboud.de",
+    "emailCatering": "catering@chefaboud.de",
+
+    "footerTagline": "Authentic Lebanese cuisine crafted with heritage ingredients and the spirit of generous hospitality.",
+    "copyright": "All rights reserved.",
+
+    "sectionStarters": "Starters",
+    "sectionStartersArabic": "المقبلات",
+    "sectionPlates": "Plates",
+    "sectionPlatesArabic": "الأطباق الرئيسية",
+    "sectionSandwiches": "Sandwiches",
+    "sectionSandwichesArabic": "السندويشات",
+
+    "itemS1Name": "Hummus Beiruti",
+    "itemS1ArabicName": "حمص بيروتي",
+    "itemS1Desc": "Stone-ground chickpeas blended with aged tahini, fresh lemon, and a drizzle of cold-pressed olive oil. Finished with smoked paprika and hand-picked parsley.",
+
+    "itemS2Name": "Tabbouleh",
+    "itemS2ArabicName": "تبولة",
+    "itemS2Desc": "Freshly chopped flat-leaf parsley, heirloom tomatoes, and bulgur wheat, tossed in lemon and extra virgin olive oil. Prepared fresh each morning.",
+
+    "itemS3Name": "Fattoush Salad",
+    "itemS3ArabicName": "فتوش",
+    "itemS3Desc": "Garden vegetables, crisp sumac-dusted flatbread chips, pomegranate seeds, and fresh mint in a tangy pomegranate molasses dressing.",
+
+    "itemP1Name": "Kibbeh bil Sanieh",
+    "itemP1ArabicName": "كبة بالصينية",
+    "itemP1Desc": "Layers of hand-kneaded bulgur and minced lamb, baked in the tray with pine nuts, caramelised onions, and a warming spice blend of seven baharat.",
+
+    "itemP2Name": "Grilled Halloumi Plate",
+    "itemP2ArabicName": "حلوم مشوي",
+    "itemP2Desc": "Thick-cut Cypriot halloumi grilled over charcoal, served with warm flatbread, roasted vegetables, and herb-infused olive oil.",
+
+    "itemP3Name": "Shawarma Plate",
+    "itemP3ArabicName": "شاورما",
+    "itemP3Desc": "Slow-marinated chicken thighs with sumac, cardamom and garlic, carved fresh off the rotisserie. Served with tahini, pickles, and toum.",
+
+    "itemW1Name": "Falafel Wrap",
+    "itemW1ArabicName": "فلافل",
+    "itemW1Desc": "Hand-shaped green herb falafel, fried golden, wrapped in fresh saj bread with pickled turnips, tahini sauce and shredded cabbage.",
+
+    "itemW2Name": "Chicken Shawarma Wrap",
+    "itemW2ArabicName": "شاورما دجاج",
+    "itemW2Desc": "Rotisserie chicken, garlic toum, tomato, pickles, and pomegranate sauce rolled tight in freshly baked Levantine flatbread.",
+
+    "itemW3Name": "Arayes",
+    "itemW3ArabicName": "عرايس",
+    "itemW3Desc": "Spiced minced lamb pressed inside flatbread and griddled until crispy. Served with a cooling cucumber-yoghurt dip."
+  },
+  "Checkout": {
+    "back": "Back",
+    "deliveryBadge": "Delivery Order",
+    "cateringBadge": "Catering & Events",
+    "checkoutTitle": "Your Details",
+    "eventDetails": "Event Details",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "date": "Date",
+    "time": "Time",
+    "address": "Delivery Address",
+    "location": "Event Location",
+    "paymentMethod": "Payment Method",
+    "cashOnDelivery": "Cash on Delivery",
+    "completeOrder": "Complete Order",
+    "requestBooking": "Request Booking",
+    "orderSummary": "Order Summary",
+    "eventSummary": "Event Summary",
+    "subtotal": "Subtotal",
+    "delivery": "Delivery",
+    "serviceFee": "Service Fee",
+    "total": "Total",
+    "selectedDishes": "Selected Dishes",
+    "secure": "256-bit Encrypted & Secure",
+    "onlinePayment": "Online Payment"
+  },
+  "Catering": {
+    "badge": "Special Occasions",
+    "title": "Buffet",
+    "titleItalic": "Designer",
+    "description": "Customize your premium dining experience. Choose your favorite dishes, specify the number of guests, and get an instant estimate.",
+    "summaryTitle": "Event Summary",
+    "viewSummary": "View Summary",
+    "guestsLabel": "Number of Guests",
+    "guestUnit": "Person",
+    "closeLabel": "Close",
+    "openSummaryLabel": "Open order summary",
+    "filterAriaLabel": "Filter by category",
+    "addDishLabel": "Add {dish}",
+    "removeDishLabel": "Remove {dish}",
+    "increaseGuests": "Increase guests",
+    "decreaseGuests": "Decrease guests",
+    "guestRangeMin": "10",
+    "guestRangeMid": "250",
+    "guestRangeMax": "500",
+    "fabSummaryDetail": "{count} items · {guests} guests",
+    "perPerson": "per person",
+    "perItem": "per item",
+    "selectedDishes": "Selected Dishes",
+    "selectedDish": "Selected Dish",
+    "noDishesSelected": "No dishes selected yet",
+    "bookButton": "Book Catering Service",
+    "disclaimer": "Final price may vary based on location and staff.",
+    "orBuildCustom": "Or build your own buffet",
+    "perPersonShort": "per person",
+    "estimatedCost": "Estimated Cost per Person",
+    "totalLabel": "Total Event",
+    "heroLabel": "Special Occasions",
+    "heroTitle": "Buffet Designer",
+    "heroSubtitle": "Design your luxury dining experience. Choose your favorite dishes, specify the number of guests, and get an instant cost estimate.",
+    "perPersonLabel": "per individual",
+    "tierBudget": "Budget",
+    "tierValue": "Great Value",
+    "tierPremium": "Luxury Experience",
+    "viewDetails": "View Details",
+    "offer1Title": "Royal Saffron Buffet",
+    "offer1Desc": "A selection of the finest kebabs and stews for an authentic experience.",
+    "offer2Title": "Emperor's Feast",
+    "offer2Desc": "A wide variety including appetizers, main courses, and traditional desserts.",
+    "offer3Title": "Grand Persian Gala",
+    "offer3Desc": "A luxurious dining experience, perfect for upscale events and weddings.",
+    "backToCatering": "Back to Overview",
+    "whatsIncluded": "What's included in the offer?",
+    "startingFrom": "Starting from",
+    "stationLabel": "Station",
+"stationProgressLabel": "Stations configured",
+"selectedOne": "selected",
+"selectedMany": "selected",
+"noneSelected": "None selected",
+"summaryEmptyHint": "No stations configured yet",
+"stationUnit": "station",
+"stationsUnit": "stations",
+"configured": "configured",
+    "inquireNow": "Inquire Now",
+    "serviceStyle": "Service Style",
+    "badgeMostPopular": "Most Popular",
+    "badgePremium": "Premium",
+    "selectedDishesLabel": "Selected Dishes",
+    "perEvent": "per event",
+    "premiumQuality": "Premium Quality",
+    "qualityDesc": "We use 100% organic saffron and the finest meats.",
+    "notice": "Pre-order Required",
+    "offersLabel": "Exclusive Catering Offers",
+    "offersTitle": "Ready Experiences",
+    "offersSubtitle": "All-inclusive packages for every event — everything arranged, nothing to worry about.",
+    "customTitle": "Design Your Buffet",
+    "customLabel": "Custom Builder",
+    "customSubtitle": "Choose exactly what you want. Price per person updates automatically.",
+    "filterAll": "All",
+    "offer1LongDesc": "The classic Persia feast is designed for intimate family gatherings. Experience the warmth of tradition with our most popular dishes.",
+    "feature1_1": "Standard buffet setup",
+    "feature1_2": "3 main courses",
+    "feature1_3": "2 types of appetizers and salads",
+    "feature1_4": "Soft drinks included",
+    "offer1Style": "Casual family buffet",
+    "offer2LongDesc": "Elevate your corporate events with our professional catering service. We offer an exclusive selection of Persian dishes, specially curated for business lunches and formal gatherings.",
+    "offer2Style": "Formal service or executive buffet",
+    "feature2_1": "Full table service available",
+    "feature2_2": "5 main course options",
+    "feature2_3": "Luxury dessert selection",
+    "feature2_4": "Coffee and tea station",
+    "offer3LongDesc": "Make your special day unforgettable with the grand wedding package. A complete luxury experience featuring our most exclusive recipes, stunning presentation, and a full service team.",
+    "offer3Style": "Luxury gala service",
+    "feature3_1": "On-site chef and service team",
+    "feature3_2": "Unlimited luxury buffet",
+    "tagPopular": "Most Popular",
+    "tagNew": "New",
+    "tagChefsPick": "Chef's Choice",
+    "guestPlaceholder": "Enter number of guests",
+    "feature3_3": "Custom Persian wedding cake",
+    "feature3_4": "Table floral arrangements",
+    "guests": "Guests"
+  },
+  "Dishes": {
+      "itemS1Name": {
+      "name": "Grilled Lamb Chops"
+    },
+    "itemS1Description": {
+      "description": "Succulent lamb chops served with herb-infused sauce."
+    },
+    "itemS1ArabicName": {
+      "name": "شرائح لحم الضأن المشوية"
+    },
+    "itemS2Name": {
+      "name": "Vegan Buddha Bowl"
+    },
+    "itemS2Description": {
+      "description": "A nourishing bowl with quinoa, tofu, and fresh veggies."
+    },
+    "itemS2ArabicName": {
+      "name": "وعاء بوذا نباتي"
+    },
+    "itemS3Name": {
+      "name": "Seafood Paella"
+    },
+    "itemS3Description": {
+      "description": "Traditional Spanish rice dish with fresh seafood."
+    },
+    "itemS3ArabicName": {
+      "name": "باييلا المأكولات البحرية"
+    },
+    "backToMenu": "Back to Menu",
+"authenticIngredients": "Authentic Ingredients",
+"premiumPackaging": "Premium Packaging",
+    "exploreFullMenu": "Explore Full Menu",
+    "tabbouleh":    { "name": "Tabbouleh",           "tag": "Salad · Fresh"   ,      "desc": "A vibrantly fresh salad of finely chopped parsley, ripe tomatoes, and spring onions, tossed with bulgur wheat and dressed in lemon and olive oil. Bright, herbaceous, and quintessentially Levantine." },
+    "fattoush":     { "name": "Fattoush",            "tag": "Salad · Fresh"   ,      "desc": "A refreshing salad of crisp vegetables, tossed with a tangy dressing of lemon juice and olive oil. A true taste of the Levant." },
+    "kibbeh":       { "name": "Kibbeh Bil Saniyeh",  "tag": "Main · Baked"   ,      "desc": "Crispy meatballs filled with bulgur and spices, baked to perfection. A beloved traditional dish with a rich history." },
+    "mansaf":       { "name": "Mansaf",              "tag": "Main · Signature" ,     "desc": "The royal dish of Jordan, featuring tender lamb slow-cooked in a rich, creamy sauce served over aromatic rice." },
+    "knafeh":       { "name": "Knafeh",              "tag": "Dessert · Sweet"   ,      "desc": "A delightful Middle Eastern dessert made with layers of phyllo pastry, sweet cheese, and a drizzle of rosewater syrup." },
+    "baklava":      { "name": "Baklava",             "tag": "Dessert · Sweet"   ,      "desc": "A rich, flaky pastry filled with chopped nuts and sweetened with syrup or honey." },
+    "warak_enab": {
+      "name": "Stuffed Vine Leaves",
+      "tag": "Cold Mezze",
+      "desc": "Crisp vine leaves stuffed with a flavorful mixture of rice, herbs, and spices."
+    },
+    "baba_ganoush": {
+      "name": "Moutabal (Baba Ganoush)",
+      "tag": "Cold Mezze",
+      "desc": "A creamy and flavorful dip made from roasted eggplant, tahini, lemon juice, and garlic."
+    },
+    "hummus": {
+    "name": "Silky Hummus",
+    "tag": "Cold Mezze",
+    "desc": "Chickpeas puréed with premium tahini, lemon juice, and a hint of garlic. Topped with cold-pressed Palestinian olive oil."
+  },
+    "shawarma_teller_hahnchen": { "name": "Chicken Shawarma Plate" },
+    "grill_teller_mix": { "name": "Mix Grill Plate" },
+    "tag": "Main · Signature",
+    "desc": "A generous selection of our signature dishes, perfect for sharing and discovering the flavors of the Levant. Ideal for two people.",
+    "aboud_teller_mix": { "name": "Aboud Plate Mix" },
+    "tabbouleh_salad": { "name": "Tabbouleh Salad" },
+    "fattoush_salad": { "name": "Fattoush Salad" },
+  "shawarma": {
+    "name": "Oak-Smoked Shawarma",
+    "tag": "Main Entrée",
+    "desc": "Thinly sliced prime meat marinated in 12 signature spices, slow-roasted over oak wood for a deep smoky finish."
+  },
+  "shawarma_teller": {
+  "name": "Schawarma-Teller Hähnchen",
+  "desc": "Zartes Hähnchenfleisch in unserem 12-Gewürz-Mix mariniert, langsam am Eichenholz gegart und mit frischem Gemüse, Knoblauchsauce und warmem Fladenbrot serviert."
+},
+"grill_mix": {
+  "name": "Grill-Teller Mix",
+  "desc": "Ein großzügiger gemischter Grillteller mit Kafta, Shish Taouk und gewürztem Hähnchen – alles über offener Flamme gegrillt, mit Reis, Grillgemüse und Haussaucen."
+},
+"aboud_special": {
+  "name": "Aboud-Teller Mix",
+  "desc": "Chef Abouds persönlicher Signaturteller – eine sorgfältig zusammengestellte Auswahl der feinsten Gerichte der Küche mit Schawarma, Falafel und Grillspezialitäten."
+},
+"falafel_teller": {
+  "name": "Falafel-Teller",
+  "desc": "Außen knusprig, innen zart – unser Falafel wird täglich frisch aus eingeweichten Kichererbsen und Kräutern zubereitet, mit Hummus, Taboulé und warmem Brot."
+},
+"hummus_teller": {
+  "name": "Hummus-Teller",
+  "desc": "Seidig-cremiger Hummus mit nativem Olivenöl und Paprika, serviert mit frisch gebackenem Fladenbrot. Ein Klassiker der levantinischen Küche."
+},
+"halloumi_teller": {
+  "name": "Halloumi-Teller",
+  "desc": "Goldgegrillter Halloumi-Käse mit knuspriger Kruste und weichem Inneren, serviert mit geröstetem Gemüse und einem frischen Kräutersalat."
+},
+    "catStarters":  { "name": "Starters"                                             },
+    "catMains":     { "name": "Mains"                                                },
+    "catDesserts":  { "name": "Desserts"                                             },
+    "signatureLabel": "Signature Selection",
+    "addToCart":      "Add to cart",
+    "currency":       "$",
+    "dish1": "Slow-Braised Lamb Flatbread",
+    "dish2": "Charcoal Grilled Kofta",
+    "dish3": "Levantine Vegetarian Plate",
+    "dish4": "Signature Mezze Selection",
+    "dish5": "Rosewater Pistachio Baklava",
+    "dish6": "Saffron Cardamom Custard",
+    "fattoush_garden": "Fattoush Garden Salad",
+    "mashawi_platter": "The Grand Mashawi Platter",
+    "cateringPackageName": "Catering Package",
+    "catMain": "Main",
+    "catSide": "Side",
+    "catApp": "Appetizer",
+    "catDessert": "Dessert"
+  },
+  "Product": {
+    "priceLabel": "Price",
+    "prepLabel": "Prep",
+    "calLabel": "Kcal",
+    "spiceLabel": "Spice",
+    "spiceMild": "Mild",
+    "spiceMedium": "Medium",
+    "spiceHot": "Hot",
+    "aboutLabel": "About This Dish",
+    "ingredientsLabel": "Ingredients",
+    "allergensLabel": "Allergens",
+    "relatedLabel": "More From This Category",
+    "allergenGluten": "Gluten",
+    "allergenDairy": "Dairy",
+    "allergenNuts": "Tree Nuts",
+    "allergenSesame": "Sesame",
+    "allergenEggs": "Eggs",
+    "hummusDesc": "Silky-smooth chickpeas blended with tahini, fresh lemon juice, and a hint of garlic — served warm with a generous drizzle of olive oil and dusted with paprika. A cornerstone of the Levantine table.",
+    "hummusIng1": "Chickpeas",
+    "hummusIng2": "Tahini",
+    "hummusIng3": "Lemon Juice",
+    "hummusIng4": "Garlic",
+    "hummusIng5": "Olive Oil",
+    "tabboulehDesc": "A vibrantly fresh salad of finely chopped parsley, ripe tomatoes, and spring onions, tossed with bulgur wheat and dressed in lemon and olive oil. Bright, herbaceous, and quintessentially Levantine.",
+    "tabboulehIng1": "Flat-leaf Parsley",
+    "tabboulehIng2": "Bulgur Wheat",
+    "tabboulehIng3": "Tomatoes",
+    "tabboulehIng4": "Spring Onions",
+    "tabboulehIng5": "Lemon & Olive Oil",
+    "fattoushDesc": "A lively salad built on crisp toasted flatbread, garden vegetables, and a tangy pomegranate-sumac dressing. The crunch of the bread against the freshness of mint and radish makes it truly memorable.",
+    "fattoushIng1": "Toasted Flatbread",
+    "fattoushIng2": "Romaine Lettuce",
+    "fattoushIng3": "Radishes & Cucumber",
+    "fattoushIng4": "Sumac & Pomegranate Molasses",
+    "fattoushIng5": "Fresh Mint",
+    "shawarmaDesc": "Tender chicken marinated for 24 hours in a blend of Shami spices — cinnamon, allspice, and cardamom — then slow-roasted and hand-carved. Served with garlic sauce and warm flatbread.",
+    "shawarmaIng1": "Chicken Thighs",
+    "shawarmaIng2": "Shami Spice Blend",
+    "shawarmaIng3": "Garlic Sauce (Toum)",
+    "shawarmaIng4": "Flatbread",
+    "shawarmaIng5": "Pickled Vegetables",
+    "kibbehDesc": "A beloved Shami classic — a crisp shell of fine bulgur and spiced lamb encasing a filling of minced meat, toasted pine nuts, and caramelised onions. Baked golden in the traditional Levantine style.",
+    "kibbehIng1": "Lamb & Beef Mince",
+    "kibbehIng2": "Fine Bulgur",
+    "kibbehIng3": "Pine Nuts",
+    "kibbehIng4": "Caramelised Onions",
+    "kibbehIng5": "Seven Spices",
+    "mansafDesc": "The grand dish of the Levant — slow-braised lamb on a bed of saffron rice, generously bathed in jameed, a fermented dried yoghurt sauce with a deep, tangy richness. A dish of celebration.",
+    "mansafIng1": "Slow-braised Lamb",
+    "mansafIng2": "Saffron Rice",
+    "mansafIng3": "Jameed (Fermented Yoghurt)",
+    "mansafIng4": "Toasted Almonds & Pine Nuts",
+    "mansafIng5": "Flatbread",
+    "knafehDesc": "Shredded kataifi pastry soaked in rose-water syrup, layered over warm Nabulsi cheese, then crowned with crushed pistachios. Crisp on top, melting within — this is the queen of Levantine desserts.",
+    "knafehIng1": "Kataifi Pastry",
+    "knafehIng2": "Nabulsi Cheese",
+    "knafehIng3": "Rose-water Syrup",
+    "knafehIng4": "Crushed Pistachios",
+    "knafehIng5": "Orange Blossom Water",
+    "baklavaDesc": "Delicate layers of hand-pulled filo pastry, filled with a fragrant blend of pistachios and walnuts, soaked in a light honey and rose-water syrup. Each piece is a study in contrast — flaky, rich, and gently floral.",
+    "baklavaIng1": "Filo Pastry",
+    "baklavaIng2": "Pistachios & Walnuts",
+    "baklavaIng3": "Honey Syrup",
+    "baklavaIng4": "Rose Water",
+    "baklavaIng5": "Clarified Butter"
+  },
+  "About": {
+    "badge": "Our Heritage",
+    "title": "A Legacy of",
+    "titleItalic": "Flavor",
+    "storyTitle": "The Zafran Story",
+    "storyPara1": "Founded in 2026, Zafran was born from a desire to bridge the gap between ancient Persian spice routes and the modern European culinary scene.",
+    "storyPara2": "Every thread of saffron we use is hand-harvested from our private estates, ensuring a level of purity that defines every dish we serve.",
+    "galleryTitle": "Captured Moments",
+    "gallerySubtitle": "Atmosphere & Artistry",
+    "stats": {
+      "years": "Years of Tradition",
+      "chefs": "Master Chefs",
+      "awards": "Culinary Awards"
+    }
+  }
+}
