@@ -5,18 +5,12 @@ import { useLocale } from 'next-intl';
 import { useState } from 'react';
 
 const FEED_POSTS = [
-  { id: 1, img: '/images/post1.PNG', link: '...', isVideo: true },
-  { id: 2, img: '/images/post2.PNG', link: '...', isVideo: true },
-  { id: 3, img: '/images/post3.PNG', link: '...', isVideo: true },
-  { id: 4, img: '/images/post4.PNG', link: '...', isVideo: true },
-  { id: 5, img: '/images/post5.PNG', link: '...', isVideo: true },
-  { id: 6, img: '/images/post6.PNG', link: '...', isVideo: true },
-  { id: 1, img: '/images/post1.png', link: 'https://www.instagram.com/p/DVoMb74gYjw/', isVideo: true },
-  { id: 2, img: '/images/post2.png', link: 'https://www.instagram.com/p/DVBmt5hDzFd/', isVideo: true },
-  { id: 3, img: '/images/post3.png', link: 'https://www.instagram.com/p/DPbvqOcAkM3/', isVideo: true },
-  { id: 4, img: '/images/post4.png', link: 'https://www.instagram.com/p/DPLkWBIjHdX/', isVideo: true },
-  { id: 5, img: '/images/post5.png', link: 'https://www.instagram.com/p/DOQsfbRiFUf/', isVideo: true },
-  { id: 6, img: '/images/post6.png', link: 'https://www.instagram.com/p/DO19PGmkxTr/', isVideo: true },
+  { id: 1, img: '/images/post1.PNG', link: 'https://www.instagram.com/p/DVoMb74gYjw/', isVideo: true },
+  { id: 2, img: '/images/post2.PNG', link: 'https://www.instagram.com/p/DVBmt5hDzFd/', isVideo: true },
+  { id: 3, img: '/images/post3.PNG', link: 'https://www.instagram.com/p/DPbvqOcAkM3/', isVideo: true },
+  { id: 4, img: '/images/post4.PNG', link: 'https://www.instagram.com/p/DPLkWBIjHdX/', isVideo: true },
+  { id: 5, img: '/images/post5.PNG', link: 'https://www.instagram.com/p/DOQsfbRiFUf/', isVideo: true },
+  { id: 6, img: '/images/post6.PNG', link: 'https://www.instagram.com/p/DO19PGmkxTr/', isVideo: true },
 ];
 
 export default function SocialFeed() {
