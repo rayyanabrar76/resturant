@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Added customDetails to the interface to support Catering breakdowns
 export interface CartItem {
-  id: number;
+  id: string;
   nameKey: string;
   price: number;
   qty: number;
@@ -19,8 +19,8 @@ export interface CartItem {
 interface CartContextType {
   cart: CartItem[];
   addToCart: (item: any) => void;
-  removeFromCart: (id: number) => void;
-  updateQty: (id: number, delta: number) => void;
+  removeFromCart: (id: string) => void;
+  updateQty: (id: string, delta: number) => void;
   clearCart: () => void;
   cartCount: number;
   isLoaded: boolean;
@@ -76,7 +76,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const updateQty = (id: number, delta: number) => {
+  const updateQty = (id: string, delta: number) => {
     setCart((prev) =>
       prev
         .map((item) =>
@@ -86,7 +86,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  const removeFromCart = (id: number) => {
+  const removeFromCart = (id: string) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
 

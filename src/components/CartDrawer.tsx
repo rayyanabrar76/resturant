@@ -6,7 +6,7 @@ import { X, Plus, Minus, ShoppingBag, Utensils } from 'lucide-react';
 import { Link } from '@/i18n/routing'; 
 
 interface CartItem {
-  id: number;
+  id: string;
   nameKey: string;
   price: number;
   qty: number;
@@ -63,8 +63,8 @@ export default function CartDrawer({
   isOpen: boolean; 
   onClose: () => void; 
   items: CartItem[];
-  onUpdateQty: (id: number, delta: number) => void;
-  onRemoveItem: (id: number) => void;
+  onUpdateQty: (id: string, delta: number) => void;
+  onRemoveItem: (id: string) => void;
   locale: string;
 }) {
   const t = useTranslations('Menu');
