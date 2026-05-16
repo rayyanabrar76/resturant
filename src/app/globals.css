@@ -9,6 +9,9 @@
   --color-brand-dark: #1c1917;
   --color-brand-light: #fafaf9;
 
+  /* Warm off-white page background (used as bg-ivory) */
+  --color-ivory: #faf7f0;
+
   /* Custom Metallic Gradient */
   --background-image-gold-metallic: linear-gradient(
     135deg, 
