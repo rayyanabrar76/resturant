@@ -99,7 +99,7 @@ function CartToast({ name, onClose, onCheckout }: { name: string; onClose: () =>
       animate={{ opacity: 1, y: 0,  scale: 1 }}
       exit={{   opacity: 0, y: 80, scale: 0.95 }}
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-200lex items-center gap-4 px-5 py-4 rounded-2xl"
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-200 flex items-center gap-4 px-5 py-4 rounded-2xl"
       style={{
         background: 'rgba(12,8,3,0.96)',
         border: '1px solid rgba(193,127,59,0.3)',

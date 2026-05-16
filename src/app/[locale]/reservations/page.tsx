@@ -109,7 +109,7 @@ export default function ReservationPage() {
   if (status === 'success') {
     return (
       <div className="min-h-screen bg-ivory flex items-center justify-center p-6">
-        <div className="absolute top-[-10%] right-[-5%] w-125500px] bg-gold/5 rounded-full blur-3xl -z-10" />
+        <div className="absolute top-[-10%] right-[-5%] w-125 h-125 bg-gold/5 rounded-full blur-3xl -z-10" />
         <motion.div
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}

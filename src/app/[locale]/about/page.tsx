@@ -133,7 +133,7 @@ export default function AboutPage() {
 
         {/* Decorative blobs */}
         <div
-          className="fixed top-[-10%] right-[-5%] w-31.25-[125px] rounded-full blur-3xl -z-10 pointer-events-none"
+          className="fixed top-[-10%] right-[-5%] w-[125px] h-[125px] rounded-full blur-3xl -z-10 pointer-events-none"
           style={{ background: 'rgba(193,127,59,0.05)' }}
         />
         <div
