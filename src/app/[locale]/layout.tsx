@@ -9,10 +9,10 @@ import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Premium Persian Cuisine',
-    default: 'Chef Aboud Kuche | Premium Persian Cuisine',
+    template: '%s | Chef Aboud Küche',
+    default: 'Chef Aboud Küche | Levantine Cuisine',
   },
-  description: 'Experience the finest Persian culinary arts in the heart of the city.',
+  description: 'Experience the finest Levantine culinary arts in the heart of Berlin.',
   icons: {
     icon: '/favicon.ico',
   },

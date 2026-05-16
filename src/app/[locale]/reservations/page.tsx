@@ -240,7 +240,7 @@ export default function ReservationPage() {
                 {[
                   { icon: Clock, text: 'Open daily · 17:30 – 23:00' },
                   { icon: Phone, text: '+49 30 1234 5678' },
-                  { icon: Mail,  text: 'reserve@zafran.com' },
+                  { icon: Mail,  text: 'reserve@chefaboud.de' },
                 ].map(({ icon: Icon, text }) => (
                   <div key={text} className="flex items-center gap-3">
                     <Icon size={13} className="text-gold shrink-0" strokeWidth={1.8} />
@@ -422,7 +422,7 @@ export default function ReservationPage() {
           className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4"
         >
           {[
-            { icon: MapPin, title: 'Location',      body: 'Unter den Linden 42, Berlin' },
+            { icon: MapPin, title: 'Location',      body: 'Thielallee 34, 14195 Berlin' },
             { icon: Clock,  title: 'Opening Hours',  body: 'Mon – Sat · 17:30 – 23:00'  },
             { icon: Phone,  title: 'Call Us',        body: '+49 30 1234 5678'            },
           ].map(({ icon: Icon, title, body }) => (

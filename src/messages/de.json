@@ -38,7 +38,7 @@
 "cateringTitle1": "Catering",
 "cateringTitle2": "Neu definiert",
     "title": "Essenz des Safrans",
-    "description": "Erleben Sie eine kulinarische Reise, in der persische Tradition auf modernen Luxus trifft. Jedes Gericht erzählt eine Geschichte von Herkunft und Gewürzen.",
+    "description": "Erleben Sie eine kulinarische Reise, in der levantinische Tradition auf modernen Luxus trifft. Jedes Gericht erzählt eine Geschichte von Herkunft und Gewürzen.",
     "orderNow": "Tisch reservieren",
     "viewGallery": "Galerie ansehen",
     "discover": "Entdecken",
@@ -46,7 +46,7 @@
       "kitchenItalic": "des Chefs",
     "kitchenDesc": "Jede Zutat wird sorgfältig ausgewählt, um ein gehobenes kulinarisches Erlebnis zu garantieren, das unser Erbe ehrt.",
     "eventTitle": "Veranstalten Sie ein unvergessliches Event",
-    "eventDesc": "Unser maßgeschneidertes Catering bringt die Eleganz des Safrans an Ihren Wunschort.",
+    "eventDesc": "Unser maßgeschneidertes Catering bringt die Eleganz von Chef Aboud Küche an Ihren Wunschort.",
     "planBuffet": "Buffet planen"
   },
   "menuDropdown": {
@@ -106,7 +106,7 @@
   },
   "Gallery": {
     "title": "Eine visuelle Geschichte",
-    "subtitle": "Ein Einblick in Zafran",
+    "subtitle": "Ein Einblick in Chef Aboud Küche",
     "filter": {
       "all": "Alle",
       "food": "Speisen",
@@ -341,7 +341,7 @@
     "offer1Desc": "Eine Auswahl unserer besten Kebabs und Schmorgerichte für ein authentisches Erlebnis.",
     "offer2Title": "Kaiserliches Festmahl",
     "offer2Desc": "Eine umfangreiche Auswahl mit Vorspeisen, Hauptgerichten und traditionellen Desserts.",
-    "offer3Title": "Große Persische Gala",
+    "offer3Title": "Große Levantinische Gala",
     "offer3Desc": "Ein luxuriöses kulinarisches Erlebnis, ideal für gehobene Veranstaltungen und Hochzeiten.",
     "backToCatering": "Zurück zur Übersicht",
     "whatsIncluded": "Was ist enthalten?",
@@ -362,13 +362,13 @@
     "customLabel": "Individuelle Auswahl",
     "customSubtitle": "Wählen Sie genau, was Sie möchten. Der Preis pro Person aktualisiert sich automatisch.",
     "filterAll": "Alle",
-    "offer1LongDesc": "Das klassische persische Festmahl wurde für intime Familientreffen konzipiert. Erleben Sie die Wärme der Tradition mit unseren beliebtesten Gerichten.",
+    "offer1LongDesc": "Das klassische levantinische Festmahl wurde für intime Familientreffen konzipiert. Erleben Sie die Wärme der Tradition mit unseren beliebtesten Gerichten.",
     "feature1_1": "Standard-Buffetaufbau",
     "feature1_2": "3 Hauptgerichte",
     "feature1_3": "2 Vorspeisen und Salate",
     "feature1_4": "Erfrischungsgetränke inklusive",
     "offer1Style": "Legeres Familienbuffet",
-    "offer2LongDesc": "Werten Sie Ihre Firmenveranstaltungen mit unserem professionellen Catering-Service auf. Wir bieten eine gehobene Auswahl persischer Gerichte, ideal für Geschäftsessen und formelle Anlässe.",
+    "offer2LongDesc": "Werten Sie Ihre Firmenveranstaltungen mit unserem professionellen Catering-Service auf. Wir bieten eine gehobene Auswahl levantinischer Gerichte, ideal für Geschäftsessen und formelle Anlässe.",
     "offer2Style": "Formeller Service oder Executive-Buffet",
     "feature2_1": "Kompletter Tischservice verfügbar",
     "feature2_2": "5 Hauptgerichtsoptionen",
@@ -378,7 +378,7 @@
     "offer3Style": "Luxuriöser Gala-Service",
     "feature3_1": "Privatkoch und Serviceteam vor Ort",
     "feature3_2": "Unbegrenztes Luxus-Buffet",
-    "feature3_3": "Individuelle persische Hochzeitstorte",
+    "feature3_3": "Individuelle levantinische Hochzeitstorte",
     "feature3_4": "Blumendekoration für die Tische",
     "guestPlaceholder": "Anzahl der Gäste eingeben",
     "tagPopular": "Am beliebtesten",
@@ -393,7 +393,7 @@
     "liveMenuBadge": "Aktuelle Speisekarte",
     "updatedToday": "Heute aktualisiert",
     "heroDescription": "Eine Hommage an die levantinische Tradition — jedes Gericht handgefertigt mit saisonalen Zutaten, alten Gewürzrouten und der Wärme von Chef Abouds Küche.",
-    "location": "Frankfurt, Deutschland",
+    "location": "Berlin, Deutschland",
     "sommelierHints": "Sommelier-Empfehlungen",
     "signatureStyle": "Signature Style",
     "featuredDishAlt": "Empfohlenes Gericht",
@@ -433,7 +433,7 @@
     "emailReservations": "info@chefaboud.de",
     "emailCatering": "catering@chefaboud.de",
 
-    "footerTagline": "Authentische libanesische Küche – zubereitet mit traditionellen Zutaten und dem Geist großzügiger Gastfreundschaft.",
+    "footerTagline": "Authentische levantinische Küche – zubereitet mit traditionellen Zutaten und dem Geist großzügiger Gastfreundschaft.",
     "copyright": "Alle Rechte vorbehalten.",
 
     "sectionStarters": "Vorspeisen",
@@ -534,7 +534,7 @@
     "mansaf": {
       "name": "Mansaf",
       "tag": "Hauptgericht · Spezial",
-      "desc": "Ein traditionelles persisches Gericht mit Reis, Lammfleisch und einer würzigen Soße — ein Symbol der levantinischen Küche."
+      "desc": "Ein traditionelles jordanisches Gericht mit Reis, Lammfleisch und einer würzigen Soße — ein Symbol der levantinischen Küche."
     },
     "knafeh": {
       "name": "Knafeh",
@@ -659,8 +659,8 @@
     "badge": "Unsere Geschichte",
     "title": "Mit",
     "titleItalic": "Leidenschaft",
-    "storyPara1": "Zafran entstand aus einer einzigen Vision: die Tiefe des persischen kulinarischen Erbes in einen Dialog mit den feinsten europäischen Techniken zu bringen. 2008 in einem Raum mit zwölf Plätzen in Kreuzberg gegründet, sind wir gewachsen — ohne jemals die Wärme unseres ersten Tisches zu verlieren.",
-    "storyPara2": "Jedes Gericht, das unsere Küche verlässt, trägt die Erinnerung an einen Gewürzmarkt in Teheran, an das Rezept der Großmutter und an die Ernte unserer eigenen Farm in Brandenburg. Wir kochen mit Feuer, mit Geduld und mit kompromissloser Liebe zu den Zutaten.",
+    "storyPara1": "Chef Aboud Küche entstand aus einer einzigen Vision: die Tiefe des levantinischen kulinarischen Erbes in einen Dialog mit den feinsten europäischen Techniken zu bringen. 2008 in einem Raum mit zwölf Plätzen in Kreuzberg gegründet, sind wir gewachsen — ohne jemals die Wärme unseres ersten Tisches zu verlieren.",
+    "storyPara2": "Jedes Gericht, das unsere Küche verlässt, trägt die Erinnerung an einen Gewürzmarkt in Damaskus, an das Rezept der Großmutter und an die Ernte unserer eigenen Farm in Brandenburg. Wir kochen mit Feuer, mit Geduld und mit kompromissloser Liebe zu den Zutaten.",
     "storyTitle": "Wo Tradition auf Haute Cuisine trifft",
     "stats": {
       "years": "Jahre Exzellenz",
@@ -684,11 +684,11 @@
       "sectionLabel": "Unsere Philosophie",
       "line1": "\"Wir kochen kein Essen.",
       "line2": "Wir kochen Erinnerung.\"",
-      "attribution": "— Karim Zafrani, Gründer"
+      "attribution": "— Chef Aboud, Gründer"
     },
     "story": {
       "sectionLabel": "Unsere Geschichte",
-      "kitchenCode": "\"Jedes Gericht ist ein Liebesbrief an die Zutaten.\" — Zafran Küchenkodex"
+      "kitchenCode": "\"Jedes Gericht ist ein Liebesbrief an die Zutaten.\" — Chef Aboud Küche Küchenkodex"
     },
     "timeline": {
       "sectionLabel": "Unsere Reise",
@@ -697,7 +697,7 @@
         {
           "year": "2008",
           "title": "Der Anfang",
-          "body": "Chef Karim Zafrani eröffnet einen Degustationsraum mit zwölf Plätzen in Kreuzberg mit einem einzigen Menü — sieben Gänge persisch-europäischer Fusion."
+          "body": "Chef Aboud eröffnet einen Degustationsraum mit zwölf Plätzen in Kreuzberg mit einem einzigen Menü — sieben Gänge moderner levantinischer Küche."
         },
         {
           "year": "2012",
@@ -716,7 +716,7 @@
         },
         {
           "year": "2024",
-          "title": "Zafran heute",
+          "title": "Chef Aboud Küche heute",
           "body": "Vierzig Plätze, eine Warteliste von sechs Monaten und eine unerschütterliche Leidenschaft für Geschmack."
         }
       ]
@@ -748,9 +748,9 @@
       "sectionTitle": "Lernen Sie das Team kennen",
       "chefs": [
         {
-          "name": "Karim Zafrani",
+          "name": "Chef Aboud",
           "role": "Küchenchef & Gründer",
-          "bio": "Ausgebildet in Paris und Teheran, verkörpert Karim die Brücke zwischen persischem Erbe und moderner europäischer Technik. Sein Safran-Risotto steht seit 2008 unverändert auf der Karte."
+          "bio": "Ausgebildet in Beirut und Paris, verkörpert Chef Aboud die Brücke zwischen levantinischem Erbe und moderner europäischer Technik. Sein Mansaf steht seit 2008 unverändert auf der Karte."
         },
         {
           "name": "Sofia Marchetti",

@@ -39,7 +39,7 @@ const TIMELINE = [
   {
     year: '2008',
     title: 'The Seed',
-    body: 'Chef Karim Zafrani opens a 12-seat tasting room in Kreuzberg with a single menu — seven courses of Persian-European fusion.',
+    body: 'Chef Aboud opens a 12-seat tasting room in Kreuzberg with a single menu — seven courses of modern Levantine cooking.',
   },
   {
     year: '2012',
@@ -58,17 +58,17 @@ const TIMELINE = [
   },
   {
     year: '2024',
-    title: 'Zafran Today',
+    title: 'Chef Aboud Küche Today',
     body: 'Forty covers, a six-month waitlist, and an obsession with flavour that has never once wavered.',
   },
 ];
 
 const CHEFS = [
   {
-    name: 'Karim Zafrani',
+    name: 'Chef Aboud',
     role: 'Executive Chef & Founder',
     img: 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=800',
-    bio: 'Trained in Paris and Tehran, Karim bridges Persian heritage with modern European technique. His saffron risotto has been on the menu, unchanged, since 2008.',
+    bio: 'Trained in Beirut and Paris, Chef Aboud bridges Levantine heritage with modern European technique. His mansaf has been on the menu, unchanged, since 2008.',
   },
   {
     name: 'Sofia Marchetti',
@@ -149,7 +149,7 @@ export default function AboutPage() {
               className="font-serif italic text-[clamp(6rem,20vw,18rem)] leading-none whitespace-nowrap"
               style={{ color: 'rgba(247,242,235,0.02)' }}
             >
-              Zafran
+              Aboud
             </span>
           </div>
 
@@ -201,7 +201,7 @@ export default function AboutPage() {
                 <img
                   src="https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg?auto=compress&cs=tinysrgb&w=1260"
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  alt="Zafran Kitchen"
+                  alt="Chef Aboud Küche"
                 />
                 <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,5,2,0.92),rgba(8,5,2,0.08))]" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(193,127,59,0.12),transparent_35%)]" />
@@ -266,7 +266,7 @@ export default function AboutPage() {
                 <span style={{ color: '#c17f3b' }}>نحن نطبخ الذاكرة</span>"
               </blockquote>
               <p className="text-sm font-light" style={{ color: 'rgba(247,242,235,0.42)' }}>
-                — Karim Zafrani, Founder
+                — Chef Aboud, Founder
               </p>
             </div>
           </section>
@@ -288,7 +288,7 @@ export default function AboutPage() {
               </div>
               <div className="h-px w-16" style={{ background: '#c17f3b' }} />
               <p className="text-sm font-light italic" style={{ color: 'rgba(247,242,235,0.42)' }}>
-                "Every dish is a love letter to the ingredients." — The Zafran kitchen code
+                "Every dish is a love letter to the ingredients." — The Chef Aboud Küche kitchen code
               </p>
             </Reveal>
 

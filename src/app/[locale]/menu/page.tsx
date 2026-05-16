@@ -12,15 +12,15 @@ export async function generateMetadata(
   const translations: Record<string, { title: string; description: string }> = {
     en: {
       title: 'Chef Aboud Küche | Menu',
-      description: 'Explore our curated Lebanese menu.',
+      description: 'Explore our curated Levantine menu.',
     },
     de: {
       title: 'Chef Aboud Küche | Speisekarte',
-      description: 'Entdecken Sie unsere libanesische Speisekarte.',
+      description: 'Entdecken Sie unsere levantinische Speisekarte.',
     },
     ar: {
       title: 'مطبخ الشيف عبود | القائمة',
-      description: 'اكتشف قائمة طعامنا اللبنانية المنتقاة.',
+      description: 'اكتشف قائمة طعامنا الشامية المنتقاة.',
     },
   };
 

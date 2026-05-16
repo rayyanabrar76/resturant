@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const title = id.charAt(0).toUpperCase() + id.slice(1).replace('_', ' ');
   return {
-    title: `Zafran | ${title}`,
+    title: `Chef Aboud Küche | ${title}`,
   };
 }
 
