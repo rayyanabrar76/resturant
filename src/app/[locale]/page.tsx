@@ -8,8 +8,6 @@ import ExperienceBridge from '@/components/ExperienceBridge';
 import SocialFeed from '@/components/SocialFeed';
 import Footer from '@/components/Footer';
 
-import { i } from 'framer-motion/client';
-
 export default function HomePage() {
   const t = useTranslations('HomePage');
 
