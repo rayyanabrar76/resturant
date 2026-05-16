@@ -374,8 +374,17 @@ export default function CheckoutPage() {
   const total       = subtotal + deliveryFee;
 
   const getDisplayName = (key: string) => {
-    if (key.startsWith('dish') || key.startsWith('cat')) { try { return d(key); } catch {} }
-    try { return d(`${key}.name`); } catch { return key; }
+    // The catering package label is a flat string in the Dishes namespace.
+    // Handle it explicitly so it does not get misrouted by prefix guessing
+    // (e.g. 'cateringPackageName' starts with 'cat').
+    if (key === 'cateringPackageName') {
+      try { return d('cateringPackageName'); } catch { return key; }
+    }
+    // Menu / product dishes store their display name under a nested `.name`.
+    try { return d(`${key}.name`); } catch {}
+    // Category-style keys are flat strings.
+    try { return d(key); } catch {}
+    return key;
   };
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('stripe');
