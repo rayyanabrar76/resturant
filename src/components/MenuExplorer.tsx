@@ -2,12 +2,10 @@
 
 import React, { useMemo, useState } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
-import { useTranslations, useLocale } from 'next-intl';
-import { useRouter } from '@/i18n/routing';
-import { useCart } from '@/context/CartContext';
+import { useTranslations } from 'next-intl';
 import {
-  Wine, X, Leaf, Wheat, Nut, Utensils, Star, ArrowRight,
-  Sparkles, Flame, Salad, Clock3, MapPin, ShoppingBag, Check,
+  Wine, X, Leaf, Wheat, Nut, Star,
+  Sparkles, Flame, Salad, Clock3, MapPin,
 } from 'lucide-react';
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
@@ -90,58 +88,6 @@ const floatingBlobs = [
   'bottom-[-120px] left-[18%] w-80 h-80',
 ];
 
-// ─── CART TOAST ───────────────────────────────────────────────────────────────
-
-function CartToast({ name, onClose, onCheckout }: { name: string; onClose: () => void; onCheckout: () => void }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 80, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0,  scale: 1 }}
-      exit={{   opacity: 0, y: 80, scale: 0.95 }}
-      transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-200 flex items-center gap-4 px-5 py-4 rounded-2xl"
-      style={{
-        background: 'rgba(12,8,3,0.96)',
-        border: '1px solid rgba(193,127,59,0.3)',
-        backdropFilter: 'blur(20px)',
-        boxShadow: '0 16px 48px rgba(0,0,0,0.6)',
-        minWidth: 'min(360px, 90vw)',
-      }}
-    >
-      <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
-        style={{ background: 'rgba(74,222,128,0.12)', border: '1px solid rgba(74,222,128,0.3)' }}>
-        <Check size={14} style={{ color: '#4ade80' }} />
-      </div>
-      <div className="grow min-w-0">
-        <p style={{ fontSize: '12px', fontWeight: 700, color: '#f7f2eb', fontFamily: "'Jost', sans-serif", letterSpacing: '0.05em' }}>
-          Added to cart
-        </p>
-        <p className="truncate" style={{ fontSize: '11px', color: 'rgba(247,242,235,0.45)', fontFamily: "'Jost', sans-serif" }}>
-          {name}
-        </p>
-      </div>
-      <button
-        onClick={onCheckout}
-        className="shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl transition-all"
-        style={{
-          background: '#c17f3b',
-          color: '#0c0803',
-          fontFamily: "'Jost', sans-serif",
-          fontSize: '9px',
-          fontWeight: 700,
-          letterSpacing: '0.22em',
-          textTransform: 'uppercase',
-        }}
-      >
-        <ShoppingBag size={12} /> Checkout
-      </button>
-      <button onClick={onClose} className="shrink-0 p-1" style={{ color: 'rgba(247,242,235,0.25)' }}>
-        <X size={14} />
-      </button>
-    </motion.div>
-  );
-}
-
 // ─── SECTION COMPONENT ────────────────────────────────────────────────────────
 
 function MenuSectionBlock({
@@ -206,6 +152,7 @@ function MenuSectionBlock({
             >
               <motion.img
                 src={item.image} alt={t(item.nameKey)}
+                loading="lazy" decoding="async"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ opacity: 0.74 }}
                 initial={{ scale: 1.05 }} animate={{ scale: 1 }}
@@ -213,17 +160,15 @@ function MenuSectionBlock({
                 whileHover={{ scale: 1.12 }}
               />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(8,5,2,0.98) 0%, rgba(8,5,2,0.62) 32%, rgba(8,5,2,0.05) 100%)' }} />
-              <motion.div
+              <div
                 className="absolute inset-0 pointer-events-none"
-                animate={{ opacity: [0.1, 0.22, 0.1] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ background: 'linear-gradient(135deg, rgba(193,127,59,0.16) 0%, transparent 55%, rgba(193,127,59,0.08) 100%)' }}
+                style={{ opacity: 0.16, background: 'linear-gradient(135deg, rgba(193,127,59,0.16) 0%, transparent 55%, rgba(193,127,59,0.08) 100%)' }}
               />
 
               <div className="absolute top-4 left-4 flex gap-2 z-10">
                 {item.isChefsChoice && (
                   <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
-                    style={{ backgroundColor: 'rgba(12,8,3,0.72)', border: '1px solid rgba(193,127,59,0.22)', backdropFilter: 'blur(10px)' }}>
+                    style={{ backgroundColor: 'rgba(12,8,3,0.9)', border: '1px solid rgba(193,127,59,0.22)' }}>
                     <Star size={10} fill="#c17f3b" className="text-[#c17f3b]" />
                     <span style={{ fontFamily: "'Jost', sans-serif", fontSize: '8px', fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: '#c17f3b' }}>
                       {t('chefsSelection')}
@@ -232,7 +177,7 @@ function MenuSectionBlock({
                 )}
                 {item.isHighMargin && (
                   <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
-                    style={{ backgroundColor: 'rgba(193,127,59,0.12)', border: '1px solid rgba(193,127,59,0.22)', backdropFilter: 'blur(10px)' }}>
+                    style={{ backgroundColor: 'rgba(46,30,12,0.92)', border: '1px solid rgba(193,127,59,0.3)' }}>
                     <Flame size={10} className="text-[#f7a654]" />
                     <span style={{ fontFamily: "'Jost', sans-serif", fontSize: '8px', fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', color: '#f7a654' }}>
                       {t('hotItem')}
@@ -258,7 +203,7 @@ function MenuSectionBlock({
                     </p>
                   </div>
                   <div className="shrink-0 px-3 py-2 rounded-2xl"
-                    style={{ backgroundColor: 'rgba(12,8,3,0.65)', border: '1px solid rgba(193,127,59,0.18)', backdropFilter: 'blur(10px)' }}>
+                    style={{ backgroundColor: 'rgba(12,8,3,0.88)', border: '1px solid rgba(193,127,59,0.18)' }}>
                     <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: featured ? '1.8rem' : '1.4rem', fontWeight: 300, color: '#f7f2eb' }}>
                       €{item.price}
                     </span>
@@ -278,16 +223,12 @@ function MenuSectionBlock({
                 </AnimatePresence>
               </div>
 
-              <motion.div
-                className="absolute top-4 right-4 z-10"
-                animate={{ y: [0, -4, 0], rotate: [0, 4, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
+              <div className="absolute top-4 right-4 z-10">
                 <div className="w-11 h-11 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: 'rgba(12,8,3,0.55)', border: '1px solid rgba(193,127,59,0.2)', backdropFilter: 'blur(10px)' }}>
+                  style={{ backgroundColor: 'rgba(12,8,3,0.85)', border: '1px solid rgba(193,127,59,0.2)' }}>
                   <Sparkles size={14} className="text-[#c17f3b]" />
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           );
         })}
@@ -299,40 +240,11 @@ function MenuSectionBlock({
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 
 export default function MenuExplorer({ sections }: { sections: MenuSection[] }) {
-  const t      = useTranslations('MenuExplorer');
-  const locale = useLocale();
-  const router = useRouter();
-  const { addToCart, cartCount } = useCart();
+  const t = useTranslations('MenuExplorer');
 
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
-  const [toast, setToast]               = useState<{ name: string } | null>(null);
-  const [addedId, setAddedId]           = useState<string | null>(null);
 
   const allItems = useMemo(() => sections.flatMap((s) => s.items), [sections]);
-
-  // Add item to cart, show toast, close modal
-  const handleAddToCart = (item: MenuItem) => {
-    addToCart({
-      id:      item.id,
-      nameKey: item.nameKey,
-      price:   item.price,
-      qty:     1,
-      img:     item.image,
-    });
-    setAddedId(item.id);
-    setToast({ name: t(item.nameKey) });
-    setSelectedItem(null);
-
-    // Reset added indicator after 2s
-    setTimeout(() => setAddedId(null), 2000);
-    // Auto-dismiss toast after 4s
-    setTimeout(() => setToast(null), 4000);
-  };
-
-  const handleCheckoutFromToast = () => {
-    setToast(null);
-    router.push('/checkout');
-  };
 
   const footerHours = [
     [t('monFri'),   t('hoursMonFri')],
@@ -353,16 +265,16 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
     >
       {/* Background effects */}
       <div
-        className="fixed inset-0 pointer-events-none z-0 opacity-[0.04] mix-blend-screen"
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.04]"
         style={{ backgroundImage: "url('/images/islamic-circle1.png')", backgroundSize: '620px 620px', backgroundPosition: 'center' }}
       />
       <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_top,rgba(193,127,59,0.16),transparent_32%),radial-gradient(circle_at_bottom,rgba(255,255,255,0.04),transparent_25%)]" />
+      {/* Static decorative blobs — animating a blurred surface re-rasterizes
+          the blur every frame and causes severe jank, so these stay still. */}
       {floatingBlobs.map((cls, idx) => (
-        <motion.div
+        <div
           key={idx}
           className={`fixed ${cls} rounded-full blur-3xl pointer-events-none z-0 opacity-20`}
-          animate={{ x: [0, 18, -10, 0], y: [0, -18, 10, 0], scale: [1, 1.08, 0.96, 1] }}
-          transition={{ duration: 12 + idx * 2, repeat: Infinity, ease: 'easeInOut' }}
           style={{ background: 'rgba(193,127,59,0.12)' }}
         />
       ))}
@@ -383,41 +295,19 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
             <div className="relative grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-0">
               <div className="p-7 sm:p-10 md:p-12 lg:p-14">
                 <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#c17f3b]/20 bg-black/20 backdrop-blur-sm">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#c17f3b]/20 bg-black/45">
                     <Sparkles size={13} className="text-[#c17f3b]" />
                     <span style={{ fontSize: '9px', letterSpacing: '0.28em', textTransform: 'uppercase', color: '#c17f3b' }}>
                       {t('liveMenuBadge')}
                     </span>
                   </span>
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-black/20 backdrop-blur-sm text-white/55">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-black/45 text-white/55">
                     <Clock3 size={12} />
                     <span style={{ fontSize: '9px', letterSpacing: '0.24em', textTransform: 'uppercase' }}>
                       {t('updatedToday')}
                     </span>
                   </span>
 
-                  {/* Cart indicator — shows when cart has items */}
-                  <AnimatePresence>
-                    {cartCount > 0 && (
-                      <motion.button
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.8 }}
-                        onClick={() => router.push('/checkout')}
-                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full transition-all"
-                        style={{
-                          border: '1px solid rgba(193,127,59,0.4)',
-                          background: 'rgba(193,127,59,0.12)',
-                          backdropFilter: 'blur(10px)',
-                        }}
-                      >
-                        <ShoppingBag size={12} className="text-[#c17f3b]" />
-                        <span style={{ fontSize: '9px', letterSpacing: '0.24em', textTransform: 'uppercase', color: '#c17f3b', fontWeight: 700 }}>
-                          {cartCount} item{cartCount !== 1 ? 's' : ''} · Checkout
-                        </span>
-                      </motion.button>
-                    )}
-                  </AnimatePresence>
                 </div>
 
                 <h1 style={{
@@ -434,7 +324,7 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
                 </p>
 
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <div className="px-4 py-3 rounded-2xl border border-[#c17f3b]/12 bg-black/20 backdrop-blur-sm">
+                  <div className="px-4 py-3 rounded-2xl border border-[#c17f3b]/12 bg-black/45">
                     <div className="flex items-center gap-2">
                       <MapPin size={13} className="text-[#c17f3b]" />
                       <span style={{ fontSize: '9px', letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(247,242,235,0.5)' }}>
@@ -442,7 +332,7 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
                       </span>
                     </div>
                   </div>
-                  <div className="px-4 py-3 rounded-2xl border border-[#c17f3b]/12 bg-black/20 backdrop-blur-sm">
+                  <div className="px-4 py-3 rounded-2xl border border-[#c17f3b]/12 bg-black/45">
                     <div className="flex items-center gap-2">
                       <Wine size={13} className="text-[#c17f3b]" />
                       <span style={{ fontSize: '9px', letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(247,242,235,0.5)' }}>
@@ -454,29 +344,23 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
               </div>
 
               <div className="relative min-h-50 lg:min-h-full overflow-hidden border-t lg:border-t-0 lg:border-l border-[#c17f3b]/12">
-                <motion.img
+                <img
                   src={sections[0]?.items?.[0]?.image || ''}
                   alt={t('featuredDishAlt')}
+                  decoding="async"
                   className="absolute inset-0 w-full h-full object-cover"
-                  initial={{ scale: 1.08 }}
-                  animate={{ scale: [1.08, 1.02, 1.08] }}
-                  transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-                  style={{ opacity: 0.82 }}
+                  style={{ opacity: 0.82, transform: 'scale(1.04)' }}
                 />
                 <div className="absolute inset-0 bg-linear-to-tr from-[#0c0803] via-[#0c0803]/35 to-transparent" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(12,8,3,0.42)_100%)]" />
-                <motion.div
-                  className="absolute bottom-5 right-5 rounded-2xl px-4 py-3 border border-[#c17f3b]/18 bg-black/35 backdrop-blur-md"
-                  animate={{ y: [0, -4, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                >
+                <div className="absolute bottom-5 right-5 rounded-2xl px-4 py-3 border border-[#c17f3b]/18 bg-black/60">
                   <div className="flex items-center gap-2">
                     <Star size={13} fill="#c17f3b" className="text-[#c17f3b]" />
                     <span style={{ fontSize: '9px', letterSpacing: '0.22em', textTransform: 'uppercase', color: '#c17f3b' }}>
                       {t('signatureStyle')}
                     </span>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -688,7 +572,7 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
                     </div>
                   </section>
 
-                  {/* ── CTA buttons ── */}
+                  {/* ── CTA ── */}
                   <div className="mt-8 flex flex-col gap-3">
                     {/* Price row */}
                     <div className="flex items-center justify-between px-1 mb-1">
@@ -699,55 +583,6 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
                         €{selectedItem.price}
                       </span>
                     </div>
-
-                    {/* Add to cart */}
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={() => handleAddToCart(selectedItem)}
-                      className="w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-3"
-                      style={{
-                        background: addedId === selectedItem.id
-                          ? 'linear-gradient(to right, #4ade80, #22c55e)'
-                          : 'linear-gradient(to right, #c17f3b, #8a5e28)',
-                        color: '#0c0803',
-                        fontFamily: "'Jost', sans-serif",
-                        fontSize: '11px',
-                        letterSpacing: '0.22em',
-                        textTransform: 'uppercase',
-                        boxShadow: addedId === selectedItem.id
-                          ? '0 8px 30px rgba(74,222,128,0.25)'
-                          : '0 8px 30px rgba(193,127,59,0.28)',
-                        transition: 'background 0.3s, box-shadow 0.3s',
-                      }}
-                    >
-                      {addedId === selectedItem.id
-                        ? <><Check size={16} /> Added!</>
-                        : <><ShoppingBag size={16} /> {t('addToSelection')} <ArrowRight size={14} /></>
-                      }
-                    </motion.button>
-
-                    {/* Go to checkout — shown when cart has items */}
-                    <AnimatePresence>
-                      {cartCount > 0 && (
-                        <motion.button
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          onClick={() => { setSelectedItem(null); router.push('/checkout'); }}
-                          className="w-full py-3 rounded-2xl transition-colors overflow-hidden"
-                          style={{
-                            fontFamily: "'Jost', sans-serif", fontSize: '10px',
-                            letterSpacing: '0.18em', textTransform: 'uppercase',
-                            color: '#c17f3b',
-                            border: '1px solid rgba(193,127,59,0.25)',
-                            background: 'rgba(193,127,59,0.06)',
-                          }}
-                        >
-                          View cart ({cartCount}) · Go to Checkout
-                        </motion.button>
-                      )}
-                    </AnimatePresence>
 
                     <button
                       onClick={() => setSelectedItem(null)}
@@ -763,17 +598,6 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
           )}
         </AnimatePresence>
       </LayoutGroup>
-
-      {/* ── Cart toast ── */}
-      <AnimatePresence>
-        {toast && (
-          <CartToast
-            name={toast.name}
-            onClose={() => setToast(null)}
-            onCheckout={handleCheckoutFromToast}
-          />
-        )}
-      </AnimatePresence>
 
       <script
         type="application/ld+json"

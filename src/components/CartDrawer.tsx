@@ -227,8 +227,8 @@ export default function CartDrawer({
                 </span>
               </div>
               
-              <Link 
-                href={items.some(i => i.customDetails) ? "/checkout?type=catering" : "/checkout"} 
+              <Link
+                href="/checkout?type=catering"
                 onClick={onClose}
                 className={items.length === 0 ? 'pointer-events-none' : 'block'}
               >

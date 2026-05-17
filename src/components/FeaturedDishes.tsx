@@ -1,9 +1,8 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { useCart } from '@/context/CartContext';
 import { Link } from '@/i18n/routing'; // Ensure this path matches your i18n setup
-import { Plus, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const DISH_ITEMS = [
   { id: 'shawarma_teller', name: 'Shawarma Teller Hähnchen', price: 13.00, img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=600' },
@@ -20,19 +19,6 @@ export default function FeaturedDishes() {
   const d = useTranslations('Dishes');
   const locale = useLocale();
   const isRTL = locale === 'ar';
-  const { addToCart } = useCart();
-
-  const handleAdd = (e: React.MouseEvent, dish: (typeof DISH_ITEMS)[0]) => {
-    e.preventDefault(); // Prevents navigating to details page when clicking "+"
-    e.stopPropagation();
-    addToCart({
-      id: dish.id as any,
-      nameKey: dish.id,
-      price: dish.price,
-      img: dish.img,
-      qty: 1,
-    });
-  };
 
   return (
     <>
@@ -87,16 +73,10 @@ export default function FeaturedDishes() {
               <div className="relative aspect-3/4 rounded-xl overflow-hidden mb-4 shadow-2xl">
                 <img src={dish.img} alt={d(`${dish.id}.name`)} className="lev-img w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-linear-to-t from-[#0c0803]/90 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-                <div className="absolute bottom-3 left-0 right-0 px-3 flex justify-between items-center z-10">
+                <div className="absolute bottom-3 left-0 right-0 px-3 flex items-center z-10">
                   <span className={`text-white/80 text-[11px] font-light italic ${isRTL ? 'font-sans' : 'font-serif'}`}>
                     {d(`${dish.id}.name`)}
                   </span>
-                  <button
-                    onClick={(e) => handleAdd(e, dish)}
-                    className="bg-[#c49448] text-[#0c0803] p-1.5 rounded-full md:translate-y-2 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-300"
-                  >
-                    <Plus size={14} strokeWidth={2.5} />
-                  </button>
                 </div>
               </div>
 

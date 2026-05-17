@@ -4,7 +4,6 @@ import { useState, useCallback } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useCart, CartItem } from '@/context/CartContext';
 import { Link } from '@/i18n/routing';
-import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
@@ -356,10 +355,10 @@ export default function CheckoutPage() {
   const d    = useTranslations('Dishes');
   const c    = useTranslations('Checkout');
   const locale = useLocale();
-  const searchParams = useSearchParams();
   const { cart, cartCount } = useCart();
 
-  const isCatering = searchParams.get('type') === 'catering';
+  // Site is catering-only — checkout always runs in catering mode.
+  const isCatering = true;
   const isRTL      = locale === 'ar';
   const symbol     = t('currencySymbol');
   const pos        = t('currencyPos');

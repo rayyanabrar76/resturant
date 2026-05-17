@@ -2,10 +2,8 @@
 
 import { notFound } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
-import { useCart } from '@/context/CartContext';
 import { motion } from 'framer-motion';
-import { Plus, Minus, ShieldCheck, Truck, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+import { ShieldCheck, Truck, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 
 const DISH_DATA: Record<string, { price: number; img: string; calories: number }> = {
@@ -55,8 +53,6 @@ export default function ProductDetailClient({ id }: { id: string }) {
   const t = useTranslations('Dishes');
   const locale = useLocale();
   const isRTL = locale === 'ar';
-  const { addToCart } = useCart();
-  const [qty, setQty] = useState(1);
 
   // Normalize id to lowercase to match DISH_DATA keys
   const activeId = id.toLowerCase();
@@ -110,18 +106,14 @@ export default function ProductDetailClient({ id }: { id: string }) {
               {t(`${activeId}.desc`)}
             </p>
 
-            <div className="flex flex-wrap gap-6 items-center mb-12">
-              <div className="flex items-center border border-white/10 rounded-full px-4 py-2 bg-white/5">
-                <button onClick={() => setQty(Math.max(1, qty - 1))} className="p-2 hover:text-[#c49448]"><Minus size={18} /></button>
-                <span className="px-6 font-sans font-bold w-12 text-center text-lg">{qty}</span>
-                <button onClick={() => setQty(qty + 1)} className="p-2 hover:text-[#c49448]"><Plus size={18} /></button>
-              </div>
-              <button 
-                onClick={() => addToCart({ ...dish, id: activeId, qty, nameKey: activeId })}
-                className="bg-[#c49448] text-[#0c0803] px-12 py-5 rounded-full font-sans font-bold text-xs uppercase tracking-widest hover:bg-[#f7f2eb] transition-all shadow-xl"
+            <div className="mb-12">
+              <Link
+                href="/catering"
+                className="inline-flex items-center gap-3 bg-[#c49448] text-[#0c0803] px-10 py-5 rounded-full font-sans font-bold text-xs uppercase tracking-widest hover:bg-[#f7f2eb] transition-all shadow-xl group"
               >
-                {t('addToCart')}
-              </button>
+                <span>{isRTL ? 'اطلب لمناسبتك' : 'Available for Catering & Events'}</span>
+                <ArrowRight size={16} className={`${isRTL ? 'rotate-180' : ''} group-hover:translate-x-1 transition-transform`} />
+              </Link>
             </div>
 
             <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
