@@ -1,10 +1,13 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import { useRouter } from '@/i18n/routing';
+import { useCart } from '@/context/CartContext';
 import {
-  Wine, X, Leaf, Wheat, Nut, Star,
+  Wine, X, Leaf, Wheat, Nut, Star, Plus,
   Sparkles, Flame, Salad, Clock3, MapPin,
 } from 'lucide-react';
 
@@ -91,16 +94,17 @@ const floatingBlobs = [
 // ─── SECTION COMPONENT ────────────────────────────────────────────────────────
 
 function MenuSectionBlock({
-  section, onSelect, t,
+  section, onSelect, onAdd, t,
 }: {
   section: MenuSection;
   onSelect: (item: MenuItem) => void;
+  onAdd: (item: MenuItem) => void;
   t: ReturnType<typeof useTranslations>;
 }) {
   const items = organizeBentoGrid(section.items);
 
   return (
-    <section className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-12 pt-16 pb-4 relative">
+    <section className="px-4 sm:px-6 lg:px-8 pt-16 pb-4 relative">
       <div className="absolute inset-x-6 top-10 h-px bg-linear-to-r from-transparent via-[#c17f3b]/20 to-transparent opacity-60" />
 
       <div className="flex items-end gap-4 mb-4 relative z-10">
@@ -137,7 +141,6 @@ function MenuSectionBlock({
           return (
             <motion.div
               key={item.id}
-              layoutId={`card-${item.id}`}
               variants={{ hidden: { opacity: 0, y: 26, scale: 0.98 }, show: { opacity: 1, y: 0, scale: 1 } }}
               whileHover={{ y: -8, scale: 1.01 }}
               whileTap={{ scale: 0.985 }}
@@ -223,12 +226,15 @@ function MenuSectionBlock({
                 </AnimatePresence>
               </div>
 
-              <div className="absolute top-4 right-4 z-10">
-                <div className="w-11 h-11 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: 'rgba(12,8,3,0.85)', border: '1px solid rgba(193,127,59,0.2)' }}>
-                  <Sparkles size={14} className="text-[#c17f3b]" />
-                </div>
-              </div>
+              {/* Add this dish to the catering / event order */}
+              <button
+                onClick={(e) => { e.stopPropagation(); onAdd(item); }}
+                aria-label={`Add ${t(item.nameKey)} to catering order`}
+                className="absolute top-4 right-4 z-20 w-11 h-11 rounded-full flex items-center justify-center transition-transform hover:scale-110 active:scale-90"
+                style={{ backgroundColor: '#c17f3b', border: '1px solid rgba(247,242,235,0.25)', boxShadow: '0 6px 20px rgba(193,127,59,0.45)' }}
+              >
+                <Plus size={18} color="#0c0803" strokeWidth={2.75} />
+              </button>
             </motion.div>
           );
         })}
@@ -241,10 +247,43 @@ function MenuSectionBlock({
 
 export default function MenuExplorer({ sections }: { sections: MenuSection[] }) {
   const t = useTranslations('MenuExplorer');
+  const { addToCart } = useCart();
 
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   const allItems = useMemo(() => sections.flatMap((s) => s.items), [sections]);
+
+  // Add a menu dish to the shared catering order, then take the guest to
+  // the catering page where it appears in the Event Summary.
+  const handleAdd = (item: MenuItem) => {
+    addToCart({ id: item.id, nameKey: t(item.nameKey), price: item.price, qty: 1, img: item.image });
+    router.push('/catering');
+  };
+
+  const searchParams = useSearchParams();
+  const router       = useRouter();
+
+  // Open a dish modal when arriving via /menu?item=<id> (e.g. from the
+  // header menu dropdown).
+  useEffect(() => {
+    const itemId = searchParams.get('item');
+    if (!itemId) return;
+    const found = allItems.find((i) => i.id === itemId);
+    if (found) setSelectedItem(found);
+  }, [searchParams, allItems]);
+
+  // Close the modal and drop the ?item= param so the same dish can be
+  // reopened from the dropdown later.
+  const closeModal = useCallback(() => {
+    setSelectedItem(null);
+    if (searchParams.get('item')) router.replace('/menu');
+  }, [searchParams, router]);
+
+  // Lock background scroll while the dish modal is open.
+  useEffect(() => {
+    document.body.style.overflow = selectedItem ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [selectedItem]);
 
   const footerHours = [
     [t('monFri'),   t('hoursMonFri')],
@@ -281,7 +320,7 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
 
       <LayoutGroup>
         {/* ── Hero ── */}
-        <section className="relative z-10 max-w-6xl mx-auto px-5 sm:px-6 lg:px-12 pt-10 md:pt-18 pb-8">
+        <section className="relative z-10 px-4 sm:px-6 lg:px-8 pt-10 md:pt-18 pb-8">
           <motion.div
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -373,18 +412,19 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
               key={section.categoryKey}
               section={section}
               onSelect={setSelectedItem}
+              onAdd={handleAdd}
               t={t}
             />
           ))}
         </div>
 
-        <div className="max-w-6xl mx-auto px-6 lg:px-12 mt-10">
+        <div className="px-4 sm:px-6 lg:px-8 mt-10">
           <div className="h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(193,127,59,0.14), transparent)' }} />
         </div>
 
         {/* ── Footer ── */}
         <footer className="relative z-10 mt-20 pb-16" style={{ borderTop: '1px solid rgba(193,127,59,0.1)' }}>
-          <div className="max-w-6xl mx-auto px-6 lg:px-12 pt-16">
+          <div className="px-4 sm:px-6 lg:px-8 pt-16">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               <div>
                 <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.6rem', fontWeight: 300, fontStyle: 'italic', color: '#f7f2eb', marginBottom: '12px' }}>
@@ -435,19 +475,19 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
             <>
               <motion.div
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                onClick={() => setSelectedItem(null)}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
+                onClick={closeModal}
                 className="fixed inset-0"
-                style={{ zIndex: 60, backgroundColor: 'rgba(12,8,3,0.88)', backdropFilter: 'blur(16px)' }}
+                style={{ zIndex: 200, backgroundColor: 'rgba(12,8,3,0.88)', backdropFilter: 'blur(16px)' }}
               />
               <motion.div
-                layoutId={`card-${selectedItem.id}`}
-                initial={{ opacity: 0, scale: 0.95, y: 40 }}
+                initial={{ opacity: 0, scale: 0.97, y: 20 }}
                 animate={{ opacity: 1, scale: 1,    y: 0 }}
-                exit={{   opacity: 0, scale: 0.96,  y: 24 }}
-                transition={{ type: 'spring', stiffness: 180, damping: 20 }}
+                exit={{   opacity: 0, scale: 0.98,  y: 12 }}
+                transition={{ duration: 0.24, ease: [0.32, 0.72, 0, 1] }}
                 className="fixed inset-0 m-auto overflow-hidden flex flex-col md:flex-row"
                 style={{
-                  zIndex: 70,
+                  zIndex: 210,
                   width: '95vw', maxWidth: '980px',
                   height: 'fit-content', maxHeight: '90vh',
                   borderRadius: '30px',
@@ -471,7 +511,7 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
 
                   <button
                     aria-label={t('closeModal')}
-                    onClick={() => setSelectedItem(null)}
+                    onClick={closeModal}
                     className="absolute top-5 left-5 p-2.5 rounded-full transition-all hover:scale-110"
                     style={{ backgroundColor: 'rgba(12,8,3,0.65)', backdropFilter: 'blur(12px)', border: '1px solid rgba(193,127,59,0.25)', color: '#f7f2eb' }}
                   >
@@ -584,8 +624,23 @@ export default function MenuExplorer({ sections }: { sections: MenuSection[] }) 
                       </span>
                     </div>
 
+                    {/* Add this dish to the catering / event order */}
                     <button
-                      onClick={() => setSelectedItem(null)}
+                      onClick={() => handleAdd(selectedItem)}
+                      className="w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2.5 transition-colors"
+                      style={{
+                        background: '#c17f3b',
+                        color: '#0c0803',
+                        fontFamily: "'Jost', sans-serif",
+                        fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase',
+                      }}
+                    >
+                      <Plus size={16} strokeWidth={2.75} />
+                      {t('addToSelection')}
+                    </button>
+
+                    <button
+                      onClick={closeModal}
                       className="w-full py-3 rounded-2xl transition-colors"
                       style={{ fontFamily: "'Jost', sans-serif", fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(247,242,235,0.3)', border: '1px solid rgba(247,242,235,0.08)' }}
                     >
@@ -617,6 +672,18 @@ export const MOCK_MENU: MenuSection[] = [
       { id: 's1', nameKey: 'itemS1Name', arabicNameKey: 'itemS1ArabicName', descriptionKey: 'itemS1Desc', price: 9,  dietaryTags: ['vegan', 'gluten-free'], categoryKey: 'sectionStarters', isChefsChoice: true, image: 'https://immigrantstable.com/wp-content/uploads/2024/08/Canned-Chickpea-Hummus-Recipe-11.jpg', availability: { isAvailable: true }, nutrition: { calories: 220, protein: 10, carbs: 28 } },
       { id: 's2', nameKey: 'itemS2Name', arabicNameKey: 'itemS2ArabicName', descriptionKey: 'itemS2Desc', price: 8,  dietaryTags: ['vegan'],                 categoryKey: 'sectionStarters', image: 'https://www.loveandlemons.com/wp-content/uploads/2022/08/tabbouleh-1.jpg', availability: { isAvailable: true }, nutrition: { calories: 160, protein: 5,  carbs: 22 } },
       { id: 's3', nameKey: 'itemS3Name', arabicNameKey: 'itemS3ArabicName', descriptionKey: 'itemS3Desc', price: 9,  dietaryTags: ['vegan'],                 categoryKey: 'sectionStarters', image: 'https://www.lastingredient.com/wp-content/uploads/2019/04/fattoush-salad2-819x1024.jpg', availability: { isAvailable: true }, nutrition: { calories: 190, protein: 4,  carbs: 30 } },
+      { id: 'st1',  nameKey: 'st1Name',  arabicNameKey: 'st1Ar',  descriptionKey: 'st1Desc',  price: 7.5, dietaryTags: ['vegan', 'gluten-free'], categoryKey: 'sectionStarters', image: 'https://www.themediterraneandish.com/wp-content/uploads/2024/05/TMD-Hummus-Leads-02-Vertical.jpg', availability: { isAvailable: true } },
+      { id: 'st2',  nameKey: 'st2Name',  arabicNameKey: 'st2Ar',  descriptionKey: 'st2Desc',  price: 7.5, dietaryTags: ['vegan', 'gluten-free'], categoryKey: 'sectionStarters', image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'st3',  nameKey: 'st3Name',  arabicNameKey: 'st3Ar',  descriptionKey: 'st3Desc',  price: 7.5, dietaryTags: ['vegan', 'gluten-free'], categoryKey: 'sectionStarters', image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'st4',  nameKey: 'st4Name',  arabicNameKey: 'st4Ar',  descriptionKey: 'st4Desc',  price: 5.5, dietaryTags: ['vegan'], categoryKey: 'sectionStarters', image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'st5',  nameKey: 'st5Name',  arabicNameKey: 'st5Ar',  descriptionKey: 'st5Desc',  price: 9.9, dietaryTags: ['vegan'], categoryKey: 'sectionStarters', image: 'https://www.loveandlemons.com/wp-content/uploads/2022/08/tabbouleh-1.jpg', availability: { isAvailable: true } },
+      { id: 'st6',  nameKey: 'st6Name',  arabicNameKey: 'st6Ar',  descriptionKey: 'st6Desc',  price: 9.9, dietaryTags: ['vegan'], categoryKey: 'sectionStarters', image: 'https://www.lastingredient.com/wp-content/uploads/2019/04/fattoush-salad2-819x1024.jpg', availability: { isAvailable: true } },
+      { id: 'st7',  nameKey: 'st7Name',  arabicNameKey: 'st7Ar',  descriptionKey: 'st7Desc',  price: 6.5, dietaryTags: ['nuts'], categoryKey: 'sectionStarters', image: 'https://images.unsplash.com/photo-1519676867240-f03562e64548?q=80&w=400&auto=format', availability: { isAvailable: true } },
+      { id: 'st8',  nameKey: 'st8Name',  arabicNameKey: 'st8Ar',  descriptionKey: 'st8Desc',  price: 5,   dietaryTags: [], categoryKey: 'sectionStarters', image: 'https://images.unsplash.com/photo-1519676867240-f03562e64548?q=80&w=400&auto=format', availability: { isAvailable: true } },
+      { id: 'st9',  nameKey: 'st9Name',  arabicNameKey: 'st9Ar',  descriptionKey: 'st9Desc',  price: 4.5, dietaryTags: ['nuts'], categoryKey: 'sectionStarters', image: 'https://images.unsplash.com/photo-1519676867240-f03562e64548?q=80&w=400&auto=format', availability: { isAvailable: true } },
+      { id: 'st10', nameKey: 'st10Name', arabicNameKey: 'st10Ar', descriptionKey: 'st10Desc', price: 4.5, dietaryTags: ['vegan', 'gluten-free'], categoryKey: 'sectionStarters', image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'st11', nameKey: 'st11Name', arabicNameKey: 'st11Ar', descriptionKey: 'st11Desc', price: 4.5, dietaryTags: ['vegan', 'gluten-free'], categoryKey: 'sectionStarters', image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'st12', nameKey: 'st12Name', arabicNameKey: 'st12Ar', descriptionKey: 'st12Desc', price: 3,   dietaryTags: ['gluten-free'], categoryKey: 'sectionStarters', image: 'https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
     ],
   },
   {
@@ -626,6 +693,15 @@ export const MOCK_MENU: MenuSection[] = [
       { id: 'p1', nameKey: 'itemP1Name', arabicNameKey: 'itemP1ArabicName', descriptionKey: 'itemP1Desc', price: 18, dietaryTags: ['nuts'],                  categoryKey: 'sectionPlates', isChefsChoice: true, isHighMargin: true, image: 'https://www.hungrypaprikas.com/wp-content/uploads/2024/01/Kibbeh-Bil-Sanieh-29.jpg', availability: { isAvailable: true }, nutrition: { calories: 580, protein: 34, carbs: 42 } },
       { id: 'p2', nameKey: 'itemP2Name', arabicNameKey: 'itemP2ArabicName', descriptionKey: 'itemP2Desc', price: 15, dietaryTags: ['gluten-free'],            categoryKey: 'sectionPlates', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true }, nutrition: { calories: 420, protein: 28, carbs: 18 } },
       { id: 'p3', nameKey: 'itemP3Name', arabicNameKey: 'itemP3ArabicName', descriptionKey: 'itemP3Desc', price: 16, dietaryTags: ['dairy-free'],             categoryKey: 'sectionPlates', image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true }, nutrition: { calories: 510, protein: 38, carbs: 32 } },
+      { id: 'pl1', nameKey: 'pl1Name', arabicNameKey: 'pl1Ar', descriptionKey: 'pl1Desc', price: 19, dietaryTags: [], categoryKey: 'sectionPlates', isHighMargin: true, image: 'https://images.unsplash.com/photo-1544124499-58912cbddaad?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'pl2', nameKey: 'pl2Name', arabicNameKey: 'pl2Ar', descriptionKey: 'pl2Desc', price: 15, dietaryTags: [], categoryKey: 'sectionPlates', image: 'https://images.unsplash.com/photo-1541518763669-27fef04b14ea?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'pl3', nameKey: 'pl3Name', arabicNameKey: 'pl3Ar', descriptionKey: 'pl3Desc', price: 15, dietaryTags: ['gluten-free'], categoryKey: 'sectionPlates', image: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'pl4', nameKey: 'pl4Name', arabicNameKey: 'pl4Ar', descriptionKey: 'pl4Desc', price: 13, dietaryTags: [], categoryKey: 'sectionPlates', image: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'pl5', nameKey: 'pl5Name', arabicNameKey: 'pl5Ar', descriptionKey: 'pl5Desc', price: 14, dietaryTags: [], categoryKey: 'sectionPlates', image: 'https://images.unsplash.com/photo-1544124499-58912cbddaad?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'pl6', nameKey: 'pl6Name', arabicNameKey: 'pl6Ar', descriptionKey: 'pl6Desc', price: 14, dietaryTags: [], categoryKey: 'sectionPlates', isChefsChoice: true, image: 'https://images.unsplash.com/photo-1541518763669-27fef04b14ea?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'pl7', nameKey: 'pl7Name', arabicNameKey: 'pl7Ar', descriptionKey: 'pl7Desc', price: 11, dietaryTags: ['vegan'], categoryKey: 'sectionPlates', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'pl8', nameKey: 'pl8Name', arabicNameKey: 'pl8Ar', descriptionKey: 'pl8Desc', price: 11, dietaryTags: ['vegan'], categoryKey: 'sectionPlates', image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'pl9', nameKey: 'pl9Name', arabicNameKey: 'pl9Ar', descriptionKey: 'pl9Desc', price: 12, dietaryTags: [], categoryKey: 'sectionPlates', image: 'https://images.unsplash.com/photo-1559561853-08451507cbe7?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
     ],
   },
   {
@@ -635,6 +711,18 @@ export const MOCK_MENU: MenuSection[] = [
       { id: 'w1', nameKey: 'itemW1Name', arabicNameKey: 'itemW1ArabicName', descriptionKey: 'itemW1Desc', price: 10, dietaryTags: ['vegan'],                  categoryKey: 'sectionSandwiches', isChefsChoice: true, image: 'https://images.unsplash.com/photo-1562967916-eb82221dfb92?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true }, nutrition: { calories: 390, protein: 14, carbs: 48 } },
       { id: 'w2', nameKey: 'itemW2Name', arabicNameKey: 'itemW2ArabicName', descriptionKey: 'itemW2Desc', price: 12, dietaryTags: ['dairy-free'],             categoryKey: 'sectionSandwiches', isHighMargin: true, image: 'https://images.unsplash.com/photo-1610614819513-58e34989848b?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true }, nutrition: { calories: 460, protein: 32, carbs: 44 } },
       { id: 'w3', nameKey: 'itemW3Name', arabicNameKey: 'itemW3ArabicName', descriptionKey: 'itemW3Desc', price: 11, dietaryTags: [],                        categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1604909052743-94e838986d24?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true }, nutrition: { calories: 430, protein: 26, carbs: 38 } },
+      { id: 'sw1',  nameKey: 'sw1Name',  arabicNameKey: 'sw1Ar',  descriptionKey: 'sw1Desc',  price: 6.5, dietaryTags: ['vegan'], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1562967916-eb82221dfb92?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'sw2',  nameKey: 'sw2Name',  arabicNameKey: 'sw2Ar',  descriptionKey: 'sw2Desc',  price: 7.5, dietaryTags: [], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1610614819513-58e34989848b?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'sw3',  nameKey: 'sw3Name',  arabicNameKey: 'sw3Ar',  descriptionKey: 'sw3Desc',  price: 6.5, dietaryTags: ['vegan'], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1604909052743-94e838986d24?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'sw4',  nameKey: 'sw4Name',  arabicNameKey: 'sw4Ar',  descriptionKey: 'sw4Desc',  price: 6.5, dietaryTags: ['vegan'], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1562967916-eb82221dfb92?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'sw5',  nameKey: 'sw5Name',  arabicNameKey: 'sw5Ar',  descriptionKey: 'sw5Desc',  price: 7.5, dietaryTags: [], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1610614819513-58e34989848b?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'sw6',  nameKey: 'sw6Name',  arabicNameKey: 'sw6Ar',  descriptionKey: 'sw6Desc',  price: 7,   dietaryTags: [], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1604909052743-94e838986d24?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'sw7',  nameKey: 'sw7Name',  arabicNameKey: 'sw7Ar',  descriptionKey: 'sw7Desc',  price: 7.5, dietaryTags: [], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1562967916-eb82221dfb92?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'sw8',  nameKey: 'sw8Name',  arabicNameKey: 'sw8Ar',  descriptionKey: 'sw8Desc',  price: 7,   dietaryTags: [], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1610614819513-58e34989848b?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'sw9',  nameKey: 'sw9Name',  arabicNameKey: 'sw9Ar',  descriptionKey: 'sw9Desc',  price: 7,   dietaryTags: [], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1604909052743-94e838986d24?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'sw10', nameKey: 'sw10Name', arabicNameKey: 'sw10Ar', descriptionKey: 'sw10Desc', price: 8,   dietaryTags: [], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1562967916-eb82221dfb92?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'sw11', nameKey: 'sw11Name', arabicNameKey: 'sw11Ar', descriptionKey: 'sw11Desc', price: 8,   dietaryTags: [], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1610614819513-58e34989848b?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
+      { id: 'sw12', nameKey: 'sw12Name', arabicNameKey: 'sw12Ar', descriptionKey: 'sw12Desc', price: 8,   dietaryTags: [], categoryKey: 'sectionSandwiches', image: 'https://images.unsplash.com/photo-1604909052743-94e838986d24?q=80&w=800&auto=format&fit=crop', availability: { isAvailable: true } },
     ],
   },
 ];
