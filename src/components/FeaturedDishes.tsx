@@ -4,7 +4,6 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { ArrowRight } from 'lucide-react';
 import { MENU_DATA } from '@/data/menu';
-import { useCart } from '@/context/CartContext';
 
 const allItems = MENU_DATA.flatMap(s => s.items);
 const featured = [
@@ -16,7 +15,6 @@ export default function FeaturedDishes() {
   const t = useTranslations('MenuExplorer');
   const locale = useLocale();
   const isRTL = locale === 'ar';
-  const { cart, addToCart, updateQty } = useCart();
 
   return (
     <>
@@ -41,14 +39,17 @@ export default function FeaturedDishes() {
         .lev-btn-primary:hover { background-color: #f7f2eb; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(196,148,72,0.3); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .lev-view-details {
+          position: absolute; inset: 0; display: flex; align-items: center;
+          justify-content: center; opacity: 0; transition: opacity 0.25s ease;
+          z-index: 10;
+        }
+        .lev-card:hover .lev-view-details { opacity: 1; }
       `}</style>
 
       <div dir={isRTL ? 'rtl' : 'ltr'} className="relative" style={{ backgroundColor: '#0c0803' }}>
         <div className="relative z-10 flex overflow-x-auto pb-10 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-4 md:gap-6 lg:gap-8 md:overflow-visible px-4">
-          {featured.map((item) => {
-            const qty = cart.find(c => c.id === item.id)?.qty ?? 0;
-            const inCart = qty > 0;
-            return (
+          {featured.map((item) => (
             <Link
               key={item.id}
               href={`/menu/${item.id}` as any}
@@ -73,38 +74,23 @@ export default function FeaturedDishes() {
                   </span>
                 </div>
 
-                {/* Cart control — counter when in cart, add button when not */}
-                <div
-                  onClick={e => e.preventDefault()}
-                  className={`absolute bottom-3 right-3 z-10 transition-all duration-200 ${inCart ? 'opacity-100 scale-100' : 'opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100'}`}
-                >
-                  {inCart ? (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(12,8,3,0.75)', border: '1.5px solid #c49448', borderRadius: '8px', padding: '3px 5px', backdropFilter: 'blur(4px)' }}>
-                      <button
-                        onClick={() => updateQty(item.id, -1)}
-                        aria-label="Decrease"
-                        style={{ width: 26, height: 26, border: 'none', background: 'transparent', color: '#f7f2eb', cursor: 'pointer', fontSize: '1rem', fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                      >−</button>
-                      <span style={{ minWidth: '20px', textAlign: 'center', fontSize: '0.85rem', fontWeight: 600, color: '#f7f2eb' }}>{qty}</span>
-                      <button
-                        onClick={() => updateQty(item.id, 1)}
-                        aria-label="Increase"
-                        style={{ width: 26, height: 26, border: 'none', background: 'transparent', color: '#f7f2eb', cursor: 'pointer', fontSize: '1rem', fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                      >+</button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => addToCart({ id: item.id, nameKey: item.nameKey, price: item.price, qty: 1, img: item.image })}
-                      aria-label={`Add ${t(item.nameKey as any)} to cart`}
-                      style={{
-                        width: '36px', height: '36px', borderRadius: '50%',
-                        background: '#c49448', border: 'none', cursor: 'pointer',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: '1.3rem', color: '#0c0803', fontWeight: 300, lineHeight: 1,
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
-                      }}
-                    >+</button>
-                  )}
+                {/* View details label on hover */}
+                <div className="lev-view-details">
+                  <span style={{
+                    fontFamily: "'Jost', sans-serif",
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    color: '#f7f2eb',
+                    background: 'rgba(12,8,3,0.65)',
+                    border: '1px solid rgba(196,148,72,0.5)',
+                    borderRadius: '9999px',
+                    padding: '7px 18px',
+                    backdropFilter: 'blur(6px)',
+                  }}>
+                    {locale === 'de' ? 'Details ansehen' : locale === 'ar' ? 'عرض التفاصيل' : 'View Details'}
+                  </span>
                 </div>
               </div>
 
@@ -123,8 +109,7 @@ export default function FeaturedDishes() {
                 </span>
               </div>
             </Link>
-            );
-          })}
+          ))}
         </div>
 
         <div className="flex justify-center mt-12 pb-16">
