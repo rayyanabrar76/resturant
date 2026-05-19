@@ -10,6 +10,7 @@ import {
   ArrowLeft,
   CreditCard,
   Truck,
+  Store,
   ShieldCheck,
   Calendar,
   Clock,
@@ -47,6 +48,7 @@ const T = {
 
 type PaymentMethod = 'stripe' | 'paypal' | 'cod';
 type OrderStatus   = 'idle' | 'processing' | 'success' | 'error';
+type Fulfillment   = 'delivery' | 'pickup';
 
 interface FormData {
   fullName: string; phone: string; date: string; time: string; address: string;
@@ -237,7 +239,7 @@ const SuccessOverlay = ({ isCatering, paymentMethod }: { isCatering:boolean; pay
 // Mobile Order Summary (collapsible)
 // ─────────────────────────────────────────────
 const MobileOrderSummary = ({
-  cart, isCatering, isRTL, formatPrice, getDisplayName, subtotal, deliveryFee, total, c,
+  cart, isCatering, isRTL, formatPrice, getDisplayName, subtotal, deliveryFee, total, feeLabel, c,
 }: any) => {
   const [open, setOpen] = useState(false);
   return (
@@ -277,7 +279,7 @@ const MobileOrderSummary = ({
           >
             <div className="px-5 pb-5 space-y-5" style={{ borderTop: `1px solid ${T.borderSub}` }}>
               {/* Items */}
-              <div className="space-y-4 pt-4 max-h-[40vh] overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+              <div className="space-y-4 pt-4 max-h-[40vh] overflow-y-auto" style={{ scrollbarWidth: 'none' }}>
                 {cart.map((item: CartItem) => (
                   <div key={item.id} className="space-y-3">
                     <div className="flex gap-3 items-center">
@@ -328,7 +330,7 @@ const MobileOrderSummary = ({
                 </div>
                 <div className="flex justify-between"
                   style={{ fontSize:'10px', textTransform:'uppercase', letterSpacing:'0.2em', color: T.creamLow }}>
-                  <span>{isCatering ? c('serviceFee') : c('delivery')}</span>
+                  <span>{feeLabel}</span>
                   <span style={{ color: T.cream }}>{formatPrice(deliveryFee)}</span>
                 </div>
                 <div className="flex justify-between items-baseline pt-3" style={{ borderTop:`1px solid ${T.borderSub}` }}>
@@ -353,13 +355,14 @@ const MobileOrderSummary = ({
 // ─────────────────────────────────────────────
 export default function CheckoutPage() {
   const t    = useTranslations('Menu');
-  const d    = useTranslations('Dishes');
   const c    = useTranslations('Checkout');
+  // ✅ FIX: use MenuExplorer namespace — this is where all dish keys live
+  const me   = useTranslations('MenuExplorer');
   const locale = useLocale();
   const searchParams = useSearchParams();
   const { cart, cartCount } = useCart();
 
-  const isCatering = searchParams.get('type') === 'catering';
+  const isCatering = true;
   const isRTL      = locale === 'ar';
   const symbol     = t('currencySymbol');
   const pos        = t('currencyPos');
@@ -369,28 +372,28 @@ export default function CheckoutPage() {
     return pos==='prefix' ? `${symbol}${v}` : `${v} ${symbol}`;
   };
 
-  const subtotal    = cart.reduce((a, i) => a + i.price * i.qty, 0);
-  const deliveryFee = subtotal > 0 ? (isCatering ? 50 : 5) : 0;
-  const total       = subtotal + deliveryFee;
+  const [fulfillment, setFulfillment] = useState<Fulfillment>('delivery');
 
+  const subtotal    = cart.reduce((a, i) => a + i.price * i.qty, 0);
+  const deliveryFee = subtotal > 0 && fulfillment === 'delivery' ? 50 : 0;
+  const total       = subtotal + deliveryFee;
+  const feeLabel    = fulfillment === 'delivery' ? c('delivery') : c('pickup');
+
+  // ✅ FIX: nameKey is now always the raw key (e.g. "fajitaSandwich").
+  // Look it up directly in the MenuExplorer namespace — same namespace used
+  // in BuffetCalculator and MenuExplorer when displaying names.
   const getDisplayName = (key: string) => {
-    // The catering package label is a flat string in the Dishes namespace.
-    // Handle it explicitly so it does not get misrouted by prefix guessing
-    // (e.g. 'cateringPackageName' starts with 'cat').
-    if (key === 'cateringPackageName') {
-      try { return d('cateringPackageName'); } catch { return key; }
-    }
-    // Menu / product dishes store their display name under a nested `.name`.
-    try { return d(`${key}.name`); } catch {}
-    // Category-style keys are flat strings.
-    try { return d(key); } catch {}
-    return key;
+    try { return me(key); } catch { return key; }
   };
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('stripe');
   const [orderStatus,   setOrderStatus]   = useState<OrderStatus>('idle');
-  const [formData,      setFormData]      = useState<FormData>({ fullName:'', phone:'', date:'', time:'', address:'' });
-  const [errors,        setErrors]        = useState<FormErrors>({});
+  const [formData,      setFormData]      = useState<FormData>({
+    fullName: '', phone: '',
+    date: searchParams.get('date') ?? '',
+    time: '', address: '',
+  });
+  const [errors, setErrors] = useState<FormErrors>({});
 
   const validate = useCallback((): boolean => {
     const e: FormErrors = {};
@@ -399,10 +402,11 @@ export default function CheckoutPage() {
     else if (!/^\+?[\d\s\-()]{7,}$/.test(formData.phone)) e.phone = 'Enter a valid phone number';
     if (!formData.date)            e.date     = 'Date is required';
     if (!formData.time)            e.time     = 'Time is required';
-    if (!formData.address.trim())  e.address  = 'Address is required';
+    if (fulfillment === 'delivery' && !formData.address.trim())
+      e.address = 'Delivery address is required';
     setErrors(e);
     return Object.keys(e).length === 0;
-  }, [formData]);
+  }, [formData, fulfillment]);
 
   const handleChange = (field: keyof FormData, value: string) => {
     setFormData(p => ({ ...p, [field]: value }));
@@ -496,7 +500,8 @@ export default function CheckoutPage() {
             <MobileOrderSummary
               cart={cart} isCatering={isCatering} isRTL={isRTL}
               formatPrice={formatPrice} getDisplayName={getDisplayName}
-              subtotal={subtotal} deliveryFee={deliveryFee} total={total} c={c}
+              subtotal={subtotal} deliveryFee={deliveryFee} total={total}
+              feeLabel={feeLabel} c={c}
             />
           </div>
 
@@ -505,6 +510,47 @@ export default function CheckoutPage() {
 
             {/* LEFT: Form */}
             <div className="lg:col-span-7 space-y-10">
+
+              {/* Delivery vs Pickup */}
+              <section className="space-y-4">
+                <h3 className="font-serif italic text-lg" style={{ color: T.cream }}>
+                  {c('fulfillmentTitle')}
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {([
+                    { id: 'delivery' as Fulfillment, label: c('delivery'), hint: c('deliveryHint'), icon: <Truck size={18} /> },
+                    { id: 'pickup'   as Fulfillment, label: c('pickup'),   hint: c('pickupHint'),   icon: <Store size={18} /> },
+                  ]).map(opt => {
+                    const active = fulfillment === opt.id;
+                    return (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => setFulfillment(opt.id)}
+                        className="relative flex flex-col items-start gap-2 px-4 py-4 rounded-2xl sm:rounded-3xl transition-all duration-200 text-start"
+                        style={{
+                          border: `2px solid ${active ? T.gold : T.borderSub}`,
+                          background: active ? T.surface : T.surfaceAlt,
+                          boxShadow: active ? '0 0 20px rgba(196,148,72,0.1)' : 'none',
+                        }}
+                      >
+                        {active && (
+                          <span className={`absolute top-3 ${isRTL ? 'left-3' : 'right-3'}`}>
+                            <CheckCircle2 size={13} style={{ color: T.gold }} />
+                          </span>
+                        )}
+                        <span style={{ color: active ? T.gold : T.creamLow }}>{opt.icon}</span>
+                        <span style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: active ? T.cream : T.creamMid }}>
+                          {opt.label}
+                        </span>
+                        <span style={{ fontSize: '10px', lineHeight: 1.5, color: T.creamLow }}>
+                          {opt.hint}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </section>
 
               {/* Contact & Delivery */}
               <section className="space-y-6">
@@ -543,21 +589,30 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
-                {/* Address */}
-                <div className="space-y-2">
-                  <FieldLabel>{isCatering ? c('location') : c('address')}</FieldLabel>
-                  <textarea rows={3} value={formData.address} onChange={e=>handleChange('address',e.target.value)}
-                    placeholder="Detailed address..."
-                    className={inputBase(!!errors.address, 'resize-none')} />
-                  <FieldError msg={errors.address} />
-                </div>
+                {/* Address — delivery only */}
+                {fulfillment === 'delivery' ? (
+                  <div className="space-y-2">
+                    <FieldLabel>{c('location')}</FieldLabel>
+                    <textarea rows={3} value={formData.address} onChange={e=>handleChange('address',e.target.value)}
+                      placeholder="Detailed address..."
+                      className={inputBase(!!errors.address, 'resize-none')} />
+                    <FieldError msg={errors.address} />
+                  </div>
+                ) : (
+                  <div className={`flex items-start gap-3 rounded-2xl px-5 py-4 ${isRTL?'flex-row-reverse text-right':''}`}
+                    style={{ background: T.surfaceAlt, border:`1px solid ${T.borderSub}` }}>
+                    <Store size={16} style={{ color: T.gold, flexShrink:0, marginTop:1 }} />
+                    <p style={{ fontSize:'12px', color: T.creamMid, lineHeight:1.6 }}>
+                      {c('pickupNote')}
+                    </p>
+                  </div>
+                )}
               </section>
 
               {/* Payment Method */}
               <section className="space-y-5">
                 <h3 className="font-serif italic text-lg" style={{ color: T.cream }}>{c('paymentMethod')}</h3>
 
-                {/* Payment tabs — full width on mobile */}
                 <div className="grid grid-cols-3 gap-2 sm:gap-3">
                   {paymentOptions.map(opt => {
                     const active = paymentMethod === opt.id;
@@ -610,7 +665,7 @@ export default function CheckoutPage() {
                 )}
               </AnimatePresence>
 
-              {/* CTA — inline on desktop, sticky on mobile */}
+              {/* CTA — inline on desktop */}
               <div className="hidden lg:block">
                 <SubmitButton orderStatus={orderStatus} handleSubmit={handleSubmit} ctaLabel={ctaLabel} />
               </div>
@@ -625,7 +680,7 @@ export default function CheckoutPage() {
                   {isCatering ? c('eventSummary') : c('orderSummary')}
                 </h4>
 
-                <div className="space-y-6 max-h-[45vh] overflow-y-auto pr-1" style={{ scrollbarWidth:'thin' }}>
+                <div className="space-y-6 max-h-[45vh] overflow-y-auto pr-1" style={{ scrollbarWidth:'none' }}>
                   {cart.map((item: CartItem) => (
                     <div key={item.id} className="space-y-4">
                       <div className="flex gap-4 items-center">
@@ -679,7 +734,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className={`flex justify-between ${isRTL?'flex-row-reverse':''}`}
                     style={{ fontSize:'10px', textTransform:'uppercase', letterSpacing:'0.2em', color: T.creamLow }}>
-                    <span>{isCatering ? c('serviceFee') : c('delivery')}</span>
+                    <span>{feeLabel}</span>
                     <span style={{ color: T.cream }}>{formatPrice(deliveryFee)}</span>
                   </div>
                   <div className={`flex justify-between items-baseline pt-4 ${isRTL?'flex-row-reverse':''}`}>
@@ -751,8 +806,8 @@ function SubmitButton({ orderStatus, handleSubmit, ctaLabel }: {
   handleSubmit: () => void;
   ctaLabel: () => string;
 }) {
-  const T_gold  = '#c49448';
-  const T_bg    = '#0c0803';
+  const T_gold     = '#c49448';
+  const T_bg       = '#0c0803';
   const T_creamLow = 'rgba(247,242,235,0.3)';
   const T_creamMid = 'rgba(247,242,235,0.55)';
   return (

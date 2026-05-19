@@ -2,7 +2,8 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { useParams } from 'next/navigation';
-import { Link } from '@/i18n/routing';
+import { Link, useRouter } from '@/i18n/routing';
+import { useCart } from '@/context/CartContext';
 import { motion } from 'framer-motion';
 import { CheckCircle2, ArrowLeft, Clock, Users, ChefHat, Star } from 'lucide-react';
 
@@ -31,7 +32,9 @@ const OFFER_DETAILS: Record<string, { image: string; features: string[]; tags: s
   },
 };
 
-const PRICES: Record<string, string> = { '1': '€400', '2': '€750', '3': '€1.200' };
+/* Prices kept in sync with PREDEFINED_OFFERS in BuffetCalculator.tsx */
+const PRICES: Record<string, number> = { '1': 400, '2': 700, '3': 1100 };
+const formatPrice = (n: number) => '€' + n.toLocaleString('de-DE');
 
 /* ══════════════════════════════════════════════════════════════════════════
    ORNAMENTS
@@ -64,7 +67,24 @@ export default function CateringDetailPage() {
 
   const offerId = (id as string) in OFFER_DETAILS ? (id as string) : '1';
   const offer   = OFFER_DETAILS[offerId];
-  const price   = PRICES[offerId] ?? '€400';
+  const price   = PRICES[offerId] ?? 400;
+
+  const router          = useRouter();
+  const { addToCart, clearCart } = useCart();
+
+  // Add this catering package to the cart and head to catering checkout.
+  const handleOrder = () => {
+    clearCart();
+    addToCart({
+      id: `catering-offer-${offerId}`,
+      nameKey: t(`offer${offerId}Title`),
+      price,
+      qty: 1,
+      img: offer.image,
+      customDetails: offer.features.map((f) => ({ name: t(f), qty: 1 })),
+    });
+    router.push('/checkout?type=catering');
+  };
 
   return (
     <>
@@ -343,24 +363,23 @@ export default function CateringDetailPage() {
                       {t('startingFrom')}
                     </p>
                     <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(2.2rem, 4vw, 3rem)', fontWeight: 300, color: '#c17f3b', lineHeight: 1 }}>
-                      {price}
+                      {formatPrice(price)}
                     </p>
                   </div>
 
                   {/* Desktop CTA */}
-                  <Link href="/reservations" className="hidden lg:block" style={{ textDecoration: 'none' }}>
-                    <button
-                      className="cta-btn w-full flex items-center justify-center gap-2.5 rounded-full"
-                      style={{
-                        padding: '1.05rem 2rem',
-                        fontFamily: "'Jost', sans-serif", fontSize: '10px',
-                        fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
-                      }}
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#c17f3b' }} />
-                      {t('inquireNow')}
-                    </button>
-                  </Link>
+                  <button
+                    onClick={handleOrder}
+                    className="cta-btn hidden lg:flex w-full items-center justify-center gap-2.5 rounded-full"
+                    style={{
+                      padding: '1.05rem 2rem',
+                      fontFamily: "'Jost', sans-serif", fontSize: '10px',
+                      fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase',
+                    }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#c17f3b' }} />
+                    {t('bookButton')}
+                  </button>
                 </div>
               </div>
             </motion.div>
@@ -380,15 +399,16 @@ export default function CateringDetailPage() {
                 {t('startingFrom')}
               </p>
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.7rem', fontWeight: 300, color: '#c17f3b', lineHeight: 1 }}>
-                {price}
+                {formatPrice(price)}
               </p>
             </div>
-            <Link href="/reservations" className="flex-1 max-w-52" style={{ textDecoration: 'none' }}>
-              <button className="cta-btn w-full min-h-12 flex items-center justify-center gap-2 rounded-2xl"
-                style={{ fontFamily: "'Jost', sans-serif", fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-                {t('inquireNow')}
-              </button>
-            </Link>
+            <button
+              onClick={handleOrder}
+              className="cta-btn flex-1 max-w-52 w-full min-h-12 flex items-center justify-center gap-2 rounded-2xl"
+              style={{ fontFamily: "'Jost', sans-serif", fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}
+            >
+              {t('bookButton')}
+            </button>
           </div>
         </div>
 

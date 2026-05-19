@@ -24,6 +24,9 @@ interface CartContextType {
   clearCart: () => void;
   cartCount: number;
   isLoaded: boolean;
+  isCartOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -31,10 +34,11 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   // 1. Load cart from localStorage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem('zafran_cart');
+    const savedCart = localStorage.getItem('chef_aboud_cart');
     if (savedCart) {
       try {
         setCart(JSON.parse(savedCart));
@@ -48,7 +52,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // 2. Save cart to localStorage whenever it changes
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem('zafran_cart', JSON.stringify(cart));
+      localStorage.setItem('chef_aboud_cart', JSON.stringify(cart));
     }
   }, [cart, isLoaded]);
 
@@ -92,18 +96,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const clearCart = () => setCart([]);
 
+  const openCart  = () => setIsCartOpen(true);
+  const closeCart = () => setIsCartOpen(false);
+
   const cartCount = cart.reduce((acc, item) => acc + item.qty, 0);
 
   return (
-    <CartContext.Provider 
-      value={{ 
-        cart, 
-        addToCart, 
-        removeFromCart, 
-        updateQty, 
-        clearCart, 
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        updateQty,
+        clearCart,
         cartCount,
-        isLoaded 
+        isLoaded,
+        isCartOpen,
+        openCart,
+        closeCart,
       }}
     >
       {children}

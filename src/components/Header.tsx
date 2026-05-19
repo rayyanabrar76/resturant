@@ -57,16 +57,17 @@ const TRANSPARENT_STYLE: React.CSSProperties = {
 export default function Header({ locale }: { locale: string }) {
   const t = useTranslations('Navigation');
   const pathname = usePathname();
-  const isHomePage = pathname === '/';
+  const isHomePage    = pathname === '/';
+  const isCateringPage = pathname.includes('/catering');
 
   // Non-home pages always start as pill (no transparent phase)
   const [isScrolled, setIsScrolled] = useState(!isHomePage);
   const [isVisible,  setIsVisible]  = useState(true);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const lastScrollY = useRef(0);
-  const { cartCount, updateQty, removeFromCart, cart } = useCart();
+  // Cart open-state lives in context so the menu page can open it on "add".
+  const { cartCount, updateQty, removeFromCart, cart, isCartOpen, openCart, closeCart } = useCart();
 
   // Sync scroll state when pathname changes (e.g. navigating home → menu)
   useEffect(() => {
@@ -78,14 +79,18 @@ export default function Header({ locale }: { locale: string }) {
     setIsScrolled(window.scrollY > 20);
   }, [isHomePage]);
 
-  // Scroll listener — only active on homepage
+  // Always show header on catering page
   useEffect(() => {
-    if (!isHomePage) return;
+    if (isCateringPage) setIsVisible(true);
+  }, [isCateringPage]);
 
+  // Scroll listener — hide-on-scroll-down runs on every page.
+  // The transparent → pill transition stays homepage-only.
+  useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
-      setIsScrolled(y > 20);
-      setIsVisible(!(y > lastScrollY.current && y > 100));
+      if (isHomePage) setIsScrolled(y > 20);
+      if (!isCateringPage) setIsVisible(!(y > lastScrollY.current && y > 100));
       lastScrollY.current = y;
     };
 
@@ -181,7 +186,7 @@ export default function Header({ locale }: { locale: string }) {
 
             {/* Cart icon */}
             <button
-              onClick={() => setIsCartOpen(true)}
+              onClick={openCart}
               className="relative p-1.5 group"
               aria-label="Open cart"
             >
@@ -307,7 +312,7 @@ export default function Header({ locale }: { locale: string }) {
 
       <CartDrawer
         isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
+        onClose={closeCart}
         items={cart}
         onUpdateQty={updateQty}
         onRemoveItem={removeFromCart}

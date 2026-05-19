@@ -6,58 +6,22 @@ import { Link } from '@/i18n/routing';
 import { ChevronDown, ArrowRight, Star } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
-
-const IMAGES = {
-  sandwiches: {
-    preview: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?q=80&w=800&auto=format&fit=crop',
-    subfolders: [
-      'https://images.unsplash.com/photo-1547050605-2f3000632a9e?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1633345245711-6b6c0717bc42?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1610614819513-58e34989848b?q=80&w=800&auto=format&fit=crop',
-    ],
-  },
-  plates: {
-    preview: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800&auto=format&fit=crop',
-    subfolders: [
-      'https://images.unsplash.com/photo-1544124499-58912cbddada?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1593001874117-c99c5ed9918a?q=80&w=800&auto=format&fit=crop',
-    ],
-  },
-  starters: {
-    preview: 'https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=800&auto=format&fit=crop',
-    subfolders: [
-      'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop',
-    ],
-  },
-};
+import { MENU_DATA } from '@/data/menu';
 
 export default function MenuDropdown({ label }: { label: string }) {
-  const t = useTranslations('menuDropdown');
+  const t = useTranslations('menuDropdown');   // generic dropdown labels
+  const m = useTranslations('MenuExplorer');   // real section + dish names
   const locale = useLocale();
   const isRTL = locale === 'ar';
 
-  const categories = t.raw('categories') as {
-    id: string;
-    label: string;
-    arabic: string;
-    subfolders: { name: string; items: string[] }[];
-  }[];
-
-  const categoriesWithImages = categories.map((cat) => ({
-    ...cat,
-    previewImage: IMAGES[cat.id as keyof typeof IMAGES].preview,
-    subfolders: cat.subfolders.map((sub, i) => ({
-      ...sub,
-      image: IMAGES[cat.id as keyof typeof IMAGES].subfolders[i],
-    })),
-  }));
-
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState(categoriesWithImages[0]);
-  const [activeImage, setActiveImage] = useState(categoriesWithImages[0].previewImage);
+  const [activeSection, setActiveSection] = useState(MENU_DATA[0]);
+  const [activeItem, setActiveItem] = useState(MENU_DATA[0].items[0]);
+
+  const selectSection = (section: typeof MENU_DATA[number]) => {
+    setActiveSection(section);
+    setActiveItem(section.items[0]);
+  };
 
   return (
     <div
@@ -81,6 +45,7 @@ export default function MenuDropdown({ label }: { label: string }) {
       <AnimatePresence>
         {isOpen && (
           <>
+            {/* Invisible bridge so the dropdown survives the gap on hover */}
             <div className="absolute top-full left-0 w-full h-6" />
 
             <motion.div
@@ -102,96 +67,89 @@ export default function MenuDropdown({ label }: { label: string }) {
 
               <div className="relative z-10 flex h-120" dir={isRTL ? 'rtl' : 'ltr'}>
 
-                {/* Categories sidebar */}
+                {/* ── Sections sidebar ── */}
                 <div className="w-55 border-r border-white/5 p-6 flex flex-col gap-2">
                   <p className="text-[9px] uppercase tracking-[0.3em] text-gold-dark mb-6 font-bold opacity-70">
                     {t('categoriesLabel')}
                   </p>
-                  {categoriesWithImages.map((cat) => (
-                    <button
-                      key={cat.id}
-                      onMouseEnter={() => {
-                        setActiveTab(cat);
-                        setActiveImage(cat.previewImage);
-                      }}
-                      className={`flex flex-col p-4 rounded-xl transition-all ${isRTL ? 'text-right' : 'text-left'} ${
-                        activeTab.id === cat.id
-                          ? 'bg-gold-dark/10 border border-gold-dark/30 shadow-[0_0_20px_rgba(184,145,48,0.08)]'
-                          : 'hover:bg-white/5 border border-transparent'
-                      }`}
-                    >
-                      <span className="text-brand-light text-[15px] font-medium" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                        {cat.label}
-                      </span>
-                      <span className="text-gold-dark/60 text-[10px] uppercase tracking-tighter">
-                        {cat.arabic}
-                      </span>
-                    </button>
-                  ))}
+                  {MENU_DATA.map((section) => {
+                    const active = activeSection.categoryKey === section.categoryKey;
+                    return (
+                      <button
+                        key={section.categoryKey}
+                        onMouseEnter={() => selectSection(section)}
+                        className={`flex flex-col p-4 rounded-xl transition-all ${isRTL ? 'text-right' : 'text-left'} ${
+                          active
+                            ? 'bg-gold-dark/10 border border-gold-dark/30 shadow-[0_0_20px_rgba(184,145,48,0.08)]'
+                            : 'hover:bg-white/5 border border-transparent'
+                        }`}
+                      >
+                        <span className="text-brand-light text-[15px] font-medium" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                          {m(section.categoryKey)}
+                        </span>
+                        <span className="text-gold-dark/60 text-[10px] uppercase tracking-tighter">
+                          {m(section.arabicLabelKey)}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
 
-                {/* Items list */}
-                <div className="flex-1 p-8 bg-white/1 overflow-y-auto custom-scrollbar mask-fade-bottom">
+                {/* ── Items list — each opens its dish modal on the menu page ── */}
+                <div className="flex-1 p-8 bg-white/1 overflow-y-auto custom-scrollbar">
                   <p className="text-[9px] uppercase tracking-[0.3em] text-gold-dark mb-6 font-bold opacity-70">
                     {t('popularChoices')}
                   </p>
-                  <div className="grid grid-cols-1 gap-8 pb-16">
-                    {activeTab.subfolders.map((sub, idx) => (
-                      <div
-                        key={idx}
-                        onMouseEnter={() => setActiveImage(sub.image)}
-                        className="group/sub"
-                      >
-                        <h4 className={`text-gold-dark text-[10px] uppercase tracking-widest mb-4 flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                          <span className="w-4 h-px bg-gold-dark/40" />
-                          {sub.name}
-                        </h4>
-                        <ul className="grid grid-cols-1 gap-3">
-                          {sub.items.map((item, i) => (
-                            <li
-                              key={i}
-                              className={`text-brand-light/70 text-[14px] hover:text-brand-light cursor-pointer transition-colors flex items-center justify-between group/item ${isRTL ? 'flex-row-reverse' : ''}`}
-                            >
-                              <span style={{ fontFamily: "'Jost', sans-serif" }}>{item}</span>
-                              <ArrowRight
-                                size={12}
-                                className={`opacity-0 group-hover/item:opacity-100 transition-all text-gold-dark ${
-                                  isRTL
-                                    ? 'rotate-180 translate-x-2 group-hover/item:translate-x-0'
-                                    : '-translate-x-2 group-hover/item:translate-x-0'
-                                }`}
-                              />
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                  <ul className="flex flex-col gap-3">
+                    {activeSection.items.map((item) => (
+                      <li key={item.id}>
+                        <Link
+                          href={`/menu?item=${item.id}` as any}
+                          onClick={() => setIsOpen(false)}
+                          onMouseEnter={() => setActiveItem(item)}
+                          className={`group/item flex items-center gap-4 p-3 rounded-2xl transition-all border ${
+                            activeItem.id === item.id
+                              ? 'bg-gold-dark/10 border-gold-dark/30'
+                              : 'border-transparent hover:bg-white/5'
+                          } ${isRTL ? 'flex-row-reverse' : ''}`}
+                        >
+                          <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-brand-dark">
+                            <Image src={item.image} alt={m(item.nameKey)} fill unoptimized className="object-cover" />
+                          </div>
+                          <div className={`flex-1 min-w-0 ${isRTL ? 'text-right' : 'text-left'}`}>
+                            <p className="text-brand-light text-[14px] truncate" style={{ fontFamily: "'Jost', sans-serif" }}>
+                              {m(item.nameKey)}
+                            </p>
+                            <p className="text-gold-dark/70 text-[11px] truncate">{m(item.arabicNameKey)}</p>
+                          </div>
+                          <span className="text-gold-dark text-sm font-medium shrink-0" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                            €{item.price}
+                          </span>
+                          <ArrowRight
+                            size={13}
+                            className={`text-gold-dark opacity-0 group-hover/item:opacity-100 transition-all shrink-0 ${isRTL ? 'rotate-180' : ''}`}
+                          />
+                        </Link>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
 
-                {/* Preview panel */}
+                {/* ── Preview panel ── */}
                 <div className="w-70 p-6 flex flex-col bg-gold-dark/2 border-l border-white/5">
                   <div className="flex-1">
                     <div className="relative aspect-4/5 w-full rounded-2xl overflow-hidden mb-6 border border-white/10 shadow-2xl bg-brand-dark">
                       <AnimatePresence mode="wait">
                         <motion.div
-                          key={activeImage}
+                          key={activeItem.id}
                           initial={{ opacity: 0, scale: 1.05 }}
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0.95 }}
-                          transition={{ duration: 0.4, ease: 'easeOut' }}
+                          transition={{ duration: 0.35, ease: 'easeOut' }}
                           className="absolute inset-0"
                         >
                           <div className="absolute inset-0 bg-linear-to-t from-brand-dark via-transparent to-transparent z-10" />
-                          <div className="w-full h-full flex items-center justify-center">
-                            <Image
-                              src={activeImage}
-                              alt="Menu Preview"
-                              fill
-                              className="object-cover opacity-80"
-                              unoptimized
-                            />
-                          </div>
+                          <Image src={activeItem.image} alt={m(activeItem.nameKey)} fill unoptimized className="object-cover opacity-85" />
                         </motion.div>
                       </AnimatePresence>
 
@@ -202,19 +160,20 @@ export default function MenuDropdown({ label }: { label: string }) {
                             {t('premiumQuality')}
                           </span>
                         </div>
-                        <p className="text-brand-light text-lg font-serif italic leading-none">
-                          {t('tasteOfLevant')}
+                        <p className="text-brand-light text-lg font-serif italic leading-tight">
+                          {m(activeItem.nameKey)}
                         </p>
                       </div>
                     </div>
 
                     <p className="text-[11px] text-brand-light/50 leading-relaxed text-center px-4 italic">
-                      "{t('freshIngredients')}"
+                      &quot;{t('freshIngredients')}&quot;
                     </p>
                   </div>
 
                   <Link
                     href="/menu"
+                    onClick={() => setIsOpen(false)}
                     className={`group mt-6 flex items-center justify-center gap-3 bg-linear-to-r from-gold-dark to-[#8a6d24] py-3.5 rounded-xl text-brand-dark font-bold text-[10px] uppercase tracking-[0.2em] hover:shadow-[0_10px_30px_rgba(184,145,48,0.3)] transition-all ${isRTL ? 'flex-row-reverse' : ''}`}
                   >
                     {t('fullExperience')}
