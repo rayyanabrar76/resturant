@@ -6,7 +6,7 @@ import { Link } from '@/i18n/routing';
 import { ChevronDown, ArrowRight, Star } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
-import { MOCK_MENU } from '@/components/MenuExplorer';
+import { MENU_DATA } from '@/data/menu';
 
 export default function MenuDropdown({ label }: { label: string }) {
   const t = useTranslations('menuDropdown');   // generic dropdown labels
@@ -15,10 +15,10 @@ export default function MenuDropdown({ label }: { label: string }) {
   const isRTL = locale === 'ar';
 
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState(MOCK_MENU[0]);
-  const [activeItem, setActiveItem] = useState(MOCK_MENU[0].items[0]);
+  const [activeSection, setActiveSection] = useState(MENU_DATA[0]);
+  const [activeItem, setActiveItem] = useState(MENU_DATA[0].items[0]);
 
-  const selectSection = (section: typeof MOCK_MENU[number]) => {
+  const selectSection = (section: typeof MENU_DATA[number]) => {
     setActiveSection(section);
     setActiveItem(section.items[0]);
   };
@@ -72,7 +72,7 @@ export default function MenuDropdown({ label }: { label: string }) {
                   <p className="text-[9px] uppercase tracking-[0.3em] text-gold-dark mb-6 font-bold opacity-70">
                     {t('categoriesLabel')}
                   </p>
-                  {MOCK_MENU.map((section) => {
+                  {MENU_DATA.map((section) => {
                     const active = activeSection.categoryKey === section.categoryKey;
                     return (
                       <button

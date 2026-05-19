@@ -69,15 +69,15 @@ export default function CartDrawer({
 }) {
   const t = useTranslations('Menu');
   const d = useTranslations('Dishes');
+  const m = useTranslations('MenuExplorer');
   const isRtl = locale === 'ar';
 
   const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
 
   const getDisplayName = (nameKey: string) => {
-    if (nameKey.startsWith('dish') || nameKey.startsWith('cat')) {
-      return d(nameKey);
-    }
-    return nameKey; 
+    try { return m(nameKey as any); } catch {}
+    try { return d(nameKey as any); } catch {}
+    return nameKey;
   };
 
   const safeT = (key: string, fallback: string) => {

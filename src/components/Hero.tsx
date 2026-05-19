@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Globe, Zap } from 'lucide-react';
 import { Link } from '@/i18n/routing';
+import { MENU_DATA } from '@/data/menu';
 
 const StarIcon = ({ size = 12, color = '#c17f3b' }: { size?: number; color?: string }) => (
   <svg width={size} height={size} viewBox="0 0 20 20">
@@ -14,25 +15,20 @@ const StarIcon = ({ size = 12, color = '#c17f3b' }: { size?: number; color?: str
 
 const SLIDE_SRCS = ['/videos/hero2.mp4', '/videos/hero2.mp4', '/videos/hero-catering.mp4'];
 
-const RECIPE_IMGS = [
-  'https://immigrantstable.com/wp-content/uploads/2024/08/Canned-Chickpea-Hummus-Recipe-11.jpg',
-  'https://www.loveandlemons.com/wp-content/uploads/2022/08/tabbouleh-1.jpg',
-  'https://www.lastingredient.com/wp-content/uploads/2019/04/fattoush-salad2-819x1024.jpg',
-  'https://www.hungrypaprikas.com/wp-content/uploads/2024/01/Kibbeh-Bil-Sanieh-29.jpg',
-  'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=600',
-];
+const allItems = MENU_DATA.flatMap(s => s.items);
+const MARQUEE_ITEMS = [
+  ...allItems.filter(i => i.isChefsChoice),
+  ...allItems.filter(i => i.isHighMargin && !i.isChefsChoice),
+].slice(0, 6);
 
 export default function Hero() {
-  const t = useTranslations('hero');
+  const t  = useTranslations('hero');
+  const m  = useTranslations('MenuExplorer');
   const locale = useLocale();
   const isRTL = locale === 'ar';
   const [current, setCurrent] = useState(0);
 
   const SLIDES = t.raw('slides') as { ar: string; en: string }[];
-  const RECIPES = (t.raw('recipes') as { en: string; ar: string; slug: string }[]).map((r, i) => ({
-    ...r,
-    img: RECIPE_IMGS[i],
-  }));
 
   useEffect(() => {
     const timer = setInterval(() => setCurrent((prev) => (prev + 1) % SLIDES.length), 8000);
@@ -201,14 +197,14 @@ export default function Hero() {
         {/* ── MARQUEE ── */}
         <div className="relative pause-on-hover w-full" dir={isRTL ? 'rtl' : 'ltr'}>
           <div className="marquee-container pt-6 pb-12">
-            {[...RECIPES, ...RECIPES, ...RECIPES].map((recipe, i) => (
-              <Link key={i} href={`/menu/${recipe.slug}`} className="w-48 lg:w-64 mx-3 group cursor-pointer shrink-0">
+            {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+              <Link key={i} href={`/menu/${item.id}` as any} className="w-48 lg:w-64 mx-3 group cursor-pointer shrink-0">
                 <div className="w-full aspect-4/5 overflow-hidden rounded-3xl mb-4 border border-white/5 bg-[#1a150f] relative">
                   <motion.img
-                    src={recipe.img}
+                    src={item.image}
                     className="w-full h-full object-cover transition-all duration-700"
                     whileHover={{ scale: 1.08 }}
-                    alt={recipe.en}
+                    alt={m(item.nameKey as any)}
                   />
                   <div className="absolute bottom-4 left-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                     <div className="bg-black/60 backdrop-blur-md border border-white/10 p-2 rounded-xl flex justify-between items-center">
@@ -224,8 +220,8 @@ export default function Hero() {
                     {t('chefsSelection')}
                   </p>
                   <h3 className="font-serif-italic text-lg lg:text-xl leading-tight flex items-center gap-2">
-                    <span className="text-white group-hover:text-[#c17f3b] transition-colors">{recipe.en}</span>
-                    <span className="text-white/20 text-xs italic">/ {recipe.ar}</span>
+                    <span className="text-white group-hover:text-[#c17f3b] transition-colors">{m(item.nameKey as any)}</span>
+                    <span className="text-white/20 text-xs italic">/ {m(item.arabicNameKey as any)}</span>
                   </h3>
                 </div>
               </Link>

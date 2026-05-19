@@ -57,7 +57,8 @@ const TRANSPARENT_STYLE: React.CSSProperties = {
 export default function Header({ locale }: { locale: string }) {
   const t = useTranslations('Navigation');
   const pathname = usePathname();
-  const isHomePage = pathname === '/';
+  const isHomePage    = pathname === '/';
+  const isCateringPage = pathname.includes('/catering');
 
   // Non-home pages always start as pill (no transparent phase)
   const [isScrolled, setIsScrolled] = useState(!isHomePage);
@@ -78,13 +79,18 @@ export default function Header({ locale }: { locale: string }) {
     setIsScrolled(window.scrollY > 20);
   }, [isHomePage]);
 
+  // Always show header on catering page
+  useEffect(() => {
+    if (isCateringPage) setIsVisible(true);
+  }, [isCateringPage]);
+
   // Scroll listener — hide-on-scroll-down runs on every page.
   // The transparent → pill transition stays homepage-only.
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
       if (isHomePage) setIsScrolled(y > 20);
-      setIsVisible(!(y > lastScrollY.current && y > 100));
+      if (!isCateringPage) setIsVisible(!(y > lastScrollY.current && y > 100));
       lastScrollY.current = y;
     };
 
