@@ -714,6 +714,7 @@ export default function BuffetCalculator() {
   const [suggestionApplied, setSuggestionApplied] = useState(false);
   const [clearCartModal,    setClearCartModal]    = useState(false);
   const [pendingSuggestion, setPendingSuggestion] = useState<{ id: string; qty: number }[]>([]);
+  const [sidebarTab,        setSidebarTab]        = useState<'when' | 'order'>('when');
 
   // Default date if user never picks: next Sunday (refueat-style).
   const defaultDateLabel = useMemo(() => {
@@ -807,8 +808,8 @@ export default function BuffetCalculator() {
 
   /* ── Auto-expand cart details when user adds their first item ── */
   useEffect(() => {
-    if (totalDishCount === 1 && !showCartDetails) setShowCartDetails(true);
-    if (totalDishCount === 0) setShowCartDetails(false);
+    if (totalDishCount === 1 && !showCartDetails) { setShowCartDetails(true); setSidebarTab('order'); }
+    if (totalDishCount === 0) { setShowCartDetails(false); setSidebarTab('when'); }
   }, [totalDishCount]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ── Suggestion ── */
@@ -845,7 +846,7 @@ export default function BuffetCalculator() {
 
   return (
     <>
-      <div dir={isRTL ? 'rtl' : 'ltr'} style={{ backgroundColor: C.bg, position: 'relative' }}>
+      <div dir={isRTL ? 'rtl' : 'ltr'} style={{ backgroundColor: C.bg, position: 'relative' }} className="pb-24 lg:pb-0">
 
         {/* Background decoration */}
         <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, opacity: 0.03, backgroundImage: "url('/images/islamic-circle1.png')", backgroundSize: '620px 620px', backgroundPosition: 'center' }} />
@@ -882,7 +883,7 @@ export default function BuffetCalculator() {
           <div style={{ position: 'relative', backgroundColor: C.bg }}>
 
             {/* ── Configurator: rounded card, text-left / image-right ── */}
-            <div style={{ padding: '1.5rem 1.5rem 0' }}>
+            <div style={{ padding: '1.5rem 1.5rem 0' }} className="max-sm:p-3! max-sm:pb-0!">
               <div style={{
                 display: 'flex',
                 minHeight: '720px',
@@ -891,7 +892,7 @@ export default function BuffetCalculator() {
                 border: `1px solid ${C.border}`,
                 background: C.panel,
                 boxShadow: '0 14px 40px rgba(0,0,0,0.35)',
-              }}>
+              }} className="max-md:min-h-fit!">
 
                 {/* LEFT half — content */}
                 <div style={{
@@ -903,7 +904,7 @@ export default function BuffetCalculator() {
                   minWidth: 0,
                   position: 'relative',
                   zIndex: 1,
-                }}>
+                }} className="max-sm:p-5! max-sm:gap-7!">
 
                 {suggestionApplied ? (
                   /* ── Success state ── */
@@ -1084,7 +1085,8 @@ export default function BuffetCalculator() {
 
             {/* ── Filter bar (sticky) ── */}
             <div ref={filterBarRef}
-              style={{ position: 'sticky', top: '106px', zIndex: 5, background: C.bg, borderBottom: `1px solid ${C.border}`, padding: '0.75rem 1.75rem', display: 'flex', gap: '0.7rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              style={{ position: 'sticky', top: '106px', zIndex: 5, background: C.bg, borderBottom: `1px solid ${C.border}`, padding: '0.75rem 1.75rem', display: 'flex', gap: '0.7rem', flexWrap: 'wrap', alignItems: 'center' }}
+              className="max-sm:px-3!">
 
               {/* Dietary pills */}
               <div role="group" aria-label="Dietary filter" style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
@@ -1137,7 +1139,7 @@ export default function BuffetCalculator() {
                 const filtered = section.items.filter(filterItem);
                 if (filtered.length === 0) return null;
                 return (
-                  <div key={section.categoryKey} id={`menu-section-${section.categoryKey}`} style={{ padding: '2rem 1.75rem 1.5rem' }}>
+                  <div key={section.categoryKey} id={`menu-section-${section.categoryKey}`} style={{ padding: '2rem 1.75rem 1.5rem' }} className="max-sm:px-3!">
                     {/* Section heading — refueat-style: centered, big, with descriptive copy */}
                     <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
                       <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(1.7rem,3vw,2.4rem)', fontWeight: 300, fontStyle: 'italic', color: C.text, lineHeight: 1, marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -1182,42 +1184,64 @@ export default function BuffetCalculator() {
             style={{ position: 'sticky', top: '106px', height: 'calc(100vh - 106px)', background: C.panel, borderLeft: `1px solid ${C.border}`, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
             {/* ── Cart status header ── */}
-            <div style={{ padding: '0.9rem 1.4rem', borderBottom: `1px solid ${C.border}`, flexShrink: 0, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ width: '46px', height: '46px', borderRadius: '8px', overflow: 'hidden', background: C.surface, border: `1px solid ${C.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                {selectedItems[0] ? (
-                  <img src={selectedItems[0].image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                ) : (
-                  <Receipt size={18} color={C.muted} />
-                )}
+            <div style={{ padding: '0.9rem 1.4rem 0', borderBottom: `1px solid ${C.border}`, flexShrink: 0 }}>
+              {/* Thumbnail + count row */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                <div style={{ width: '46px', height: '46px', borderRadius: '8px', overflow: 'hidden', background: C.surface, border: `1px solid ${C.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  {selectedItems[0] ? (
+                    <img src={selectedItems[0].image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  ) : (
+                    <Receipt size={18} color={C.muted} />
+                  )}
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  {totalDishCount === 0 ? (
+                    <p style={{ fontSize: '0.85rem', color: C.text, fontWeight: 500 }}>
+                      {locale === 'de' ? 'Wähle jetzt Produkte aus!' : locale === 'ar' ? 'اختر منتجاتك الآن!' : 'Pick your dishes now!'}
+                    </p>
+                  ) : (
+                    <p style={{ fontSize: '0.85rem', color: C.text, fontWeight: 500 }}>
+                      {totalDishCount} {totalDishCount === 1
+                        ? (locale === 'de' ? 'gewähltes Produkt' : locale === 'ar' ? 'منتج مختار' : 'item selected')
+                        : (locale === 'de' ? 'gewählte Produkte' : locale === 'ar' ? 'منتجات مختارة' : 'items selected')}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                {totalDishCount === 0 ? (
-                  <p style={{ fontSize: '0.85rem', color: C.text, fontWeight: 500 }}>
-                    {locale === 'de' ? 'Wähle jetzt Produkte aus!' : locale === 'ar' ? 'اختر منتجاتك الآن!' : 'Pick your dishes now!'}
-                  </p>
-                ) : (
-                  <p style={{ fontSize: '0.85rem', color: C.text, fontWeight: 500 }}>
-                    {totalDishCount} {totalDishCount === 1
-                      ? (locale === 'de' ? 'gewähltes Produkt' : locale === 'ar' ? 'منتج مختار' : 'item selected')
-                      : (locale === 'de' ? 'gewählte Produkte' : locale === 'ar' ? 'منتجات مختارة' : 'items selected')}
-                  </p>
-                )}
+
+              {/* Tab switcher */}
+              <div style={{ display: 'flex', gap: '2px' }}>
+                {([
+                  { id: 'when'  as const, label: locale === 'de' ? 'Wann & Wie' : locale === 'ar' ? 'متى وكيف' : 'When & How' },
+                  { id: 'order' as const, label: totalDishCount > 0
+                    ? (locale === 'de' ? `Bestellung (${totalDishCount})` : locale === 'ar' ? `الطلب (${totalDishCount})` : `My Order (${totalDishCount})`)
+                    : (locale === 'de' ? 'Bestellung' : locale === 'ar' ? 'طلبي' : 'My Order') },
+                ]).map(tab => {
+                  const active = sidebarTab === tab.id;
+                  return (
+                    <button key={tab.id} type="button" onClick={() => setSidebarTab(tab.id)}
+                      style={{
+                        flex: 1, padding: '0.5rem 0.4rem',
+                        background: 'none', border: 'none',
+                        borderBottom: `2px solid ${active ? C.gold : 'transparent'}`,
+                        color: active ? C.gold : C.muted,
+                        fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.05em',
+                        cursor: 'pointer', fontFamily: 'inherit',
+                        transition: 'color 0.15s, border-color 0.15s',
+                        whiteSpace: 'nowrap',
+                      }}>
+                      {tab.label}
+                    </button>
+                  );
+                })}
               </div>
-              {totalDishCount > 0 && (
-                <button
-                  onClick={() => setShowCartDetails(v => !v)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: C.gold, fontSize: '0.78rem', fontFamily: 'inherit', textDecoration: 'underline', display: 'flex', alignItems: 'center', gap: '4px' }}
-                >
-                  {showCartDetails
-                    ? (locale === 'de' ? 'verbergen' : locale === 'ar' ? 'إخفاء' : 'hide')
-                    : (locale === 'de' ? 'ansehen' : locale === 'ar' ? 'عرض' : 'view')}
-                  <ChevronDown size={11} style={{ transform: showCartDetails ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-                </button>
-              )}
             </div>
 
             {/* ── Editable wizard rows + content ── */}
             <div style={{ flex: 1, overflowY: 'auto', scrollbarWidth: 'none' }}>
+
+              {/* ── WHEN & HOW tab ── */}
+              {sidebarTab === 'when' && <>
 
               {/* Wann (date) */}
               <div style={{ borderBottom: `1px solid ${C.border}` }}>
@@ -1343,14 +1367,19 @@ export default function BuffetCalculator() {
                 </div>
               )}
 
-              {/* Meal-size slider — only when cart has items AND details expanded */}
-              {totalDishCount > 0 && showCartDetails && (
+              </> /* end sidebarTab === 'when' */}
+
+              {/* ── MY ORDER tab ── */}
+              {sidebarTab === 'order' && <>
+
+              {/* Meal-size slider */}
+              {totalDishCount > 0 && (
                 <MealSizeBlock mealSize={mealSize} setMealSize={setMealSize} guests={guests}
                   totalDishCount={totalDishCount} t={t} locale={locale} />
               )}
 
-              {/* Cart items grouped by section — only when expanded */}
-              {totalDishCount > 0 && showCartDetails && (
+              {/* Cart items */}
+              {totalDishCount > 0 ? (
                 <div style={{ borderBottom: `1px solid ${C.border}` }}>
                   <div style={{ padding: '0.7rem 1.4rem 0.4rem' }}>
                     <p style={{ fontSize: '0.85rem', fontWeight: 600, color: C.text }}>
@@ -1396,35 +1425,61 @@ export default function BuffetCalculator() {
                     })}
                   </AnimatePresence>
                 </div>
+              ) : (
+                <div style={{ padding: '2.5rem 1.4rem', textAlign: 'center' }}>
+                  <p style={{ fontSize: '0.82rem', color: C.muted, fontStyle: 'italic' }}>
+                    {locale === 'de' ? 'Noch keine Produkte gewählt.' : locale === 'ar' ? 'لم تختر منتجات بعد.' : 'No dishes added yet.'}
+                  </p>
+                </div>
               )}
+
+              </> /* end sidebarTab === 'order' */}
             </div>
 
             {/* ── Footer: total + CTA ── */}
-            <div style={{ padding: '0.85rem 1.4rem', borderTop: `1px solid ${C.border}`, background: C.panel, flexShrink: 0 }}>
-              {totalDishCount > 0 ? (
-                <>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.6rem' }}>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 600, color: C.text }}>{formatVal(displayPrice)}</div>
-                    <span style={{ fontSize: '0.68rem', color: C.muted }}>
-                      {priceMode === 'brutto' ? '(inkl. MwSt.)' : '(zzgl. MwSt.)'}, {locale === 'de' ? 'zzgl. Gebühren' : locale === 'ar' ? 'بالإضافة للرسوم' : 'plus fees'}
-                    </span>
-                  </div>
-                  <button onClick={handleBooking} disabled={isBooking}
-                    style={{ width: '100%', padding: '0.9rem', background: C.gold, color: '#0c0803', border: 'none', borderRadius: '8px', fontFamily: 'inherit', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', cursor: isBooking ? 'not-allowed' : 'pointer', transition: 'background 0.2s' }}
-                    onMouseEnter={e => { if (!isBooking) (e.currentTarget as HTMLElement).style.background = C.goldDark; }}
-                    onMouseLeave={e => { if (!isBooking) (e.currentTarget as HTMLElement).style.background = C.gold; }}>
-                    {isBooking ? '…' : (locale === 'de' ? 'Bestelldetails ergänzen' : locale === 'ar' ? 'إكمال تفاصيل الطلب' : 'Complete order details')}
-                  </button>
-                </>
-              ) : (
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: C.muted }}>
-                  <span>
-                    {locale === 'de' ? 'Gebührenübersicht' : locale === 'ar' ? 'نظرة عامة على الرسوم' : 'Fee overview'}
-                  </span>
-                  <span>{formatVal(0)}</span>
+            {(() => {
+              const canCheckout = totalDishCount > 0 && !!eventDate;
+              const missingHint = totalDishCount > 0 && !eventDate
+                ? (locale === 'de' ? 'Bitte Datum & Abholung auswählen.' : locale === 'ar' ? 'يرجى اختيار التاريخ وطريقة الاستلام.' : 'Select a date & pickup method first.')
+                : null;
+              return (
+                <div style={{ padding: '0.85rem 1.4rem', borderTop: `1px solid ${C.border}`, background: C.panel, flexShrink: 0 }}>
+                  {totalDishCount > 0 ? (
+                    <>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: missingHint ? '0.4rem' : '0.6rem' }}>
+                        <div style={{ fontSize: '0.95rem', fontWeight: 600, color: C.text }}>{formatVal(displayPrice)}</div>
+                        <span style={{ fontSize: '0.68rem', color: C.muted }}>
+                          {priceMode === 'brutto' ? '(inkl. MwSt.)' : '(zzgl. MwSt.)'}, {locale === 'de' ? 'zzgl. Gebühren' : locale === 'ar' ? 'بالإضافة للرسوم' : 'plus fees'}
+                        </span>
+                      </div>
+                      {missingHint && (
+                        <p style={{ fontSize: '0.72rem', color: C.gold, marginBottom: '0.55rem', lineHeight: 1.45 }}>
+                          {missingHint}
+                        </p>
+                      )}
+                      <button
+                        onClick={() => { if (!canCheckout) { setSidebarTab('when'); setEditingRow('date'); } else { handleBooking(); } }}
+                        disabled={isBooking}
+                        style={{ width: '100%', padding: '0.9rem', background: canCheckout ? C.gold : 'transparent', color: canCheckout ? '#0c0803' : C.gold, border: `1.5px solid ${C.gold}`, borderRadius: '8px', fontFamily: 'inherit', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', cursor: isBooking ? 'not-allowed' : 'pointer', transition: 'all 0.2s' }}
+                        onMouseEnter={e => { if (!isBooking) { const el = e.currentTarget as HTMLElement; el.style.background = canCheckout ? C.goldDark : C.goldBg; } }}
+                        onMouseLeave={e => { if (!isBooking) { const el = e.currentTarget as HTMLElement; el.style.background = canCheckout ? C.gold : 'transparent'; } }}
+                      >
+                        {isBooking ? '…' : canCheckout
+                          ? (locale === 'de' ? 'Bestelldetails ergänzen' : locale === 'ar' ? 'إكمال تفاصيل الطلب' : 'Complete order details')
+                          : (locale === 'de' ? 'Wann & Wie auswählen' : locale === 'ar' ? 'اختر الوقت والطريقة' : 'Select date & method')}
+                      </button>
+                    </>
+                  ) : (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: C.muted }}>
+                      <span>
+                        {locale === 'de' ? 'Gebührenübersicht' : locale === 'ar' ? 'نظرة عامة على الرسوم' : 'Fee overview'}
+                      </span>
+                      <span>{formatVal(0)}</span>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              );
+            })()}
           </aside>
         </div>
 

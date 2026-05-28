@@ -1,9 +1,10 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { Link } from '@/i18n/routing';
+import { Link, useRouter } from '@/i18n/routing';
 import { ArrowRight } from 'lucide-react';
 import { MENU_DATA } from '@/data/menu';
+import { useCart } from '@/context/CartContext';
 
 const allItems = MENU_DATA.flatMap(s => s.items);
 const featured = [
@@ -15,6 +16,17 @@ export default function FeaturedDishes() {
   const t = useTranslations('MenuExplorer');
   const locale = useLocale();
   const isRTL = locale === 'ar';
+  const { cart, addToCart, updateQty } = useCart();
+  const router = useRouter();
+
+  const handleAdd = (item: typeof featured[0]) => {
+    if (cart.some(c => c.id === item.id)) {
+      updateQty(item.id, 1);
+    } else {
+      addToCart({ id: item.id, nameKey: item.nameKey, price: item.price, qty: 1, img: item.image });
+    }
+    router.push('/catering' as any);
+  };
 
   return (
     <>
@@ -39,27 +51,21 @@ export default function FeaturedDishes() {
         .lev-btn-primary:hover { background-color: #f7f2eb; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(196,148,72,0.3); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .lev-view-details {
-          position: absolute; inset: 0; display: flex; align-items: center;
-          justify-content: center; opacity: 0; transition: opacity 0.25s ease;
-          z-index: 10;
-        }
-        .lev-card:hover .lev-view-details { opacity: 1; }
       `}</style>
 
       <div dir={isRTL ? 'rtl' : 'ltr'} className="relative" style={{ backgroundColor: '#0c0803' }}>
         <div className="relative z-10 flex overflow-x-auto pb-10 snap-x snap-mandatory hide-scrollbar md:grid md:grid-cols-4 md:gap-6 lg:gap-8 md:overflow-visible px-4">
           {featured.map((item) => (
-            <Link
+            <button
               key={item.id}
-              href={`/menu/${item.id}` as any}
+              onClick={() => handleAdd(item)}
               className={[
-                'lev-card group snap-center block relative',
+                'lev-card group snap-center block relative text-left',
                 'min-w-[70vw] md:min-w-0',
                 isRTL ? 'ml-4 last:ml-0' : 'mr-4 last:mr-0',
                 'md:mr-0 md:ml-0',
               ].join(' ')}
-              style={{ textDecoration: 'none' }}
+              style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
             >
               <div className="relative aspect-3/4 rounded-xl overflow-hidden mb-4 shadow-2xl">
                 <img
@@ -74,24 +80,6 @@ export default function FeaturedDishes() {
                   </span>
                 </div>
 
-                {/* View details label on hover */}
-                <div className="lev-view-details">
-                  <span style={{
-                    fontFamily: "'Jost', sans-serif",
-                    fontSize: '11px',
-                    fontWeight: 700,
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
-                    color: '#f7f2eb',
-                    background: 'rgba(12,8,3,0.65)',
-                    border: '1px solid rgba(196,148,72,0.5)',
-                    borderRadius: '9999px',
-                    padding: '7px 18px',
-                    backdropFilter: 'blur(6px)',
-                  }}>
-                    {locale === 'de' ? 'Details ansehen' : locale === 'ar' ? 'عرض التفاصيل' : 'View Details'}
-                  </span>
-                </div>
               </div>
 
               <div className={`flex justify-between items-start px-0.5 ${isRTL ? 'flex-row-reverse' : ''}`}>
@@ -104,11 +92,8 @@ export default function FeaturedDishes() {
                     {t('curatedSelection')}
                   </p>
                 </div>
-                <span style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 500, color: '#c49448', fontSize: '1rem', marginTop: '4px' }}>
-                  €{item.price}
-                </span>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
 

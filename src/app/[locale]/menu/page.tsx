@@ -1,7 +1,5 @@
-// src/app/[locale]/menu/page.tsx
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { MOCK_MENU } from '@/components/MenuExplorer';
 import MenuPageClient from '@/components/MenuPageClient';
 
 export async function generateMetadata(
@@ -10,18 +8,9 @@ export async function generateMetadata(
   const { locale } = await props.params;
 
   const translations: Record<string, { title: string; description: string }> = {
-    en: {
-      title: 'Chef Aboud Küche | Menu',
-      description: 'Explore our curated Levantine menu.',
-    },
-    de: {
-      title: 'Chef Aboud Küche | Speisekarte',
-      description: 'Entdecken Sie unsere levantinische Speisekarte.',
-    },
-    ar: {
-      title: 'مطبخ الشيف عبود | القائمة',
-      description: 'اكتشف قائمة طعامنا الشامية المنتقاة.',
-    },
+    en: { title: 'Chef Aboud Küche | Menu',       description: 'Explore our curated Levantine menu.'             },
+    de: { title: 'Chef Aboud Küche | Speisekarte', description: 'Entdecken Sie unsere levantinische Speisekarte.' },
+    ar: { title: 'مطبخ الشيف عبود | القائمة',      description: 'اكتشف قائمة طعامنا الشامية المنتقاة.'           },
   };
 
   const t = translations[locale] ?? translations.en;
@@ -33,10 +22,7 @@ export default async function MenuPage(
 ) {
   const { locale } = await props.params;
 
-  // Must match your routing.ts locales exactly
-  if (!['en', 'de', 'ar'].includes(locale)) {
-    notFound();
-  }
+  if (!['en', 'de', 'ar'].includes(locale)) notFound();
 
-  return <MenuPageClient locale={locale} data={MOCK_MENU} />;
+  return <MenuPageClient locale={locale} />;
 }

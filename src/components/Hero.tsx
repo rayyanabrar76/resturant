@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Globe, Zap } from 'lucide-react';
-import { Link } from '@/i18n/routing';
+import { Link, useRouter } from '@/i18n/routing';
 import { MENU_DATA } from '@/data/menu';
+import { useCart } from '@/context/CartContext';
 
 const StarIcon = ({ size = 12, color = '#c17f3b' }: { size?: number; color?: string }) => (
   <svg width={size} height={size} viewBox="0 0 20 20">
@@ -27,6 +28,17 @@ export default function Hero() {
   const locale = useLocale();
   const isRTL = locale === 'ar';
   const [current, setCurrent] = useState(0);
+  const { cart, addToCart, updateQty } = useCart();
+  const router = useRouter();
+
+  const handleAdd = (item: typeof MARQUEE_ITEMS[0]) => {
+    if (cart.some(c => c.id === item.id)) {
+      updateQty(item.id, 1);
+    } else {
+      addToCart({ id: item.id, nameKey: item.nameKey, price: item.price, qty: 1, img: item.image });
+    }
+    router.push('/catering' as any);
+  };
 
   const SLIDES = t.raw('slides') as { ar: string; en: string }[];
 
@@ -198,7 +210,7 @@ export default function Hero() {
         <div className="relative pause-on-hover w-full" dir={isRTL ? 'rtl' : 'ltr'}>
           <div className="marquee-container pt-6 pb-12">
             {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
-              <Link key={i} href={`/menu/${item.id}` as any} className="w-48 lg:w-64 mx-3 group cursor-pointer shrink-0">
+              <button key={i} onClick={() => handleAdd(item)} className="w-48 lg:w-64 mx-3 group cursor-pointer shrink-0 text-left bg-transparent border-none p-0">
                 <div className="w-full aspect-4/5 overflow-hidden rounded-3xl mb-4 border border-white/5 bg-[#1a150f] relative">
                   <motion.img
                     src={item.image}
@@ -206,14 +218,6 @@ export default function Hero() {
                     whileHover={{ scale: 1.08 }}
                     alt={m(item.nameKey as any)}
                   />
-                  <div className="absolute bottom-4 left-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                    <div className="bg-black/60 backdrop-blur-md border border-white/10 p-2 rounded-xl flex justify-between items-center">
-                      <span className="text-[10px] font-sans-caps font-bold text-white tracking-widest">
-                        {t('viewDetails')}
-                      </span>
-                      <StarIcon size={12} color="white" />
-                    </div>
-                  </div>
                 </div>
                 <div className={`px-1 ${isRTL ? 'text-right' : 'text-left'}`}>
                   <p className="font-sans-caps text-[8px] font-bold text-[#c17f3b] mb-1 tracking-widest uppercase">
@@ -224,7 +228,7 @@ export default function Hero() {
                     <span className="text-white/20 text-xs italic">/ {m(item.arabicNameKey as any)}</span>
                   </h3>
                 </div>
-              </Link>
+              </button>
             ))}
           </div>
         </div>

@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl';
 import Hero from '@/components/Hero';
 import FeaturedDishes from '@/components/FeaturedDishes';
 import CateringTeaser from '@/components/CateringTeaser';
-import ChefsTable from '@/components/ChefsTable'; // <---
+import ChefsTable from '@/components/ChefsTable';
 import EditorialReviews from '@/components/EditorialReviews';
 import ExperienceBridge from '@/components/ExperienceBridge';
 import SocialFeed from '@/components/SocialFeed';
@@ -60,13 +60,14 @@ export default function HomePage() {
             <FeaturedDishes />
           </div>
         </section>
-   <ChefsTable />
-   <EditorialReviews />
-   <ExperienceBridge />
-   <SocialFeed />
+
+        <ChefsTable />
+        <EditorialReviews />
+        <ExperienceBridge />
+        <SocialFeed />
+
       </main>
 
-      {/* 5. Site-wide Footer */}
       <Footer />
     </>
   );
