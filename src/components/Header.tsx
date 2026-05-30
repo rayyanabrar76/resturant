@@ -53,7 +53,10 @@ const TRANSPARENT_STYLE: React.CSSProperties = {
 export default function Header({ locale }: { locale: string }) {
   const t        = useTranslations('Navigation');
   const pathname = usePathname();
-  const isHomePage = pathname === '/';
+  const isHomePage  = pathname === '/';
+  const isAdminPage = pathname === '/admin';
+
+  if (isAdminPage) return null;
 
   const [isScrolled, setIsScrolled] = useState(!isHomePage);
   const [isVisible,  setIsVisible]  = useState(true);
