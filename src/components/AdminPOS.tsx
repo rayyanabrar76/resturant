@@ -203,7 +203,7 @@ export default function AdminPOS() {
     setTab('details');
   };
 
-  const canPrint = orderItems.length > 0 && !!details.name;
+  const canPrint = orderItems.length > 0 && !!details.name && !!details.phone && !!details.address;
 
   if (!unlocked) return <PINGate onSuccess={() => setUnlocked(true)} />;
 
@@ -369,9 +369,9 @@ export default function AdminPOS() {
           </span>
         </div>
 
-        {!details.name && orderItems.length > 0 && (
+        {!canPrint && orderItems.length > 0 && (
           <p style={{ fontSize: '10px', color: G.gold, fontFamily: "'Jost', sans-serif", marginBottom: '8px', textAlign: 'center', opacity: 0.8 }}>
-            Kundenname eingeben um zu drucken
+            {[!details.name && 'Name', !details.phone && 'Telefon', !details.address && 'Adresse'].filter(Boolean).join(', ')} erforderlich
           </p>
         )}
 
