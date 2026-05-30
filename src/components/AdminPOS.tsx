@@ -2,8 +2,8 @@
 
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus, Printer, User, MapPin, Calendar, Clock, Trash2, LogOut, RefreshCw } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { Plus, Minus, Printer, User, MapPin, Calendar, Clock, Trash2, LogOut, RefreshCw, Images } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
 import { MENU_DATA } from '@/data/menu';
 import type { MenuItem } from '@/data/menu';
 
@@ -112,7 +112,8 @@ function PINGate({ onSuccess }: { onSuccess: () => void }) {
 // ── Main POS ──────────────────────────────────────────────────────────────
 
 export default function AdminPOS() {
-  const t = useTranslations('MenuExplorer');
+  const t      = useTranslations('MenuExplorer');
+  const locale = useLocale();
 
   const [unlocked,      setUnlocked]      = useState(false);
   const [activeSection, setActiveSection] = useState(MENU_DATA[0].categoryKey);
@@ -227,16 +228,28 @@ export default function AdminPOS() {
               Catering Order
             </h1>
           </div>
-          <button
-            onClick={() => setUnlocked(false)}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl transition-colors"
-            style={{ color: 'rgba(247,242,235,0.3)', border: '1px solid rgba(247,242,235,0.08)', fontSize: '9px', fontFamily: "'Jost', sans-serif", fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}
-            onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#ef4444'}
-            onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(247,242,235,0.3)'}
-          >
-            <LogOut size={12} />
-            Lock
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => window.open(`/${locale}/gallery`, '_blank')}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl transition-colors"
+              style={{ color: 'rgba(193,127,59,0.7)', border: '1px solid rgba(193,127,59,0.2)', fontSize: '9px', fontFamily: "'Jost', sans-serif", fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#c17f3b'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(193,127,59,0.45)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(193,127,59,0.7)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(193,127,59,0.2)'; }}
+            >
+              <Images size={12} />
+              Gallery
+            </button>
+            <button
+              onClick={() => setUnlocked(false)}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl transition-colors"
+              style={{ color: 'rgba(247,242,235,0.3)', border: '1px solid rgba(247,242,235,0.08)', fontSize: '9px', fontFamily: "'Jost', sans-serif", fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#ef4444'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(247,242,235,0.3)'}
+            >
+              <LogOut size={12} />
+              Lock
+            </button>
+          </div>
         </div>
 
         {/* Two-column layout */}
