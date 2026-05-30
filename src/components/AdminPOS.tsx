@@ -125,10 +125,10 @@ function PINGate({ onSuccess }: { onSuccess: () => void }) {
           Chef Aboud Küche
         </p>
         <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '2.2rem', fontStyle: 'italic', color: G.text, marginBottom: '6px' }}>
-          Mitarbeiter-Zugang
+          {a('staffAccess')}
         </h1>
         <p style={{ fontSize: '11px', color: G.muted, marginBottom: '40px', fontFamily: "'Jost', sans-serif" }}>
-          PIN eingeben
+          {a('enterPin')}
         </p>
 
         {/* Dots */}
@@ -170,6 +170,7 @@ function PINGate({ onSuccess }: { onSuccess: () => void }) {
 /* ── Main POS ────────────────────────────────────────────────────────────── */
 export default function AdminPOS() {
   const t      = useTranslations('MenuExplorer');
+  const a      = useTranslations('Admin');
   const locale = useLocale();
 
   const [unlocked,   setUnlocked]   = useState(false);
@@ -212,16 +213,16 @@ export default function AdminPOS() {
   const DetailForm = (
     <div style={{ padding: '20px 16px', overflowY: 'auto', height: '100%' }}>
       <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '9px', letterSpacing: '0.38em', textTransform: 'uppercase', color: G.gold, fontWeight: 700, marginBottom: '20px' }}>
-        Kundendaten
+        {a('customerDetails')}
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {([
-          { key: 'name',    label: 'Name *',       Icon: User,        type: 'text', placeholder: 'Kundenname' },
-          { key: 'phone',   label: 'Telefon',      Icon: Phone,       type: 'tel',  placeholder: '+49 …' },
-          { key: 'address', label: 'Adresse',      Icon: MapPin,      type: 'text', placeholder: 'Lieferadresse' },
-          { key: 'date',    label: 'Datum',        Icon: Calendar,    type: 'date', placeholder: '' },
-          { key: 'time',    label: 'Uhrzeit',      Icon: Clock,       type: 'time', placeholder: '' },
-          { key: 'notes',   label: 'Anmerkungen',  Icon: NotebookPen, type: 'text', placeholder: 'Besondere Wünsche…' },
+          { key: 'name',    label: a('labelName'),    Icon: User,        type: 'text', placeholder: a('placeholderName') },
+          { key: 'phone',   label: a('labelPhone'),   Icon: Phone,       type: 'tel',  placeholder: a('placeholderPhone') },
+          { key: 'address', label: a('labelAddress'),  Icon: MapPin,      type: 'text', placeholder: a('placeholderAddress') },
+          { key: 'date',    label: a('labelDate'),    Icon: Calendar,    type: 'date', placeholder: '' },
+          { key: 'time',    label: a('labelTime'),    Icon: Clock,       type: 'time', placeholder: '' },
+          { key: 'notes',   label: a('labelNotes'),   Icon: NotebookPen, type: 'text', placeholder: a('placeholderNotes') },
         ] as const).map(({ key, label, Icon, type, placeholder }) => (
           <div key={key}>
             <label style={{ display: 'block', fontFamily: "'Jost', sans-serif", fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', color: G.muted, marginBottom: '5px' }}>
@@ -317,7 +318,7 @@ export default function AdminPOS() {
           <div style={{ textAlign: 'center', paddingTop: '48px' }}>
             <ShoppingBag size={36} style={{ color: 'rgba(247,242,235,0.08)', margin: '0 auto 10px' }} />
             <p style={{ color: 'rgba(247,242,235,0.18)', fontSize: '12px', fontFamily: "'Jost', sans-serif" }}>
-              Noch keine Artikel hinzugefügt
+              {a('noItems')}
             </p>
           </div>
         ) : (
@@ -362,7 +363,7 @@ export default function AdminPOS() {
       <div style={{ padding: '14px 16px', borderTop: `1px solid ${G.border}`, flexShrink: 0 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '14px' }}>
           <span style={{ fontFamily: "'Jost', sans-serif", fontSize: '9px', fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: G.muted }}>
-            {totalItems} {totalItems === 1 ? 'Artikel' : 'Artikel'}
+            {totalItems} {a('items')}
           </span>
           <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '2.4rem', color: G.gold, lineHeight: 1 }}>
             €{total.toFixed(2)}
@@ -371,7 +372,7 @@ export default function AdminPOS() {
 
         {!canPrint && orderItems.length > 0 && (
           <p style={{ fontSize: '10px', color: G.gold, fontFamily: "'Jost', sans-serif", marginBottom: '8px', textAlign: 'center', opacity: 0.8 }}>
-            {[!details.name && 'Name', !details.phone && 'Telefon', !details.address && 'Adresse'].filter(Boolean).join(', ')} erforderlich
+            {[!details.name && a('labelName').replace(' *',''), !details.phone && a('labelPhone'), !details.address && a('labelAddress')].filter(Boolean).join(', ')} {a('required')}
           </p>
         )}
 
@@ -387,14 +388,14 @@ export default function AdminPOS() {
             marginBottom: '8px', transition: 'all 0.15s',
           }}>
           <Printer size={15} />
-          Bon drucken
+          {a('printReceipt')}
         </button>
 
         <button onClick={clearOrder} disabled={orderItems.length === 0}
           style={{ width: '100%', padding: '10px', background: 'none', border: 'none', color: 'rgba(247,242,235,0.18)', fontFamily: "'Jost', sans-serif", fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', cursor: orderItems.length > 0 ? 'pointer' : 'default', transition: 'color 0.15s' }}
           onMouseEnter={e => { if (orderItems.length > 0) (e.currentTarget as HTMLElement).style.color = G.red; }}
           onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'rgba(247,242,235,0.18)'}>
-          Neue Bestellung
+          {a('newOrder')}
         </button>
       </div>
     </div>
@@ -412,7 +413,7 @@ export default function AdminPOS() {
             Chef Aboud Küche
           </p>
           <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.35rem', fontStyle: 'italic', color: G.text, lineHeight: 1.1 }}>
-            Catering Order
+            {a('cateringOrder')}
           </h1>
         </div>
         <div style={{ display: 'flex', gap: '8px' }}>
@@ -420,7 +421,7 @@ export default function AdminPOS() {
             onClick={() => window.open(`/${locale}/gallery`, '_blank')}
             style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 14px', borderRadius: '10px', border: `1px solid rgba(193,127,59,0.28)`, background: G.goldBg, color: G.gold, fontFamily: "'Jost', sans-serif", fontSize: '9px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', cursor: 'pointer' }}>
             <Images size={12} />
-            Galerie
+            {a('gallery')}
           </button>
           <button
             onClick={() => setUnlocked(false)}
@@ -428,7 +429,7 @@ export default function AdminPOS() {
             onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = G.red}
             onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = G.muted}>
             <LogOut size={12} />
-            Sperren
+            {a('lock')}
           </button>
         </div>
       </div>
@@ -450,7 +451,7 @@ export default function AdminPOS() {
         <div style={{ width: '300px', flexShrink: 0, display: 'flex', flexDirection: 'column', background: G.panel }}>
           <div style={{ padding: '14px 16px 10px', borderBottom: `1px solid ${G.border}`, flexShrink: 0 }}>
             <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '9px', letterSpacing: '0.35em', textTransform: 'uppercase', color: G.gold, fontWeight: 700 }}>
-              Bestellung
+              {a('orderTitle')}
             </p>
           </div>
           <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -484,9 +485,9 @@ export default function AdminPOS() {
         {/* Bottom tab bar */}
         <div style={{ borderTop: `1px solid ${G.border}`, background: G.panel, display: 'flex', flexShrink: 0 }}>
           {([
-            { key: 'details' as MobileTab, label: 'Kunde',       Icon: User           },
-            { key: 'menu'    as MobileTab, label: 'Speisekarte', Icon: UtensilsCrossed },
-            { key: 'order'   as MobileTab, label: totalItems > 0 ? `Bestellung (${totalItems})` : 'Bestellung', Icon: ShoppingBag },
+            { key: 'details' as MobileTab, label: a('tabCustomer'),                                                       Icon: User           },
+            { key: 'menu'    as MobileTab, label: a('tabMenu'),                                                           Icon: UtensilsCrossed },
+            { key: 'order'   as MobileTab, label: totalItems > 0 ? `${a('tabOrder')} (${totalItems})` : a('tabOrder'),   Icon: ShoppingBag     },
           ]).map(({ key, label, Icon }) => (
             <button key={key} onClick={() => setTab(key)}
               style={{
