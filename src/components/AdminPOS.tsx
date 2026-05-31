@@ -101,6 +101,7 @@ function openReceipt(details: CustomerDetails, items: OrderItem[], total: number
 
 /* ── PIN gate ────────────────────────────────────────────────────────────── */
 function PINGate({ onSuccess }: { onSuccess: () => void }) {
+  const a = useTranslations('Admin');
   const [pin,   setPin]   = useState('');
   const [shake, setShake] = useState(false);
 
@@ -270,7 +271,7 @@ export default function AdminPOS() {
           <motion.div key={activeSection}
             initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '10px' }}
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(140px, calc(50% - 5px)), 1fr))', gap: '10px' }}
           >
             {currentSection.items.map(item => {
               const qty = getQty(item.id);
@@ -288,11 +289,11 @@ export default function AdminPOS() {
                     <img src={item.image} alt="" loading="lazy"
                       style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                   </div>
-                  <div style={{ padding: '8px 10px 10px' }}>
-                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', fontStyle: 'italic', color: G.text, lineHeight: 1.25, marginBottom: '3px' }}>
+                  <div style={{ padding: '10px 10px 12px' }}>
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '14px', fontStyle: 'italic', color: G.text, lineHeight: 1.25, marginBottom: '4px' }}>
                       {t(item.nameKey as any)}
                     </p>
-                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '14px', color: G.gold, fontWeight: 500 }}>
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', color: G.gold, fontWeight: 500 }}>
                       €{item.price}
                     </p>
                   </div>
@@ -341,15 +342,15 @@ export default function AdminPOS() {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
                     <button onClick={() => updateQty(item.id, -1)}
-                      style={{ width: '32px', height: '32px', borderRadius: '50%', border: `1px solid ${G.border}`, background: 'transparent', color: qty === 1 ? G.red : G.text, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s' }}>
-                      {qty === 1 ? <Trash2 size={12} /> : <Minus size={12} />}
+                      style={{ width: '40px', height: '40px', borderRadius: '50%', border: `1px solid ${G.border}`, background: 'transparent', color: qty === 1 ? G.red : G.text, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s', flexShrink: 0 }}>
+                      {qty === 1 ? <Trash2 size={14} /> : <Minus size={14} />}
                     </button>
-                    <span style={{ fontSize: '15px', fontWeight: 700, color: G.text, minWidth: '22px', textAlign: 'center', fontFamily: "'Jost', sans-serif" }}>
+                    <span style={{ fontSize: '15px', fontWeight: 700, color: G.text, minWidth: '24px', textAlign: 'center', fontFamily: "'Jost', sans-serif" }}>
                       {qty}
                     </span>
                     <button onClick={() => updateQty(item.id, 1)}
-                      style={{ width: '32px', height: '32px', borderRadius: '50%', border: `1px solid ${G.border}`, background: 'transparent', color: G.text, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s' }}>
-                      <Plus size={12} />
+                      style={{ width: '40px', height: '40px', borderRadius: '50%', border: `1px solid ${G.border}`, background: 'transparent', color: G.text, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s', flexShrink: 0 }}>
+                      <Plus size={14} />
                     </button>
                   </div>
                 </motion.div>
@@ -407,29 +408,35 @@ export default function AdminPOS() {
     <div style={{ minHeight: '100vh', background: G.bg, color: G.text }}>
 
       {/* ── Header ── */}
-      <div style={{ height: `${HEADER_H}px`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 16px', borderBottom: `1px solid ${G.border}`, background: G.panel, flexShrink: 0 }}>
+      <div style={{ height: `${HEADER_H}px`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', borderBottom: `1px solid ${G.border}`, background: G.panel, flexShrink: 0 }}>
         <div>
           <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '8px', letterSpacing: '0.35em', textTransform: 'uppercase', color: G.gold, fontWeight: 700 }}>
             Chef Aboud Küche
           </p>
-          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.35rem', fontStyle: 'italic', color: G.text, lineHeight: 1.1 }}>
+          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.25rem', fontStyle: 'italic', color: G.text, lineHeight: 1.1 }}>
             {a('cateringOrder')}
           </h1>
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div style={{ display: 'flex', gap: '6px' }}>
+          {/* Gallery — icon only on mobile, icon+label on desktop */}
           <button
             onClick={() => window.open(`/${locale}/gallery`, '_blank')}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 14px', borderRadius: '10px', border: `1px solid rgba(193,127,59,0.28)`, background: G.goldBg, color: G.gold, fontFamily: "'Jost', sans-serif", fontSize: '9px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', cursor: 'pointer' }}>
-            <Images size={12} />
-            {a('gallery')}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '9px 12px', borderRadius: '10px', border: `1px solid rgba(193,127,59,0.28)`, background: G.goldBg, color: G.gold, cursor: 'pointer' }}>
+            <Images size={16} />
+            <span className="hidden sm:inline" style={{ fontFamily: "'Jost', sans-serif", fontSize: '9px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+              {a('gallery')}
+            </span>
           </button>
+          {/* Lock — icon only on mobile */}
           <button
             onClick={() => setUnlocked(false)}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 14px', borderRadius: '10px', border: `1px solid rgba(247,242,235,0.08)`, background: 'transparent', color: G.muted, fontFamily: "'Jost', sans-serif", fontSize: '9px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', cursor: 'pointer' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '9px 12px', borderRadius: '10px', border: `1px solid rgba(247,242,235,0.08)`, background: 'transparent', color: G.muted, cursor: 'pointer' }}
             onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = G.red}
             onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = G.muted}>
-            <LogOut size={12} />
-            {a('lock')}
+            <LogOut size={16} />
+            <span className="hidden sm:inline" style={{ fontFamily: "'Jost', sans-serif", fontSize: '9px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+              {a('lock')}
+            </span>
           </button>
         </div>
       </div>
@@ -483,7 +490,7 @@ export default function AdminPOS() {
         </div>
 
         {/* Bottom tab bar */}
-        <div style={{ borderTop: `1px solid ${G.border}`, background: G.panel, display: 'flex', flexShrink: 0 }}>
+        <div style={{ borderTop: `1px solid ${G.border}`, background: G.panel, display: 'flex', flexShrink: 0, paddingBottom: 'env(safe-area-inset-bottom)' }}>
           {([
             { key: 'details' as MobileTab, label: a('tabCustomer'),                                                       Icon: User           },
             { key: 'menu'    as MobileTab, label: a('tabMenu'),                                                           Icon: UtensilsCrossed },
