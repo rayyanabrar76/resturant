@@ -91,7 +91,7 @@ export default function Header({ locale }: { locale: string }) {
   const navLinks = [
     { name: t('Catering'), href: '/catering' },
     { name: t('Menu'),     href: '/menu'     },
-    { name: 'Gallery',     href: '/gallery'  },
+    { name: t('Gallery'),  href: '/gallery'  },
     { name: t('About'),    href: '/about'    },
   
   ];
