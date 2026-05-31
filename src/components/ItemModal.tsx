@@ -64,6 +64,55 @@ export default function ItemModal({ item, onClose, onAdd }: ItemModalProps) {
     <AnimatePresence>
       {item && (
         <>
+          <style>{`
+            .item-modal {
+              display: flex;
+              flex-direction: row;
+              width: 92vw;
+              max-width: 1200px;
+              height: 82vh;
+              min-height: 500px;
+              max-height: 860px;
+              border-radius: 12px;
+            }
+            .item-modal-img {
+              width: 45%;
+              flex-shrink: 0;
+              display: flex;
+              flex-direction: column;
+              overflow: hidden;
+            }
+            .item-modal-content {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              overflow: hidden;
+            }
+            @media (max-width: 639px) {
+              .item-modal {
+                flex-direction: column;
+                width: 100vw;
+                max-width: 100vw;
+                height: 92vh;
+                max-height: 92vh;
+                border-radius: 20px 20px 0 0;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+              }
+              .item-modal-img {
+                width: 100%;
+                height: 220px;
+                flex-shrink: 0;
+              }
+              .item-modal-content {
+                flex: 1;
+                min-height: 0;
+              }
+            }
+          `}</style>
+
           {/* Backdrop */}
           <motion.div
             key="backdrop"
@@ -73,36 +122,31 @@ export default function ItemModal({ item, onClose, onAdd }: ItemModalProps) {
             style={{ zIndex: 200, backgroundColor: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(6px)' }}
           />
 
-          {/* Modal — centering wrapper lets Framer animate scale without fighting translateX/Y */}
+          {/* Modal */}
           <div
             style={{
-              position: 'fixed', top: 68, left: 0, right: 0, bottom: 0, zIndex: 210,
+              position: 'fixed', inset: 0, zIndex: 210,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               pointerEvents: 'none',
             }}
           >
           <motion.div
             key="modal"
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{   opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.22, ease: [0.32, 0.72, 0, 1] }}
+            initial={{ opacity: 0, y: 20, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0,  scale: 1    }}
+            exit={{   opacity: 0, y: 20,  scale: 0.98 }}
+            transition={{ duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
+            className="item-modal"
             style={{
               pointerEvents: 'auto',
-              display: 'flex', overflow: 'hidden',
-              width: '92vw',
-              maxWidth: '1200px',
-              height: '82vh',
-              minHeight: '500px',
-              maxHeight: '860px',
-              borderRadius: '12px',
+              overflow: 'hidden',
               backgroundColor: '#14110d',
               border: '1px solid rgba(193,127,59,0.2)',
               boxShadow: '0 24px 80px rgba(0,0,0,0.85)',
             }}
           >
-            {/* ── LEFT: Gallery (45%) ── */}
-            <div style={{ width: '45%', flexShrink: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+            {/* ── LEFT / TOP: Gallery ── */}
+            <div className="item-modal-img">
 
               {/* Main image */}
               <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
@@ -176,11 +220,8 @@ export default function ItemModal({ item, onClose, onAdd }: ItemModalProps) {
               )}
             </div>
 
-            {/* ── RIGHT: Content (55%) ── */}
-            <div style={{
-              flex: 1, display: 'flex', flexDirection: 'column',
-              background: '#1a1510', overflow: 'hidden',
-            }}>
+            {/* ── RIGHT / BOTTOM: Content ── */}
+            <div className="item-modal-content" style={{ background: '#1a1510' }}>
               {/* Top bar: close button */}
               <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '14px 16px 0', flexShrink: 0 }}>
                 <button
@@ -198,7 +239,7 @@ export default function ItemModal({ item, onClose, onAdd }: ItemModalProps) {
               </div>
 
               {/* Scrollable body */}
-              <div style={{ flex: 1, overflowY: 'auto', scrollbarWidth: 'none', padding: '12px 32px 28px' }}>
+              <div style={{ flex: 1, overflowY: 'auto', scrollbarWidth: 'none' }} className="px-5 sm:px-8 pt-3 pb-7">
 
                 {/* Arabic name above title */}
                 <p style={{
@@ -297,7 +338,7 @@ export default function ItemModal({ item, onClose, onAdd }: ItemModalProps) {
               <div style={{
                 flexShrink: 0,
                 borderTop: '1px solid rgba(247,242,235,0.08)',
-                padding: '14px 32px',
+                padding: '14px 20px',
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 background: '#14110d',
               }}>
