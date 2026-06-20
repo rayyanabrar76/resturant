@@ -114,12 +114,12 @@ interface UndoToastProps { message: string; onUndo: () => void; onDismiss: () =>
 function UndoToast({ message, onUndo, onDismiss }: UndoToastProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 10, scale: 0.96 }}
+      initial={{ opacity: 0, y: 20, scale: 0.96, x: '-50%' }}
+      animate={{ opacity: 1, y: 0, scale: 1, x: '-50%' }}
+      exit={{ opacity: 0, y: 10, scale: 0.96, x: '-50%' }}
       transition={{ type: 'spring', damping: 24, stiffness: 300 }}
       style={{
-        position: 'fixed', bottom: '5.5rem', left: '50%', transform: 'translateX(-50%)',
+        position: 'fixed', bottom: '5.5rem', left: '50%',
         zIndex: 100, display: 'flex', alignItems: 'center', gap: '0.75rem',
         background: '#1e1710', border: `1px solid ${C.goldBorder}`,
         borderRadius: '10px', padding: '0.6rem 1rem',
