@@ -123,7 +123,8 @@ function UndoToast({ message, onUndo, onDismiss }: UndoToastProps) {
         zIndex: 100, display: 'flex', alignItems: 'center', gap: '0.75rem',
         background: '#1e1710', border: `1px solid ${C.goldBorder}`,
         borderRadius: '10px', padding: '0.6rem 1rem',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.6)', whiteSpace: 'nowrap',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+        maxWidth: 'calc(100vw - 2rem)', boxSizing: 'border-box',
       }}
     >
       <span style={{ fontSize: '0.78rem', color: C.text }}>{message}</span>
