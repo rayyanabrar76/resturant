@@ -1552,7 +1552,7 @@ export default function BuffetCalculator() {
               exit={{ opacity: 0, scale: 0.95, y: 16 }}
               transition={{ type: 'spring', damping: 26, stiffness: 320 }}
               style={{
-                position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+                position: 'fixed', inset: 0, margin: 'auto', height: 'fit-content',
                 zIndex: 201, width: 'min(480px, 92vw)',
                 background: '#1e1810', border: `1px solid ${C.goldBorder}`,
                 borderRadius: '16px', padding: '2rem',
