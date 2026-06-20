@@ -654,7 +654,7 @@ function MobileDrawer({
             .mobile-drawer {
               position: fixed; bottom: 0; left: 0; right: 0; z-index: 51;
               background: ${C.panel}; border-top: 1px solid ${C.goldBorder};
-              border-radius: 20px 20px 0 0; max-height: 90vh;
+              border-radius: 20px 20px 0 0; max-height: calc(100vh - 80px);
               display: flex; flex-direction: column;
               padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
             }
